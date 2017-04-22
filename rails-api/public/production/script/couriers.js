@@ -62,14 +62,7 @@ function getStops(){
             $('#selectStops').html(stringforselect);
         }
     });
-    
-//    var stringforselect="";
-//    for(var i=0;i<6;i++){
-//        var strforselet="<option id=\""+i+"\">海淀"+i+"</option>";
-//        stringforselect = stringforselect + strforselet;
-//    }
-    $('#selectStops').html(stringforselect);
-    
+        
 }
 
 function saveStops(){
