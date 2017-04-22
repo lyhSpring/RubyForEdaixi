@@ -24,6 +24,7 @@ function addManager() {
 //        }
 //    });
 //    getCategories();
+    //
     $('#addManagers').modal('toggle');
     $("#nameinput").val("");
 }
