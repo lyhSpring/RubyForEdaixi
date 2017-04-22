@@ -25,7 +25,9 @@ function getCouriers(){
                    // "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
                   //  "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
 		"<td >"+data.mobile+"</td>"+
-                "<td >"+data.email+"</td>"+   
+        "<td >"+data.email+"</td>"+  
+        "<td >"+""+"</td>"+
+       // "<td >"+data.stops+"</td>"+
 		"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data.id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
 		 "</tr>";
                 stringfortrlist = stringfortrlist + stringfortr; 
@@ -52,30 +54,30 @@ function getCouriers(){
 
 function showModel(id){
  $('#selectStopsModel').modal('show');
-    $('#forCouriersId').html(id);
+    $('#forCouriersId').val(id);
     getStops();
 }
 
 function getStops(){
-        $.ajax({
-        type: "GET",
-        url: domain+"/users/getUsersByRole?ser[role]=qs",
-        dataType: "json",
-        success: function (data) {
-            var stringforselect = "";
-            if(data!=null){
-                for(var i = 0; i < data.length; i++){
-                    var strforname="<option id=\""+data[i].id+"\">"+data[i].name+"</option>";
-                    stringforselect = stringforselect + strforname;
-                }
-            }
-            $('#selectStops').html(stringforselect);
-        }
-    });
-    
+//        $.ajax({
+//        type: "GET",
+//        url: domain+"/users/getUsersByRole?ser[role]=qs",
+//        dataType: "json",
+//        success: function (data) {
+//            var stringforselect = "";
+//            if(data!=null){
+//                for(var i = 0; i < data.length; i++){
+//                    var strforname="<option id=\""+data[i].id+"\">"+data[i].name+"</option>";
+//                    stringforselect = stringforselect + strforname;
+//                }
+//            }
+//            $('#selectStops').html(stringforselect);
+//        }
+//    });
+//    
     var stringforselect="";
     for(var i=0;i<6;i++){
-        var strforselet="<option id=\""+i+"\">" 海淀"+i+"</option>";
+        var strforselet="<option id=\""+i+"\">海淀"+i+"</option>";
         stringforselect = stringforselect + strforselet;
     }
     $('#selectStops').html(stringforselect);
@@ -83,10 +85,11 @@ function getStops(){
 }
 
 function saveStops(){
-    var userId = 
+    var userId = $('#forCouriersId').val;
     var selectIndex=document.getElementById("selectStops").selectedIndex;
     var stop=document.getElementById("selectStops").options[selectIndex].id;
     console.log(stop);
+    console.log(userId);
     $.ajax({
         type: "GET",
         url: domain+"/users/getUsersByRole?user[role]=qs",
@@ -98,8 +101,8 @@ function saveStops(){
             alert("添加失败");
         }
     });
-
-    
+ $('#forCouriersId').modal('toggle');
+    getCouriers();
 }
 
 
