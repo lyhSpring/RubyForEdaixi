@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  time_exp: MyString
+  washing_status: MyString
+  address: MyString
+  total_price: 
+
+two:
+  user_id: 1
+  time_exp: MyString
+  washing_status: MyString
+  address: MyString
+  total_price: 
