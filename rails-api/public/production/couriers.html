@@ -151,11 +151,11 @@
                     <table id="couriersTable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
+                          <th>Id</th>
                           <th>姓名</th>
-                          <th>性别</th>
-                          <th>身份证号</th>
-                          <th>电话</th>
-                          <th>住址</th>
+                          <th>电话号码</th>
+                          <th>邮箱</th>
+                          <th>站点</th>
                           <th>操作</th>
                         </tr>
                       </thead>
@@ -214,6 +214,37 @@
         </div>
         <!--  /add manager  -->
 
+          
+          
+          
+        <div class="modal fade" id="selectStopsModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">选择站点</h4>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <select id="selectStops">
+                    
+                    </select>
+                    <label style="display:none" id="forCouriersId" value=""></label>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="saveStops()">保存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+          
+          
+          
+          
+          
         <!-- Modal -->
         <div class="modal fade" id="passModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
@@ -246,8 +277,7 @@
             </div>
           </div>
         </div>
-        
-
+    
 
       </div>
     </div>
