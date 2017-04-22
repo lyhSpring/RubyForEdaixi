@@ -13,7 +13,7 @@ function getCouriers(){
     var couriersTable = $('#couriersTable').dataTable();
         $.ajax({
         type: "GET",
-        async: false，
+        async: false,
         url: domain+"/stations",
         dataType: "json",
         success: function (data) {
@@ -21,12 +21,13 @@ function getCouriers(){
             if(data!=null){
                 for(var i = 0; i < data.length; i++){
             var j=data[i].id;
-                    station_name[j]=data.[i].name;
+parseInt(j);
+                    station_name[j]=data[i].name;
                 }
             }
         }
     });      
-}    
+   console.log(station_name); 
     $.ajax({
         type: "GET",
         url: domain+"/users/getUsersByRole?user[role]=qs",
@@ -36,15 +37,19 @@ function getCouriers(){
             var stringforselect = "";
             if(data!=null){
             for(var i = 0; i < data.length; i++){
-                
-             var stringfortr ="<tr class=\"gradeX\">"+
+		console.log(data[i].station_id);                
+             	var station_names="";
+		if(data[i].station_id!=null){
+			station_names=station_name[data[i].station_id];
+		}
+		var stringfortr ="<tr class=\"gradeX\">"+
                 "<td class=\"center\">"+data[i].id+"</td>"+
                 "<td >"+data[i].name+"</td>"+
                    // "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
                   //  "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
 		          "<td >"+data[i].mobile+"</td>"+
                 "<td >"+data[i].email+"</td>"+  
-                "<td >"+station_name[data[i].station_id]+"</td>"+
+                "<td >"+station_names+"</td>"+
         // "<td >"+data.stops+"</td>"+
 		      "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
 		      "</tr>";
