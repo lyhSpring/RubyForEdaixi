@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   end
 
   def getUsersByRole
-    @user = User.find_by_role(params[:user][:role]);
+    @user = User.where('role = ?',"#{params[:user][:role]}");
     if @user
       render json: @user
     else
