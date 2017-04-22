@@ -1,0 +1,39 @@
+body{
+  background-color: #2a3f54;
+}
+.login_wrapper{
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  margin-top: 100px;
+  padding: 50px;
+  background-color: #EEEEEE;
+  border-radius: 15px;
+}
+h1{
+  color: #646464;
+  text-align: center;
+}
+.form-group{
+  margin-top: 20px;
+}
+.btn-submit{
+  background-color: #1abb9c;
+  width: 200px;
+  height: 40px;
+  line-height: 25px;
+  margin: 50px 100px 10px;
+  color: white;
+}
+
+.btn-link{
+  text-align: right;
+  float: right;
+}
+
+.btn-default{
+  width: 200px;
+  height: 40px;
+  line-height: 25px;
+  margin: 0px 100px;
+}

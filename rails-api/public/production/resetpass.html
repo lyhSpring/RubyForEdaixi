@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>e袋洗--后台管理系统-重置密码</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/login.css" rel="stylesheet">
+  </head>
+
+  <body class="login">
+    <div>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form>
+              <h1>重置密码</h1>
+              <div class="form-group">
+                <label for="idinput">用户名</label>
+                <input type="text" id="idinput" class="form-control" placeholder="请输入用户名">
+              </div>
+              <div class="form-group">
+                <label for="emailinput">邮箱地址</label>
+                <input type="text" id="emailinput" class="form-control" placeholder="请输入邮箱地址">
+              </div>
+              
+                <button type="button" class="btn btn-submit" data-toggle="modal" data-target="#myModal">发送邮件</button></br>
+                <a class="btn btn-default" href="login.html">取消</a>
+              <div class="clearfix"></div>
+
+            </form>
+          </section>
+        </div>
+
+      </div>
+
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">反馈信息</h4>
+            </div>
+            <div class="modal-body">
+              邮件已发送至邮箱，请根据邮件提示重置密码。
+              </br>(用户名和邮箱不匹配，提示信息变成“您输入的用户名或邮箱地址不匹配，请重新输入”)。
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-defaul" data-dismiss="modal">关闭</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  <script src="script/resetpass.js"></script>
+  </body>
+</html>
