@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   		post :register
   		get :getUsersByRole
   		post :getUsersByRole
+      put :updateStationId
+      patch :updateStationId
   	end
   end
   resources :listings

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417073451) do
+ActiveRecord::Schema.define(version: 20170422072102) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -47,6 +47,20 @@ ActiveRecord::Schema.define(version: 20170417073451) do
     t.decimal  "price",         precision: 10
   end
 
+  create_table "regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "level"
+  end
+
+  create_table "stations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "password"
@@ -55,6 +69,7 @@ ActiveRecord::Schema.define(version: 20170417073451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "role"
+    t.integer  "station_id"
   end
 
 end

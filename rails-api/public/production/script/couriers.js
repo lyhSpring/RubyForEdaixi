@@ -3,8 +3,8 @@
  */
 $(document).ready(function() {
     var couriersTable = $('#couriersTable').dataTable();
-
-    
+alert("457");
+    getCouriers();
 });
 
 
@@ -12,7 +12,8 @@ function getCouriers(){
 	     var couriersTable = $('#couriersTable').dataTable();
         $.ajax({
         type: "GET",
-        url: domain+"/users/getUsersByRole?User[role]=qs",
+        // url: domain+"/users/getUsersByRole?User[role]=qs",
+        url: "http://localhost:3000/users/getUsersByRole?user[role]=qs",
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";

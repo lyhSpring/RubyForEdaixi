@@ -65,6 +65,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def updateStationId
+    if @users.update(user_params)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
