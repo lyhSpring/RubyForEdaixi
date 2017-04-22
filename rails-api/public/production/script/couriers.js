@@ -1,9 +1,10 @@
 /**
  * Created by wuyanli on 2017/4/12.
  */
+var domain="http://180.76.165.224:3000";
 $(document).ready(function() {
     var couriersTable = $('#couriersTable').dataTable();
-
+getCouriers();
     
 });
 
@@ -12,23 +13,21 @@ function getCouriers(){
 	     var couriersTable = $('#couriersTable').dataTable();
         $.ajax({
         type: "GET",
-        url: domain+"/users/getUsersByRole?User[role]=qs",
+        url: domain+"/users/getUsersByRole?user[role]=qs",
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
             var stringforselect = "";
             if(data!=null){
                 var stringfortr ="<tr class=\"gradeX\">"+
-                "<td class=\"center\">"+id+"</td>"+
-                "<td >"+data[i].name+"</td>"+
-                "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data.id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
+                "<td class=\"center\">"+data.id+"</td>"+
+                "<td >"+data.name+"</td>"+
                    // "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
                   //  "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
-		"<td >"+data[i].mobile+"</td>"+
-                "<td >"+data[i].email+"</td>"+   
+		"<td >"+data.mobile+"</td>"+
+                "<td >"+data.email+"</td>"+   
+		"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data.id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
 		 "</tr>";
-                    var strforname="<option>"+data[i].name+"</option>";
-                    stringforselect = stringforselect + strforname;
                 stringfortrlist = stringfortrlist + stringfortr; 
                 for(var i = 0; i < data.length; i++){
                     var stringfortr ="<tr class=\"gradeX\">"+
@@ -47,7 +46,7 @@ function getCouriers(){
             }
 
             $('#selectCategories').html(stringforselect);
-            $('#couriersTable').html(stringfortrlist);
+            $('#couriersTableBody').html(stringfortrlist);
         }
     });
 }
