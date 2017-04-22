@@ -19,67 +19,55 @@ function getCouriers(){
             var stringfortrlist = "";
             var stringforselect = "";
             if(data!=null){
-                var stringfortr ="<tr class=\"gradeX\">"+
-                "<td class=\"center\">"+data.id+"</td>"+
-                "<td >"+data.name+"</td>"+
+            for(var i = 0; i < data.length; i++){
+             var stringfortr ="<tr class=\"gradeX\">"+
+                "<td class=\"center\">"+data[i].id+"</td>"+
+                "<td >"+data[i].name+"</td>"+
                    // "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
                   //  "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
-		"<td >"+data.mobile+"</td>"+
-        "<td >"+data.email+"</td>"+  
-        "<td >"+""+"</td>"+
-       // "<td >"+data.stops+"</td>"+
-		"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data.id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
-		 "</tr>";
+		          "<td >"+data[i].mobile+"</td>"+
+                "<td >"+data[i].email+"</td>"+  
+                "<td >"+""+"</td>"+
+        // "<td >"+data.stops+"</td>"+
+		      "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
+		      "</tr>";
                 stringfortrlist = stringfortrlist + stringfortr; 
-                for(var i = 0; i < data.length; i++){
-                    var stringfortr ="<tr class=\"gradeX\">"+
-                    "<td class=\"center\">"+id+"</td>"+
-                    "<td >"+data[i].name+"</td>"+
-                    //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
-                   // "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
-                  //  "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
-		"<td >"+data[i].mobile+"</td>"+
-                "<td >"+data[i].email+"</td>"+   
-		 "</tr>";
-                    var strforname="<option>"+data[i].name+"</option>";
-                    stringforselect = stringforselect + strforname;
-                stringfortrlist = stringfortrlist + stringfortr;
                 }
             }
-            $('#selectCategories').html(stringforselect);
             $('#couriersTableBody').html(stringfortrlist);
         }
     });
 }
 
 function showModel(id){
- $('#selectStopsModel').modal('show');
-    $('#forCouriersId').val(id);
-    getStops();
+$('#selectStopsModel').modal('show');
+$('#forCouriersId').val(id);
+
+getStops();
 }
 
 function getStops(){
-//        $.ajax({
-//        type: "GET",
-//        url: domain+"/users/getUsersByRole?ser[role]=qs",
-//        dataType: "json",
-//        success: function (data) {
-//            var stringforselect = "";
-//            if(data!=null){
-//                for(var i = 0; i < data.length; i++){
-//                    var strforname="<option id=\""+data[i].id+"\">"+data[i].name+"</option>";
-//                    stringforselect = stringforselect + strforname;
-//                }
-//            }
-//            $('#selectStops').html(stringforselect);
-//        }
-//    });
-//    
-    var stringforselect="";
-    for(var i=0;i<6;i++){
-        var strforselet="<option id=\""+i+"\">海淀"+i+"</option>";
-        stringforselect = stringforselect + strforselet;
-    }
+        $.ajax({
+        type: "GET",
+        url: domain+"/stations",
+        dataType: "json",
+        success: function (data) {
+            var stringforselect = "";
+            if(data!=null){
+                for(var i = 0; i < data.length; i++){
+                    var strforname="<option id=\""+data[i].id+"\">"+data[i].name+"</option>";
+                    stringforselect = stringforselect + strforname;
+                }
+            }
+            $('#selectStops').html(stringforselect);
+        }
+    });
+    
+//    var stringforselect="";
+//    for(var i=0;i<6;i++){
+//        var strforselet="<option id=\""+i+"\">海淀"+i+"</option>";
+//        stringforselect = stringforselect + strforselet;
+//    }
     $('#selectStops').html(stringforselect);
     
 }
@@ -91,8 +79,8 @@ function saveStops(){
     console.log(stop);
     console.log(userId);
     $.ajax({
-        type: "GET",
-        url: domain+"/users/getUsersByRole?user[role]=qs",
+        type: "PUT",
+        url: domain+"updateStationId/",
         dataType: "json",
         success: function (data) {
             alert("添加成功");
@@ -101,7 +89,7 @@ function saveStops(){
             alert("添加失败");
         }
     });
- $('#forCouriersId').modal('toggle');
+ $('#selectStopsModel').modal('toggle');
     getCouriers();
 }
 

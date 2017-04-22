@@ -11,13 +11,11 @@
 //         alert("您输入的账号密码有误，请重新输入！");
 //     }
 // }
-
+var domain="http://180.76.165.224:3000";
 
 function submitLoginReq(){
     var username=$("#idinput").val();
     var password=$("#passinput").val();
-    alert(username);
-    alert(password);
     var isready=checkTheInput(username,password);
     if(isready){
         var hashforpassword = hex_md5(password);
@@ -37,8 +35,8 @@ function login(){
    // alert(url);
  //   alert(password);
     $.ajax({
-        type: "POST",
-        url: "http://localhost:3000/users/login?user[mobile]="+username+"&&user[password]="+password,
+        type:"POST",
+        url: domain+"/users/login?user[mobile]="+username+"&&user[password]="+password,
         data:{},
         dataType: "json",
         success: function (data) {
