@@ -5,13 +5,29 @@ var domain="http://180.76.165.224:3000";
 $(document).ready(function() {
     var couriersTable = $('#couriersTable').dataTable();
 getCouriers();
-    
 });
 
 
 function getCouriers(){
-	     var couriersTable = $('#couriersTable').dataTable();
+    var station_name=new Array();
+    var couriersTable = $('#couriersTable').dataTable();
         $.ajax({
+        type: "GET",
+        async: false，
+        url: domain+"/stations",
+        dataType: "json",
+        success: function (data) {
+            var stringforselect = "";
+            if(data!=null){
+                for(var i = 0; i < data.length; i++){
+            var j=data[i].id;
+                    station_name[j]=data.[i].name;
+                }
+            }
+        }
+    });      
+}    
+    $.ajax({
         type: "GET",
         url: domain+"/users/getUsersByRole?user[role]=qs",
         dataType: "json",
@@ -20,6 +36,7 @@ function getCouriers(){
             var stringforselect = "";
             if(data!=null){
             for(var i = 0; i < data.length; i++){
+                
              var stringfortr ="<tr class=\"gradeX\">"+
                 "<td class=\"center\">"+data[i].id+"</td>"+
                 "<td >"+data[i].name+"</td>"+
@@ -27,7 +44,7 @@ function getCouriers(){
                   //  "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
 		          "<td >"+data[i].mobile+"</td>"+
                 "<td >"+data[i].email+"</td>"+  
-                "<td >"+""+"</td>"+
+                "<td >"+station_name[data[i].station_id]+"</td>"+
         // "<td >"+data.stops+"</td>"+
 		      "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
 		      "</tr>";
@@ -61,8 +78,7 @@ function getStops(){
             }
             $('#selectStops').html(stringforselect);
         }
-    });
-        
+    });      
 }
 
 function saveStops(){
@@ -73,7 +89,8 @@ function saveStops(){
     console.log(userId);
     $.ajax({
         type: "PUT",
-        url: domain+"updateStationId/",
+        url: domain+"/users/"+userId+".json?user[station_id]="+stop,
+        
         dataType: "json",
         success: function (data) {
             alert("添加成功");

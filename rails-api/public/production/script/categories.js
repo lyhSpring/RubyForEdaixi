@@ -2,28 +2,8 @@
  * Created by wuyanli on 2017/4/12.
  */
 var domain = 'http://180.76.165.224:3000';
-$(document).ready(function() {
-   // var categoriesTable = $('#categoriesTable').dataTable();
-    
+$(document).ready(function() {    
     getCategories();
-    
-    // var stringfortrlist ="<tr class=\"gradeX\">"+
-    //     "<td>"+"wew"+"</td>"+
-    //     "<td class=\"hidden-xs\">"+"ddd"+"</td>"+
-    //     "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"upadteCategories()\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
-    //     "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
-
-    //     "+</tr>"+"<tr class=\"gradeX\">"+
-    //     "<td>"+"wew"+"</td>"+
-    //     "<td class=\"hidden-xs\">"+"ddd"+"</td>"+
-    //     "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"upadteCategories()\"style=\"font-size:4px;padding:0px 8px;\">"+"ddd"+"</a></td>"+
-    //     "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" onclick=\"deleteCategories()\" style=\"font-size:4px;padding:0px 8px;\">查看</a></td>"+
-
-    //     "+</tr>";
-    // $('#categoriesTableBody').html(stringfortrlist);
-    //       // Highlight every second row
-    // oTable.$('tr:odd').css('backgroundColor', 'blue');
-    
 } );
 
 function upadteCategories() {
