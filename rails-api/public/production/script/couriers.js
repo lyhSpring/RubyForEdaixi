@@ -44,7 +44,6 @@ function getCouriers(){
                 stringfortrlist = stringfortrlist + stringfortr;
                 }
             }
-
             $('#selectCategories').html(stringforselect);
             $('#couriersTableBody').html(stringfortrlist);
         }
@@ -53,33 +52,53 @@ function getCouriers(){
 
 function showModel(id){
  $('#selectStopsModel').modal('show');
+    $('#forCouriersId').html(id);
     getStops();
 }
 
 function getStops(){
-//        $.ajax({
-//        type: "GET",
-//        url: domain+"/users/getUsersByRole?User[role]=qs",
-//        dataType: "json",
-//        success: function (data) {
-//            var stringforselect = "";
-//            if(data!=null){
-//                for(var i = 0; i < data.length; i++){
-//                    var strforname="<option>"+data[i].name+"</option>";
-//                    stringforselect = stringforselect + strforname;
-//                }
-//            }
-//
-//            $('#selectStops').html(stringforselect);
-//        }
-//    });
-//    
+        $.ajax({
+        type: "GET",
+        url: domain+"/users/getUsersByRole?ser[role]=qs",
+        dataType: "json",
+        success: function (data) {
+            var stringforselect = "";
+            if(data!=null){
+                for(var i = 0; i < data.length; i++){
+                    var strforname="<option id=\""+data[i].id+"\">"+data[i].name+"</option>";
+                    stringforselect = stringforselect + strforname;
+                }
+            }
+            $('#selectStops').html(stringforselect);
+        }
+    });
+    
     var stringforselect="";
     for(var i=0;i<6;i++){
-        var strforselet="<option> 海淀"+i+"</option>";
+        var strforselet="<option id=\""+i+"\">" 海淀"+i+"</option>";
         stringforselect = stringforselect + strforselet;
     }
     $('#selectStops').html(stringforselect);
+    
+}
+
+function saveStops(){
+    var userId = 
+    var selectIndex=document.getElementById("selectStops").selectedIndex;
+    var stop=document.getElementById("selectStops").options[selectIndex].id;
+    console.log(stop);
+    $.ajax({
+        type: "GET",
+        url: domain+"/users/getUsersByRole?user[role]=qs",
+        dataType: "json",
+        success: function (data) {
+            alert("添加成功");
+        },
+        error:function(data){
+            alert("添加失败");
+        }
+    });
+
     
 }
 
