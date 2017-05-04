@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :roles
+  resources :worker_roles
+  resources :workers
+  resources :waybills
+  resources :region_categories
+  resources :price_rules
+  resources :prices
+  resources :items
+  resources :factory_stations
+  resources :factories
+  resources :couriers
+  resources :addresses
   resources :stations
   resources :orders
   resources :categories

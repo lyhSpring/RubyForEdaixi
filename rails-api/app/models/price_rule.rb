@@ -1,0 +1,2 @@
+class PriceRule < ApplicationRecord
+end

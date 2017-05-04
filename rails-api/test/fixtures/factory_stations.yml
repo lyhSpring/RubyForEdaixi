@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  factory_id: 1
+  station_id: 1
+
+two:
+  factory_id: 1
+  station_id: 1

@@ -16,13 +16,20 @@
 # 	}
 # 	])
 
-user = User.create([
-	{
-		name: 'lyh2我很聪明',
-		password: '123456',
-		email: '123@qq.com',
-		mobile: '18811439847',
-		}])
+price = Price.create([{
+	price1: 5,
+	price2: 4,
+	price3: 3,
+	product_id: 1
+	}])
+
+# user = User.create([
+# 	{
+# 		name: 'lyh2我很聪明',
+# 		password: '123456',
+# 		email: '123@qq.com',
+# 		mobile: '18811439847',
+# 		}])
 
 # category = Category.create([
 # 	{

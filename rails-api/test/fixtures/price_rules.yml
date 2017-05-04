@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grade: 1
+  region_id: 1
+  category_id: 1
+  from_date: 2017-05-04 21:26:39
+
+two:
+  grade: 1
+  region_id: 1
+  category_id: 1
+  from_date: 2017-05-04 21:26:39

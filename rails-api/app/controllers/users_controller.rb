@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+  require 'will_paginate'
+
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page],per_page:10).order(updated_at: :desc)
 
     render json: @users
   end

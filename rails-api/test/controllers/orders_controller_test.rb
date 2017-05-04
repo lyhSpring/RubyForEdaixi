@@ -12,7 +12,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create order" do
     assert_difference('Order.count') do
-      post orders_url, params: { order: { address: @order.address, time_exp: @order.time_exp, total_price: @order.total_price, user_id: @order.user_id, washing_status: @order.washing_status } }, as: :json
+      post orders_url, params: { order: { address_id: @order.address_id, categories_id: @order.categories_id, courier_id: @order.courier_id, factory_id: @order.factory_id, status: @order.status, totalprice: @order.totalprice, user_id: @order.user_id, voucher_status: @order.voucher_status, washing_status: @order.washing_status, waybill_id: @order.waybill_id } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update order" do
-    patch order_url(@order), params: { order: { address: @order.address, time_exp: @order.time_exp, total_price: @order.total_price, user_id: @order.user_id, washing_status: @order.washing_status } }, as: :json
+    patch order_url(@order), params: { order: { address_id: @order.address_id, categories_id: @order.categories_id, courier_id: @order.courier_id, factory_id: @order.factory_id, status: @order.status, totalprice: @order.totalprice, user_id: @order.user_id, voucher_status: @order.voucher_status, washing_status: @order.washing_status, waybill_id: @order.waybill_id } }, as: :json
     assert_response 200
   end
 

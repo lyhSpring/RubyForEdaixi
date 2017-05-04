@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/jonatack/will_paginate.git
+  revision: 3c861498bdbc643638c1f25bdbe67f93d03be79b
+  specs:
+    will_paginate (3.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -122,6 +128,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.2)
   tzinfo-data
+  will_paginate!
 
 BUNDLED WITH
-   1.13.7
+   1.14.6

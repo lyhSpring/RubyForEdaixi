@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @products = Product.paginate(page: params[:page],per_page:10).order(updated_at: :desc)
 
     render json: @products
   end
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
   end
 
   def getProductByCategory
-    @product = Product.where("categories_id = ?","#{params[:product][:categories_id]}")
+    @product = Product.search(params[:product][:categories_id],params[:page])
     if @product
       render json: @product
     else

@@ -1,0 +1,2 @@
+class Waybill < ApplicationRecord
+end
