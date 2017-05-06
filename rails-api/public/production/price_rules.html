@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>e袋洗--后台管理系统-区域管理</title>
+    <title>e袋洗--后台管理系统-定价管理</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -144,84 +144,127 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="col-md-12 col-sm-12 col-xs-12">
+
+              <!-- Split button -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm">海淀区</button>
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">朝阳区</a></li>
+                  <li><a href="#">东城区</a></li>
+                  <li><a href="#">大兴区</a></li>
+                  <li><a href="#">。。。</a></li>
+                </ul>
+              </div>
+              <!-- /Split button -->
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>区域列表</h2>
-                    <button class="btn btn-primary btn-lg newbtn" data-toggle="modal" data-target="#addCity"> <i class="fa fa-plus"></i> 新增 </button>
+                    <h2>定价规则</h2>
+                    <button class="btn btn-primary newbtn" data-toggle="modal" data-target="#addPriceRule"> <i class="fa fa-plus"></i> 新增 </button>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     
-                    <table id="citiesTable" class="table table-striped table-bordered">
+                    <table id="priceRulesTable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>区域名称</th>
-                          <th>地址</th>
-                          <th>编辑品类</th>
-                          <th>删除区域</th>
+                          <th>序号</th>
+                          <th>价格等级</th>
+                          <th>开始时间</th>
+                          <th>编辑</th>
+                          <th>删除</th>
                         </tr>
                       </thead>
-                      <tbody id="cityTableBody">
-                        
+                      <tbody id="priceRulesTableBody">
+                        <td>1</td>
+                        <td>price1</td>
+                        <td>2017-05-07</td>
+                        <td><button class="btn btn-primary btn-sm">编辑</button></td>
+                        <td><button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteConfirm">删除</button></td>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
+
         </div>
         <!-- /page content-->
 
-        <!-- Modal -->
-       <div class="modal fade" id="addCity" tabindex="-1" role="dialog" aria-labelledby="addCityLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="addCityLabel">添加商品</h4>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="form-group">
-                    <label for="citynameinput">区域名称</label>
-                    <input type="text" id="citynameinput" class="form-control" placeholder="请输入区域名称">
-                  </div>
-                  <div class="form-group">
-                    <label for="addrinput">地址</label>
-                    <input type="text" id="addrinput" class="form-control" placeholder="请输入地址">
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" value="category1">
-                      Category1
-                    </label>
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" value="category2">
-                      Category2
-                    </label>
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" value="">
-                      加载所有品类
-                    </label>
-                  </div>
 
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="addProduct()">保存</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Modal -->
+
       </div>
     </div>
 
 
+        <!--  add manager  -->
+        <!-- Modal -->
+        <div class="modal fade" id="addPriceRule" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addPriceRuleLabel">新增定价规则</h4>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="regioninput">区域</label>
+                    <input type="text" id="regioninput" class="form-control" value="海淀区" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label for="gradeselect">选择价格等级</label>
+                    <select id="gradeselect" class="form-control">
+                      <option>price1</option>
+                      <option>price2</option>
+                      <option>price3</option>
+                    </select>
+                  </div>
+                  <div class="form-group xdisplay_inputx has-feedback ">
+                    <label for="fromDateinput">选择开始时间</label>
+                    <input type="text" class="form-control has-feedback-left" id="single_cal2" placeholder="First Name" aria-describedby="inputSuccess2Status2">
+                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                    <span id="inputSuccess2Status2" class="sr-only">(success)</span>
+                      <!-- datepicker -->
+                        <div class="col-md-3">
+                           <div class="daterangepicker dropdown-menu ltr single opensright show-calendar picker_2 xdisplay"><div class="calendar left single" style="display: block;"><div class="daterangepicker_input"><input class="input-mini form-control active" type="text" name="daterangepicker_start" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"><table class="table-condensed"><thead><tr><th class="prev available"><i class="fa fa-chevron-left glyphicon glyphicon-chevron-left"></i></th><th colspan="5" class="month">Oct 2016</th><th class="next available"><i class="fa fa-chevron-right glyphicon glyphicon-chevron-right"></i></th></tr><tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead><tbody><tr><td class="weekend off available" data-title="r0c0">25</td><td class="off available" data-title="r0c1">26</td><td class="off available" data-title="r0c2">27</td><td class="off available" data-title="r0c3">28</td><td class="off available" data-title="r0c4">29</td><td class="off available" data-title="r0c5">30</td><td class="weekend available" data-title="r0c6">1</td></tr><tr><td class="weekend available" data-title="r1c0">2</td><td class="available" data-title="r1c1">3</td><td class="available" data-title="r1c2">4</td><td class="available" data-title="r1c3">5</td><td class="available" data-title="r1c4">6</td><td class="available" data-title="r1c5">7</td><td class="weekend available" data-title="r1c6">8</td></tr><tr><td class="weekend available" data-title="r2c0">9</td><td class="available" data-title="r2c1">10</td><td class="available" data-title="r2c2">11</td><td class="available" data-title="r2c3">12</td><td class="available" data-title="r2c4">13</td><td class="available" data-title="r2c5">14</td><td class="weekend available" data-title="r2c6">15</td></tr><tr><td class="weekend available" data-title="r3c0">16</td><td class="available" data-title="r3c1">17</td><td class="today active start-date active end-date available" data-title="r3c2">18</td><td class="available" data-title="r3c3">19</td><td class="available" data-title="r3c4">20</td><td class="available" data-title="r3c5">21</td><td class="weekend available" data-title="r3c6">22</td></tr><tr><td class="weekend available" data-title="r4c0">23</td><td class="available" data-title="r4c1">24</td><td class="available" data-title="r4c2">25</td><td class="available" data-title="r4c3">26</td><td class="available" data-title="r4c4">27</td><td class="available" data-title="r4c5">28</td><td class="weekend available" data-title="r4c6">29</td></tr><tr><td class="weekend available" data-title="r5c0">30</td><td class="available" data-title="r5c1">31</td><td class="off available" data-title="r5c2">1</td><td class="off available" data-title="r5c3">2</td><td class="off available" data-title="r5c4">3</td><td class="off available" data-title="r5c5">4</td><td class="weekend off available" data-title="r5c6">5</td></tr></tbody></table></div></div><div class="calendar right" style="display: none;"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_end" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"><table class="table-condensed"><thead><tr><th></th><th colspan="5" class="month">Nov 2016</th><th class="next available"><i class="fa fa-chevron-right glyphicon glyphicon-chevron-right"></i></th></tr><tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr></thead><tbody><tr><td class="weekend off available" data-title="r0c0">30</td><td class="off available" data-title="r0c1">31</td><td class="available" data-title="r0c2">1</td><td class="available" data-title="r0c3">2</td><td class="available" data-title="r0c4">3</td><td class="available" data-title="r0c5">4</td><td class="weekend available" data-title="r0c6">5</td></tr><tr><td class="weekend available" data-title="r1c0">6</td><td class="available" data-title="r1c1">7</td><td class="available" data-title="r1c2">8</td><td class="available" data-title="r1c3">9</td><td class="available" data-title="r1c4">10</td><td class="available" data-title="r1c5">11</td><td class="weekend available" data-title="r1c6">12</td></tr><tr><td class="weekend available" data-title="r2c0">13</td><td class="available" data-title="r2c1">14</td><td class="available" data-title="r2c2">15</td><td class="available" data-title="r2c3">16</td><td class="available" data-title="r2c4">17</td><td class="available" data-title="r2c5">18</td><td class="weekend available" data-title="r2c6">19</td></tr><tr><td class="weekend available" data-title="r3c0">20</td><td class="available" data-title="r3c1">21</td><td class="available" data-title="r3c2">22</td><td class="available" data-title="r3c3">23</td><td class="available" data-title="r3c4">24</td><td class="available" data-title="r3c5">25</td><td class="weekend available" data-title="r3c6">26</td></tr><tr><td class="weekend available" data-title="r4c0">27</td><td class="available" data-title="r4c1">28</td><td class="available" data-title="r4c2">29</td><td class="available" data-title="r4c3">30</td><td class="off available" data-title="r4c4">1</td><td class="off available" data-title="r4c5">2</td><td class="weekend off available" data-title="r4c6">3</td></tr><tr><td class="weekend off available" data-title="r5c0">4</td><td class="off available" data-title="r5c1">5</td><td class="off available" data-title="r5c2">6</td><td class="off available" data-title="r5c3">7</td><td class="off available" data-title="r5c4">8</td><td class="off available" data-title="r5c5">9</td><td class="weekend off available" data-title="r5c6">10</td></tr></tbody></table></div></div><div class="ranges" style="display: none;"><div class="range_inputs"><button class="applyBtn btn btn-sm btn-success" type="button">Apply</button> <button class="cancelBtn btn btn-sm btn-default" type="button">Cancel</button></div></div></div>
+
+                        </div>
+                      <!-- datepicker -->
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" ">保存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  /add manager  -->
+
+        <!-- deleteconfirm -->
+          <!-- Modal -->
+          <div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="deleteConfirmLabel">删除确认</h4>
+                </div>
+                <div class="modal-body">
+                  确定删除该条定价规则吗？
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary">确定</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- /deleteconfirm -->
 
         <!-- Modal -->
         <div class="modal fade" id="passModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -284,8 +327,11 @@
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	<script src="script/cities.js"></script>
   </body>
 </html>

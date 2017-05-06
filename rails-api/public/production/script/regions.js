@@ -14,14 +14,14 @@ function showModel(id){
 }
 
 function getCities() {
-    var citiesTable = $('#citiesTable').dataTable();
+    var citiesTable = $('#regionsTable').dataTable();
     var stringfortrlist ="<tr class=\"gradeX\">"+
         "<td class=\"hidden-xs\">"+"海淀"+"</td>"+
         "<td class=\"hidden-xs\">"+"北京交通大学"+"</td>"+
         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel()\" style=\"font-size:4px;padding:0px 8px;\">"+"编辑"+"</a></td>"+
         "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
         "+</tr>";
-    $('#cityTableBody').html(stringfortrlist);
+    $('#regionsTableBody').html(stringfortrlist);
 
 }
 function getProduct(){

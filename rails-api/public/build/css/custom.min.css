@@ -1971,7 +1971,7 @@ legend {
 	margin-left:0
 }
 .form-control-feedback {
-	margin-top:8px;
+	margin-top:4px;
 	height:23px;
 	color:#bbb;
 	line-height:24px;
@@ -1979,7 +1979,7 @@ legend {
 }
 .form-control-feedback.left {
 	border-right:1px solid #ccc;
-	left:13px
+	left:4px
 }
 .form-control-feedback.right {
 	border-left:1px solid #ccc;
@@ -3833,3 +3833,4 @@ ul.notifications {
 	font-size: 10pt;
 	margin-left: 100px;
 }
+
