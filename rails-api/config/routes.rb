@@ -4,21 +4,11 @@ Rails.application.routes.draw do
   resources :workers
   resources :waybills
   resources :region_categories
-  resources :price_rules do
-    collection do
-      get :addNewRule
-      post :addNewRule
-    end
-  end
+  resources :price_rules
   resources :prices
   resources :items
   resources :factory_stations
-  resources :factories do
-    collection do
-      get :getAllFactories
-      post :getAllFactories
-    end
-  end
+  resources :factories
   resources :couriers
   resources :addresses
   resources :stations

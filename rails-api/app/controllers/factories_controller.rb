@@ -33,11 +33,6 @@ class FactoriesController < ApplicationController
     end
   end
 
-  def getAllFactories
-    @factory = Factory.find_by_sql ["select * from factories,addresses where addresses.addressable_id=factories.id and addresses.addressable_type=3"]    
-    render json: @factory
-  end
-
   # DELETE /factories/1
   def destroy
     @factory.destroy
