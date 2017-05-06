@@ -25,7 +25,7 @@ function getPrice(){
             if(data!=null){
                 for(var i = 0; i < data.length; i++){
                     var stringfortr ="<tr class=\"gradeX\">"+
-                    "<td class=\"center\">"+Product_name[data[i].id]+"</td>"+
+                    "<td class=\"center\">"+Product_name[data[i].product_id]+"</td>"+
                     "<td >"+data[i].price1+"</td>"+
                     "<td >"+data[i].price2+"</td>"+
                     "<td >"+data[i].price3+"</td>"+
@@ -111,7 +111,7 @@ function upadtePrice() {
 
 function getProduct() {
     $.ajax({
-        type: "POST",
+        type: "GET",
         async: false,
         url: domain+"/products",
         dataType: "json",
