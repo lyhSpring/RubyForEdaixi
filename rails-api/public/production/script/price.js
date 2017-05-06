@@ -83,9 +83,9 @@ function addPrice() {
 }
 
 function updatePrice() {
-    var priceA=$("#priceA").val();
-    var priceB=$("#priceB").val();
-    var priceC=$("#priceC").val();
+    var priceA=$("#changePriceA").val();
+    var priceB=$("#changePriceB").val();
+    var priceC=$("#changePriceC").val();
     var priceId=$('#idForPrice').val();
     if((priceA==null) || (priceB==null) || (priceC==null)){
         alert("请输入价格");
