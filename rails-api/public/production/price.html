@@ -158,6 +158,7 @@
                           <th>A</th>
                           <th>B</th>
                           <th>C</th>
+                          <th>修改</th>
                         </tr>
                       </thead>
                       <tbody id="productPriceTableBody">
@@ -212,7 +213,48 @@
           </div>
         </div>
         <!--  /add manager  -->
-       
+
+        <!--  add manager  -->
+        <!-- Modal -->
+        <div class="modal fade" id="updateProductPrice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="updateProductPriceLable">修改商品价格</h4>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label id="select">选择商品</label>
+                    <label id="product" value="">选择商品</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="priceA">Grade A 价格：</label>
+                    <input type="number" value ="" class="form-control" id="changePriceA">
+                  </div>
+                  <div class="form-group">
+                    <label for="priceB">Grade B 价格：</label>
+                    <input type="number" value ="" class="form-control" id="changePriceB">
+                  </div>
+                  <div class="form-group">
+                    <label for="priceC">Grade C 价格：</label>
+                    <input type="number" value ="" class="form-control" id="changePriceC">
+                  </div>
+                  <label for="priceC" value="" style="display: none" id="idForPrice"></label>
+
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updatePrice()">保存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  /add manager  -->
+
+
       </div>
     </div>
 
