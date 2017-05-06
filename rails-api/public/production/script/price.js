@@ -15,6 +15,15 @@ function showModel(id,price1,price2,price3,product_id){
      $("#changePriceA").val(price1);
      $("#changePriceB").val(price2);
      $("#changePriceC").val(price3);
+
+     
+    var obj = document.getElementById("idForChangeProduct");
+    for(var i=0;i<obj.length;i++){
+        if(obj.options[obj.selectedIndex].value==product_id){
+            document.getElementById("idForChangeProduct")[i].selected=true;
+        }
+    }
+
      $("#product").val(Product_name[product_id]);
 console.log("dddd"+Product_name[product_id]);
 }
@@ -130,9 +139,11 @@ function getProduct() {
                 Product_name[j]=data[i].name;
                 var strforname="<option value='"+data[i].id+"'>"+data[i].name+"</option>";
                 stringfortrlist = stringfortrlist + strforname;
+
             }
             console.log(stringfortrlist);
             $('#idForProduct').html(stringfortrlist);
+            $('#idForChangeProduct').html(stringfortrlist);
         }
     });
 }
