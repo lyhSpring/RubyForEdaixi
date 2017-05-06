@@ -49,11 +49,11 @@ function addPrice() {
     var priceD=$("#priceD").val();
     var selectIndex=document.getElementById("idForProduct").selectedIndex;
     var ProductId=document.getElementById("idForProduct").options[selectIndex].value;
-    var url=domain+"prices?price[price1]="+priceA+"&price[price2]="+priceB+"&price[price3]="+priceC+"&price[product_id]="+ProductId;
+    var url=domain+"/prices?price[price1]="+priceA+"&price[price2]="+priceB+"&price[price3]="+priceC+"&price[product_id]="+ProductId;
     console.log(url);
    $.ajax({
        type: "POST",
-       url: domain+"prices?price[price1]="+priceA+"&price[price2]="+priceB+"&price[price3]="+priceC+"&price[product_id]="+ProductId,
+       url: domain+"/prices?price[price1]="+priceA+"&price[price2]="+priceB+"&price[price3]="+priceC+"&price[product_id]="+ProductId,
        dataType: "json",
        data:{},
        success: function (data) {
