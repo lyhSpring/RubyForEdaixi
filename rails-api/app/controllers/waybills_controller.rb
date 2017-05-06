@@ -3,7 +3,7 @@ class WaybillsController < ApplicationController
 
   # GET /waybills
   def index
-    @waybills = Waybill.all
+    @waybills = Waybill.paginate(page: params[:page],per_page:10).order(updated_at: :desc)
 
     render json: @waybills
   end

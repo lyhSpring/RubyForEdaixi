@@ -26,10 +26,28 @@ class PriceRulesController < ApplicationController
 
   # PATCH/PUT /price_rules/1
   def update
-    if @price_rule.update(price_rule_params)
-      render json: @price_rule
+    if PriceRule.where('from_date like ?',"%#{params[:price_rule][:from_date]}%").first
+      render json: {error: "time repeat"}.to_json
     else
-      render json: @price_rule.errors, status: :unprocessable_entity
+      if @price_rule.update(price_rule_params)
+        render json: @price_rule
+      else
+        render json: @price_rule.errors, status: :unprocessable_entity
+      end     
+    end
+  end
+
+  def addNewRule
+    # @price_rule = PriceRule.where('from_date like ?',"%#{params[:from_date]}%")
+    if PriceRule.where('from_date like ?',"%#{params[:price_rule][:from_date]}%").first
+      render json: {error: "time repeat"}.to_json
+    else
+      @price_rule = PriceRule.new(price_rule_params)
+      if @price_rule.save
+        render json: @price_rule
+      else
+        render json: @price_rule.errors, status: :unprocessable_entity
+      end      
     end
   end
 

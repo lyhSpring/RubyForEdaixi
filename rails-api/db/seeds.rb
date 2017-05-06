@@ -23,6 +23,13 @@ price = Price.create([{
 	product_id: 1
 	}])
 
+# price_rule = Price_rule.create([{
+# 	grade: 1,
+# 	region_id: 110108,
+# 	category_id: 1,
+# 	from_date: "2017-05-07"
+# 	}])
+
 # user = User.create([
 # 	{
 # 		name: 'lyh2我很聪明',
