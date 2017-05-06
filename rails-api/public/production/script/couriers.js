@@ -95,7 +95,6 @@ function saveStops() {
     $.ajax({
         type: "PUT",
         url: domain + "/users/" + userId + ".json?user[station_id]=" + stop,
-
         dataType: "json",
         success: function (data) {
             alert("添加成功");

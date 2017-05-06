@@ -181,37 +181,41 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">新增商品价格</h4>
+                <h4 class="modal-title" id="myModalLabelLable">新增商品价格</h4>
               </div>
               <div class="modal-body">
                 <form>
                   <div class="form-group">
-                    <label for="pName">商品名称</label>
-                    <input type="text" class="form-control" id="pName" placeholder="请输入商品名称">                    
+                    <label id="nameinput">选择商品</label>
+                    <select class="form-control" id="idForProduct">
+                      <option>请选择商品品类</option>
+                      <option>...</option>
+
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="priceA">Grade A 价格：</label>
-                    <input type="number" class="form-control" id="priceA">                    
+                    <input type="number" value ="" class="form-control" id="priceA">
                   </div>
                   <div class="form-group">
                     <label for="priceB">Grade B 价格：</label>
-                    <input type="number" class="form-control" id="priceB">                    
+                    <input type="number" value ="" class="form-control" id="priceB">
                   </div>
                   <div class="form-group">
                     <label for="priceC">Grade C 价格：</label>
-                    <input type="number" class="form-control" id="priceC">                    
+                    <input type="number" value ="" class="form-control" id="priceC">
                   </div>
                   <div class="form-group">
                     <label for="priceD">Grade D 价格：</label>
-                    <input type="number" class="form-control" id="priceD">                    
+                    <input type="number" value ="" class="form-control" id="priceD">
                   </div>
                   <div class="form-group">
                     <label for="priceE">Grade E 价格：</label>
-                    <input type="number" class="form-control" id="priceE">                    
+                    <input type="number" value ="" class="form-control" id="priceE">
                   </div>
                   <div class="form-group">
                     <label for="priceF">Grade F 价格：</label>
-                    <input type="number" class="form-control" id="priceF">                    
+                    <input type="number" value ="" class="form-control" id="priceF">
                   </div>
                   
                 </form>
