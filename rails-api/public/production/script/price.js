@@ -16,10 +16,10 @@ function showModel(id,price1,price2,price3,product_id){
      $("#changePriceB").val(price2);
      $("#changePriceC").val(price3);
 
-     
+
     var obj = document.getElementById("idForChangeProduct");
     for(var i=0;i<obj.length;i++){
-        if(obj.options[obj.selectedIndex].value==product_id){
+        if(obj.options[i].value==product_id){
             document.getElementById("idForChangeProduct")[i].selected=true;
         }
     }
