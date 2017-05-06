@@ -16,7 +16,7 @@ function showModel(id,price1,price2,price3,product_id){
      $("#changePriceB").val(price2);
      $("#changePriceC").val(price3);
      $("#product").val(Product_name[product_id]);
-
+console.log("dddd"+Product_name[product_id]);
 }
 function getPrice(){
      var productPriceTable = $('#productPriceTable').dataTable();
@@ -83,17 +83,18 @@ function addPrice() {
 }
 
 function updatePrice() {
-    var priceA=$("#priceA").val();
-    var priceB=$("#priceB").val();
-    var priceC=$("#priceC").val();
+    var priceA=$("#changePriceA").val();
+    var priceB=$("#changePriceA").val();
+    var priceC=$("#changePriceA").val();
     var priceId=$('#idForPrice').val();
     if((priceA==null) || (priceB==null) || (priceC==null)){
         alert("请输入价格");
     }
+
     var url=domain+"/prices/"+priceId+"?"+"price[price1]="+priceA+"&price[price2]="+priceB+"&price[price3]="+priceC;
     console.log(url);
     $.ajax({
-        type: "POST",
+        type: "PUT",
         url: url,
         dataType: "json",
         data:{},
@@ -108,7 +109,7 @@ function updatePrice() {
             alert("update fail！");
         }
     });
-    $('#addProductPrice').modal('toggle');
+    $('#updateProductPrice').modal('toggle');
     $("#product").val("");
     $("#priceA").val("");
     $("#priceB").val("");
