@@ -5,6 +5,7 @@ var domain='http://180.76.165.224:3000';
 var Product_name = new Array();
 $(document).ready(function() {
     getProduct();
+    console.log(Product_name);
     getPrice();
 });
 
@@ -66,8 +67,13 @@ function addPrice() {
            alert("add fail！");
        }
    });
-    $('#addProducts').modal('toggle');
-    $("#nameinput").val("");
+    $('#addProductPrice').modal('toggle');
+    $("#priceA").val("");
+    $("#priceB").val("");
+    $("#priceC").val("");
+    $("#priceD").val("");
+    $("#priceE").val("");
+    $("#priceF").val("");
 }
 
 function upadtePrice() {
