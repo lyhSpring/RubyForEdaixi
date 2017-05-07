@@ -92,7 +92,7 @@ function updateStation() {
         success: function (data) {
             if (data.id != null) {
                 alert("update success！");
-                getPriceRule();
+                getStations();
             } else {
                 alert(data);
             }
@@ -102,9 +102,7 @@ function updateStation() {
         }
     });
 
-    $('#addChangePriceRule').modal('toggle');
-    document.getElementById("regioninput").selectedIndex = 0;
-    document.getElementById("gradeselect").selectedIndex = 0;
+    $('#changeStation').modal('toggle');
 }
 
 
