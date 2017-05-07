@@ -84,7 +84,7 @@ function addPriceRule() {
                 getPriceRule();
             }
             else
-                alert(data);
+                alert("时间重复!");
         },
         error: function () {
             alert("add fail！");
