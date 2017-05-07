@@ -15,8 +15,6 @@ function showModel(id,price1,price2,price3,product_id){
      $("#changePriceA").val(price1);
      $("#changePriceB").val(price2);
      $("#changePriceC").val(price3);
-
-
 //    var obj = document.getElementById("idForChangeProduct");
 //    for(var i=0;i<obj.length;i++){
 //        if(obj.options[i].value==product_id){
