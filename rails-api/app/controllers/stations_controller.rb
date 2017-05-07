@@ -33,6 +33,11 @@ class StationsController < ApplicationController
     end
   end
 
+  def getStationByRegion
+    @station = Station.find_by_sql ["select stations.id,stations.region_id,stations.name,factories.factory_name from stations,factories,factory_stations where stations.id=factory_stations.station_id and factory_stations.factory_id=factories.id and stations.region_id=?","#{params[:station][:region_id]}"]
+    render json: @station
+  end
+
   # DELETE /stations/1
   def destroy
     @station.destroy
