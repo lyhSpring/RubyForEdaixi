@@ -33,14 +33,14 @@ function getPriceRule(){
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
-            var stringforselect = "";
             if(data!=null){
                 for(var i = 0; i < data.length; i++){
+                    var date=data[i].from_date.split("T")[0];
                     var stringfortr ="<tr class=\"gradeX\">"+
                         "<td class=\"center\">"+i+"</td>"+
                         "<td > price"+data[i].grade+"</td>"+
-                        "<td >"+data[i].from_date+"</td>"+
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+","+data[i].grade+","+data[i].region_id+","+data[i].from_date+")\" style=\"font-size:4px;padding:0px 8px;\">"+"编辑"+"</a></td>"+
+                        "<td >"+date+"</td>"+
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+","+data[i].grade+","+data[i].region_id+","+date+")\" style=\"font-size:4px;padding:0px 8px;\">"+"编辑"+"</a></td>"+
                         "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
                         "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
                         "</tr>";
