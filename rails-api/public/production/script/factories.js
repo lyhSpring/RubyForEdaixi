@@ -25,7 +25,7 @@ function getFactories() {
     var factoriesTable = $('#factoriesTable').dataTable();
     $.ajax({
         type: "GET",
-        url: domain + "/factories",
+        url: domain + "/getAllFactories",
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";

@@ -71,7 +71,7 @@ function addPriceRule() {
     var regioninput=document.getElementById("regioninput").options[selectIndex].value;
     var selectIndexForGrade=document.getElementById("gradeselect").selectedIndex;
     var Grade=document.getElementById("gradeselect").options[selectIndexForGrade].value;
-    var url=domain+"/price_rules/?price_rule[grade]="+Grade+"&price_rule[region_id]="+regioninput+"&price_rule[category_id]=1&price_rule[from_date]="+urlFormDate;
+    var url=domain+"/price_rules/addNewRule?price_rule[grade]="+Grade+"&price_rule[region_id]="+regioninput+"&price_rule[category_id]=1&price_rule[from_date]="+urlFormDate;
     console.log(url);
     $.ajax({
         type: "POST",
