@@ -20,7 +20,7 @@ function showModel(id,grade,region_id,from_date){
     }
     obj1[grade].selected=true;
     $('#idForPriceRule').val(id);
-    $('#forChangeDateinput').val(from_date);
+    $('#single_cal2').val(from_date);
 
 
 
@@ -58,14 +58,16 @@ function getPriceRule(){
 
 function addPriceRule() {
 
-    var fromDate=$("#forDateinput").val();
-
+    var fromDate=$("#single_cal2").val();
     console.log("date"+fromDate+"date");
+    var date=fromDate.split("/");
+    var urlFormDate=date[2]+"-"+date[0]+"-"+date[1];
+    console.log(urlFormDate);
     var selectIndex=document.getElementById("regioninput").selectedIndex;
     var regioninput=document.getElementById("regioninput").options[selectIndex].value;
     var selectIndexForGrade=document.getElementById("gradeselect").selectedIndex;
     var Grade=document.getElementById("gradeselect").options[selectIndexForGrade].value;
-    var url=domain+"/price_rules/addNewRule?price_rule[grade]="+Grade+"&price_rule[region_id]="+regioninput+"&price_rule[category_id]=1&price_rule[from_date]="+fromDate;
+    var url=domain+"/price_rules/addNewRule?price_rule[grade]="+Grade+"&price_rule[region_id]="+regioninput+"&price_rule[category_id]=1&price_rule[from_date]="+urlFormDate;
     console.log(url);
     $.ajax({
         type: "POST",
@@ -90,13 +92,15 @@ function addPriceRule() {
 }
 
 function updatePriceRule() {
-    var fromDate=$("#forChangeDateinput").val();
+    var fromDate=$("#single_cal").val();
+    var date=fromDate.split("/");
+    var urlFormDate=date[2]+"-"+date[0]+"-"+date[1];
     var idPriceRule=$("#idForPriceRule").val();
     var selectIndex=document.getElementById("regionChangeInput");
     var regionChangeInput=document.getElementById("regionChangeInput").options[selectIndex].value;
     var selectIndex1=document.getElementById("regionChangeInput");
     var changeGradeselect=document.getElementById("changeGradeselect").options[selectIndex1].value;
-    var url=domain+"/price_rules/"+idPriceRule+"?price_rule[from_date]="+fromDate+"&price_rule[grade]="+changeGradeselect+"&price_rule[category_id]"+regionChangeInput;
+    var url=domain+"/price_rules/"+idPriceRule+"?price_rule[from_date]="+urlFormDate+"&price_rule[grade]="+changeGradeselect+"&price_rule[category_id]"+regionChangeInput;
     console.log(url);
     $.ajax({
        type: "PUT",
