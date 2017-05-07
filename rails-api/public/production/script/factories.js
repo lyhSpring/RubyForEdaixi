@@ -71,7 +71,6 @@ function addFactories() {
         success: function (data) {
             if (data) {
                 factoryId=data.id
-                alert("add success！");
             }
         },
         error: function () {

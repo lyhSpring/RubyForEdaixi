@@ -18,7 +18,7 @@ function showModel(id,grade,region_id,from_date){
            document.getElementById("regionChangeInput")[i].selected=true;
        }
     }
-    obj1[grade-1].selected=true;
+    obj1[grade].selected=true;
     $('#idForPriceRule').val(id);
     $('#single_cal2').val(from_date);
 console.log(from_date);
@@ -107,7 +107,6 @@ function updatePriceRule() {
     var regionChangeInput=document.getElementById("regionChangeInput").options[selectIndex].value;
     var selectIndex1=document.getElementById("changeGradeselect").selectedIndex;
     var changeGradeselect=document.getElementById("changeGradeselect").options[selectIndex1].value;
-changeGradeselect=parseInt(changeGradeselect)+1;
 console.log($('#single_cal2').val());
     var url=domain+"/price_rules/"+idPriceRule+"?price_rule[from_date]="+urlFormDate+"&price_rule[grade]="+changeGradeselect+"&price_rule[category_id]"+regionChangeInput;
     console.log(url);
