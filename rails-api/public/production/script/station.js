@@ -43,7 +43,7 @@ function getStations() {
                         "<td >" + i + 1 + "</td>" +
                         "<td >" + data[i].name + "</td>" +
                         "<td >" + factoriy_name + "</td>" +
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + "," + data[i].name + "," + data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "'," + data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
