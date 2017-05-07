@@ -61,14 +61,13 @@ function showModel(id, name, region_id,factory_id) {
     $('#stationnamechange').val(name);
     var obj = document.getElementById("regionchange");
     for (var i = 0; i < obj.length; i++) {
-        if (obj.options[i].value == factory_id) {
+        if (obj.options[i].value == region_id) {
             document.getElementById("regionchange")[i].selected = true;
         }
     }
-    getFactories();
     var obj1 = document.getElementById("regionnamechange");
     for (var i = 0; i < obj.length; i++) {
-        if (obj.options[i].id == region_id) {
+        if (obj.options[i].id == factory_id) {
             document.getElementById("regionnamechange")[i].selected = true;
         }
     }
