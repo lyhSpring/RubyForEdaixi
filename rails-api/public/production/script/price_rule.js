@@ -18,11 +18,11 @@ function showModel(id,grade,region_id,from_date){
            document.getElementById("regionChangeInput")[i].selected=true;
        }
     }
-    obj1[grade].selected=true;
+    obj1[grade-1].selected=true;
     $('#idForPriceRule').val(id);
     $('#single_cal2').val(from_date);
-
-
+console.log(from_date);
+console.log($('#single_cal2').val());
 
 }
 function getPriceRule(){
@@ -35,13 +35,15 @@ function getPriceRule(){
             var stringfortrlist = "";
             if(data!=null){
                 for(var i = 0; i < data.length; i++){
-                    var date=data[i].from_date.split("T")[0];
-                    var stringfortr ="<tr class=\"gradeX\">"+
+                 var date; 
+		 if(data[i].from_date!=null){
+		  date=data[i].from_date.split("T")[0];} 
+			 var stringfortr ="<tr class=\"gradeX\">"+
                         "<td class=\"center\">"+i+"</td>"+
                         "<td > price"+data[i].grade+"</td>"+
                         "<td >"+date+"</td>"+
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+","+data[i].grade+","+data[i].region_id+","+date+")\" style=\"font-size:4px;padding:0px 8px;\">"+"编辑"+"</a></td>"+
-                        "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+","+data[i].grade+","+data[i].region_id+", '"+date+"')\" style=\"font-size:6px;padding:0px 8px;\">"+"编辑"+"</a></td>"+
+                        "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:5px;padding:0px 8px;\">删除</a></td>"+
                         "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
@@ -58,7 +60,7 @@ function getPriceRule(){
 
 function addPriceRule() {
 
-    var fromDate=$("#single_cal2").val();
+    var fromDate=$("#single_cal").val();
     console.log("date"+fromDate+"date");
     var date=fromDate.split("/");
     var urlFormDate=date[2]+"-"+date[0]+"-"+date[1];
@@ -92,14 +94,18 @@ function addPriceRule() {
 }
 
 function updatePriceRule() {
-    var fromDate=$("#single_cal").val();
+    var fromDate=$("#single_cal2").val();
     var date=fromDate.split("/");
-    var urlFormDate=date[2]+"-"+date[0]+"-"+date[1];
+    if(date.length!=1){
+var urlFormDate=date[2]+"-"+date[0]+"-"+date[1];
+}	var urlFormDate=date[0];
     var idPriceRule=$("#idForPriceRule").val();
-    var selectIndex=document.getElementById("regionChangeInput");
+    var selectIndex=document.getElementById("regionChangeInput").selectedIndex
     var regionChangeInput=document.getElementById("regionChangeInput").options[selectIndex].value;
-    var selectIndex1=document.getElementById("regionChangeInput");
+    var selectIndex1=document.getElementById("changeGradeselect").selectedIndex;
     var changeGradeselect=document.getElementById("changeGradeselect").options[selectIndex1].value;
+changeGradeselect=parseInt(changeGradeselect)+1;
+console.log($('#single_cal2').val());
     var url=domain+"/price_rules/"+idPriceRule+"?price_rule[from_date]="+urlFormDate+"&price_rule[grade]="+changeGradeselect+"&price_rule[category_id]"+regionChangeInput;
     console.log(url);
     $.ajax({
@@ -110,8 +116,8 @@ function updatePriceRule() {
        success: function (data) {
                 if(data.id!=null){
                     alert("update success！");
-                    getProduct();
-                }else{
+                getPriceRule();
+			}else{
                     alert(data);
                 }
        },
@@ -120,8 +126,7 @@ function updatePriceRule() {
        }
    });
 
-   getCategories();
-   $('#updateProducts').modal('toggle');
+   $('#addChangePriceRule').modal('toggle');
    document.getElementById("regioninput").selectedIndex=0;
    document.getElementById("gradeselect").selectedIndex=0;
 }
