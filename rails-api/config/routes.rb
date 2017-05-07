@@ -21,7 +21,12 @@ Rails.application.routes.draw do
   end
   resources :couriers
   resources :addresses
-  resources :stations
+  resources :stations do
+    collection do
+      get :getStationByRegion
+      post :getStationByRegion
+    end
+  end
   resources :orders
   resources :categories
   resources :products do 
