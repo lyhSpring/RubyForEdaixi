@@ -10,11 +10,10 @@ $(document).ready(function () {
 
 function getStations() {
     var factoriy_name = new Array();
-    var couriersTable = $('#couriersTable').dataTable();
     $.ajax({
         type: "GET",
         async: false,
-        url: domain + "/getAllFactories",
+        url: domain + "/factories/getAllFactories",
         dataType: "json",
         success: function (data) {
             var stringforselect = "";
@@ -44,7 +43,7 @@ function getStations() {
                         "<td >" + i + 1 + "</td>" +
                         "<td >" + data[i].name + "</td>" +
                         "<td >" + factoriy_name + "</td>" +
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + "," + data[i].name + "," + data[i].factory_id + "," + data[i].grade + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + "," + data[i].name + "," + data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
@@ -58,9 +57,10 @@ function getStations() {
 function showModel(id, name, factory_id) {
     $('#changeStation').modal('show');
     $('#idForStation').val(id);
+    $('#stationnamechange').val(name);
     var obj = document.getElementById("regionchange");
     for (var i = 0; i < obj.length; i++) {
-        if (obj.options[i].value == region_id) {
+        if (obj.options[i].value == factory_id) {
             document.getElementById("regionchange")[i].selected = true;
         }
     }
@@ -75,38 +75,36 @@ function showModel(id, name, factory_id) {
 
 
 function updateStation() {
-    var idForStation=$('#idForStation').val();
-    var stationnamechange=$('#stationnamechange').val();
-    var selectIndex=document.getElementById("regionchange").selectedIndex
-    var regionchange=document.getElementById("regionchange").options[selectIndex].value;
-    var selectIndex1=document.getElementById("regionnamechange").selectedIndex;
-    var regionnamechange=document.getElementById("regionnamechange").options[selectIndex1].id;
-    var url=domain+"/stations/"+idForStation+"?station[name]="+stationnamechange+"&station[region_id]="+regionchange;
+    var idForStation = $('#idForStation').val();
+    var stationnamechange = $('#stationnamechange').val();
+    var selectIndex = document.getElementById("regionchange").selectedIndex
+    var regionchange = document.getElementById("regionchange").options[selectIndex].value;
+    var selectIndex1 = document.getElementById("regionnamechange").selectedIndex;
+    var regionnamechange = document.getElementById("regionnamechange").options[selectIndex1].id;
+    var url = domain + "/stations/" + idForStation + "?station[name]=" + stationnamechange + "&station[region_id]=" + regionchange;
     console.log(url);
     $.ajax({
         type: "PUT",
         url: url,
         dataType: "json",
-        data:{},
+        data: {},
         success: function (data) {
-            if(data.id!=null){
+            if (data.id != null) {
                 alert("update success！");
                 getPriceRule();
-            }else{
+            } else {
                 alert(data);
             }
         },
-        error: function(){
+        error: function () {
             alert("update fail");
         }
     });
 
     $('#addChangePriceRule').modal('toggle');
-    document.getElementById("regioninput").selectedIndex=0;
-    document.getElementById("gradeselect").selectedIndex=0;
+    document.getElementById("regioninput").selectedIndex = 0;
+    document.getElementById("gradeselect").selectedIndex = 0;
 }
-
-
 
 
 function getFactories() {
@@ -122,8 +120,8 @@ function getFactories() {
                     stringforselect = stringforselect + strforname;
                 }
             }
-            $('#regionnamechange').html(stringfortrlist);
-            $('#regionnameselect').html(stringfortrlist);
+            $('#regionnamechange').html(stringforselect);
+            $('#regionnameselect').html(stringforselect);
         }
     });
 
@@ -144,7 +142,7 @@ function addStations() {
         ayas: false,
         dataType: "json",
         success: function (data) {
-            station_id=data.id
+            station_id = data.id
             alert("add success");
         },
         error: function (data) {
@@ -154,7 +152,7 @@ function addStations() {
 
     //localhost:3000/factory_stations?factory_station[factory_id]=1&factory_station[station_id]=2
 
-    var url2=domain+"/factory_stations?factory_station[factory_id]="+regionnameselect+"&factory_station[station_id]="+station_id;
+    var url2 = domain + "/factory_stations?factory_station[factory_id]=" + regionnameselect + "&factory_station[station_id]=" + station_id;
     $.ajax({
         type: "POST",
         url: url2,
