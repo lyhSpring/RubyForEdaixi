@@ -59,17 +59,19 @@ function getPriceRule(){
 }
 
 function addPriceRule() {
-
-    var fromDate=$("#single_cal").val();
+    var fromDate=$("#single_cal4").val();
     console.log("date"+fromDate+"date");
     var date=fromDate.split("/");
-    var urlFormDate=date[2]+"-"+date[0]+"-"+date[1];
+    var urlFormDate=date[0];
+    if(date.length!=1){
+         urlFormDate=date[2]+"-"+date[0]+"-"+date[1];
+    }
     console.log(urlFormDate);
     var selectIndex=document.getElementById("regioninput").selectedIndex;
     var regioninput=document.getElementById("regioninput").options[selectIndex].value;
     var selectIndexForGrade=document.getElementById("gradeselect").selectedIndex;
     var Grade=document.getElementById("gradeselect").options[selectIndexForGrade].value;
-    var url=domain+"/price_rules/addNewRule?price_rule[grade]="+Grade+"&price_rule[region_id]="+regioninput+"&price_rule[category_id]=1&price_rule[from_date]="+urlFormDate;
+    var url=domain+"/price_rules/?price_rule[grade]="+Grade+"&price_rule[region_id]="+regioninput+"&price_rule[category_id]=1&price_rule[from_date]="+urlFormDate;
     console.log(url);
     $.ajax({
         type: "POST",
@@ -96,9 +98,10 @@ function addPriceRule() {
 function updatePriceRule() {
     var fromDate=$("#single_cal2").val();
     var date=fromDate.split("/");
+    var urlFormDate=date[0];
     if(date.length!=1){
-var urlFormDate=date[2]+"-"+date[0]+"-"+date[1];
-}	var urlFormDate=date[0];
+        urlFormDate=date[2]+"-"+date[0]+"-"+date[1];
+    }
     var idPriceRule=$("#idForPriceRule").val();
     var selectIndex=document.getElementById("regionChangeInput").selectedIndex
     var regionChangeInput=document.getElementById("regionChangeInput").options[selectIndex].value;
