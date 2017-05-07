@@ -36,14 +36,15 @@ function getStations() {
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
                     var factoriy_name = "";
-                    if (data[i].station_id != null) {
-                        factoriy_name = factoriy_name[data[i].station_id];
+                    if (data[i].factory_id != null) {
+                        factoriy_name = factoriy_name[data[i].factory_id];
                     }
+                    var sort=i+1;
                     var stringfortr = "<tr class=\"gradeX\">" +
-                        "<td >" + i + 1 + "</td>" +
+                        "<td >" + sort + "</td>" +
                         "<td >" + data[i].name + "</td>" +
                         "<td >" + factoriy_name + "</td>" +
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "'," + data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
@@ -54,7 +55,7 @@ function getStations() {
     getFactories();
 }
 
-function showModel(id, name, factory_id) {
+function showModel(id, name, region_id,factory_id) {
     $('#changeStation').modal('show');
     $('#idForStation').val(id);
     $('#stationnamechange').val(name);
@@ -143,7 +144,6 @@ function addStations() {
         dataType: "json",
         success: function (data) {
             station_id = data.id
-            alert("add success");
         },
         error: function (data) {
             alert("add fail");
