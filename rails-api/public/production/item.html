@@ -154,12 +154,6 @@
                   <div class="x_title">
                     <h2>订单详情</h2>
                     <div class="clearfix"></div>
-                    <button class="btn btn-sm" onclick="changeStatus('forpick');">待取件</button>
-                    <button class="btn btn-sm" onclick="changeStatus('forpay');">待支付</button>
-                    <button class="btn btn-sm" onclick="changeStatus('delivering');">配送中</button>
-                    <button class="btn btn-sm" onclick="changeStatus('laundrying');">清洗中</button>
-                    <button class="btn btn-sm" onclick="changeStatus('forback');">待送回</button>
-                    <button class="btn btn-sm" onclick="changeStatus('complete');">完成</button>
                   </div>
 
                   	<div class="item-info" id="forpick">
@@ -538,11 +532,6 @@
         document.getElementById('current').click();
       }
 
-      function changeStatus(status){
-      	var ds = document.getElementsByClassName('item-info');
-      	ds.style('display','none');
-      	// ds.get(status).('display','block');
-      }
     </script>
 
   </body>
