@@ -3833,3 +3833,9 @@ ul.notifications {
 	font-size: 10pt;
 	margin-left: 100px;
 }
+
+.order-status-label{
+	font-size: 10pt;
+	font-family: 微软雅黑;
+	font-weight: lighter;
+}
