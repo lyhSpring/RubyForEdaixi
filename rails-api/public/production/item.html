@@ -157,16 +157,14 @@
                   </div>
 
                   	<div class="item-info" id="forpick">
-	                  	<div class="alert alert-info" role="alert">待取件</div>
+	                  	<div class="alert alert-info" role="alert" id="title">待取件</div>
 	                  	<div class="panel panel-default">
 	                  		<div class="panel-heading">用户信息</div>
-	                  		<div class="panel-body">
-	                  			用户名：hy <br/>
-	                  			手机号码：130XXXXXXXX <br/>
-	                  			邮箱：azxdhy@163.com
+	                  		<div class="panel-body" id="user">
+
 	                  		</div>
 	                  	</div>
-	                  	<div class="panel panel-default">
+	                  	<div id="bill" class="panel panel-default">
 	                  		<div class="panel-heading">订单信息</div>
 	                  		<div class="panel-body">
 	                  			订单号：XXXXXXXXXXXXXX <br/>
@@ -176,7 +174,7 @@
 	                  	</div>
 	                  	<div class="panel panel-default">
 	                  		<div class="panel-heading">物流信息</div>
-	                  		<div class="panel-body">
+	                  		<div id="waybill" class="panel-body">
 	                  			物流单号：XXXXXXXXXXXXXX <br/>
 	                  			物流状态：待抢单/待取件 <br/>
 	                  			配送员：XXX <br/>
@@ -188,7 +186,7 @@
 	                  	<div class="panel panel-default">
 	                  		<div class="panel-heading">衣物信息</div>
 	                  		<div class="panel-body">
-	                  			<table class="table table-striped table-bordered" id="itemsTable">
+	                  			<table class="table table-striped table-bordered" id="clothesTable">
 	                  				<thead>
 	                  					<tr>
 	                  						<th>序号</th>
@@ -198,7 +196,7 @@
 	                  						<th>总价</th>
 	                  					</tr>
 	                  				</thead>
-	                  				<tbody>
+	                  				<tbody id="clothesTableBody">
 	                  					
 	                  				</tbody>
 	                  			</table>
@@ -515,7 +513,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	<script src="script/regions.js"></script>
+	<script src="script/item.js"></script>
 
 
     <script type="text/javascript">

@@ -3,56 +3,64 @@
  */
 var domain = "http://180.76.165.224:3000";
 $(document).ready(function () {
-    var stationsTable = $('#stationsTable').dataTable();
-    getStations();
+    var waybillsTable = $('#waybillsTable').dataTable();
+    getWaybill();
 });
 
 
-function getStations() {
-    var factoriy_name = new Array();
-    $.ajax({
-        type: "GET",
-        async: false,
-        url: domain + "/factories/getAllFactories",
-        dataType: "json",
-        success: function (data) {
-            var stringforselect = "";
-            if (data != null) {
-                for (var i = 0; i < data.length; i++) {
-                    var j = data[i].id;
-                    parseInt(j);
-                    factoriy_name[j] = data[i].name;
-                }
-            }
+function getWaybill() {
+    var url = location.search; //获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for (var i = 0; i < strs.length; i++) {
+            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
         }
-    });
-    console.log(factoriy_name);
-    $.ajax({
-        type: "GET",
-        url: domain + "/stations/getStationByRegion?station[region_id]=110108",
-        dataType: "json",
-        success: function (data) {
-            var stringfortrlist = "";
-            if (data != null) {
-                for (var i = 0; i < data.length; i++) {
-                    var factoriy_name = "";
-                    if (data[i].factory_id != null) {
-                        factoriy_name = factoriy_name[data[i].factory_id];
-                    }
-                    var sort=i+1;
-                    var stringfortr = "<tr class=\"gradeX\">" +
-                        "<td >" + sort + "</td>" +
-                        "<td >" + data[i].name + "</td>" +
-                        "<td >" + factoriy_name + "</td>" +
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
-                        "</tr>";
-                    stringfortrlist = stringfortrlist + stringfortr;
-                }
-            }
-            $('#stationsTableBody').html(stringfortrlist);
-        }
-    });
-    getFactories();
+    }
+    var date = new Date();
+    var stringfortrlist = "";
+    for (var i = 0; i < 5; i++) {
+        var sort = i + 1;
+        var stringfortr = "<tr class=\"gradeX\">" +
+            "<td >" + sort + "</td>" +
+            "<td >" + sort + "</td>" +
+            "<td >" + date.toLocaleDateString() + "</td>" +
+            "<td >" + '北京交通大学' + "</td>" +
+            "<td >" + '北京南站' + "</td>" +
+            "<td >" + '取件中' + "</td>" +
+            //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+            "</tr>";
+        stringfortrlist = stringfortrlist + stringfortr;
+    }
+    $('#waybillsTableBody').html(stringfortrlist);
+
+    if (theRequest['id']!=null) {
+    // $.ajax({
+    //     type: "GET",
+    //     url: domain + "/waybills/getAllWaybills",
+    //     dataType: "json",
+    //     success: function (data) {
+    //         var stringfortrlist = "";
+    //         if (data != null) {
+    //             for (var i = 0; i < data.length; i++) {
+    //                 var sort=i+1;
+    //                 var stringfortr = "<tr class=\"gradeX\">" +
+    //                     "<td >" + sort + "</td>" +
+    //                     "<td >" + data[i].id + "</td>" +
+    //                     "<td >" + data[i].order_id + "</td>" +
+    //                     "<td >" + data[i].get_address + "</td>" +
+    //                     "<td >" + data[i].to_address + "</td>" +
+    //                     "<td >" + data[i].status + "</td>" +
+    //                     "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+    //                     "</tr>";
+    //                 stringfortrlist = stringfortrlist + stringfortr;
+    //             }
+    //         }
+    //         $('#waybillsTableBody').html(stringfortrlist);
+    //     }
+    // });
+}
 }
 
 function showModel(id, name, region_id,factory_id) {

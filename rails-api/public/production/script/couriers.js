@@ -4,6 +4,7 @@
 var domain = "http://180.76.165.224:3000";
 $(document).ready(function () {
     var couriersTable = $('#couriersTable').dataTable();
+
     getCouriers();
 });
 
@@ -52,6 +53,7 @@ function getCouriers() {
                         "<td >" + station_names + "</td>" +
                         // "<td >"+data.stops+"</td>"+
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"toPage(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "查看" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
@@ -59,6 +61,10 @@ function getCouriers() {
             $('#couriersTableBody').html(stringfortrlist);
         }
     });
+}
+function toPage(id) {
+    var url="waybills.html?id="+id
+    window.location.href=url;
 }
 
 function showModel(id) {
