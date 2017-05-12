@@ -38,6 +38,20 @@ class OrdersController < ApplicationController
     @order.destroy
   end
 
+  #根据订单id获取订单的详细信息
+  def getOrdersAllInfo
+    @order = Order.find(params[:order][:id])
+    @order.waybills = Waybill.where('order_id=?',@order.id)
+    @order.items = Item.where('order_id=?',@order.id)
+    render json: @order
+  end
+
+  #根据用户id获取订单简略信息
+  def getOrdersByUserId
+    @order = Order.where('user_id = ?',"#{params[:order][:user_id]}")
+    render json: @order
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
