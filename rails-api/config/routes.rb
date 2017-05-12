@@ -27,7 +27,14 @@ Rails.application.routes.draw do
       post :getStationByRegion
     end
   end
-  resources :orders
+  resources :orders do
+    collection do
+      get :getOrdersAllInfo
+      post :getOrdersAllInfo
+      get :getOrdersByUserId
+      post :getOrdersByUserId
+    end
+  end
   resources :categories
   resources :products do 
   	collection do
