@@ -18,6 +18,8 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
+      @price = Price.new(:product_id=>@product.id, :price1=>0,:price2=>0,:price3=>0)
+      @price.save
       render json: @product, status: :created, location: @product
     else
       render json: @product.errors, status: :unprocessable_entity
