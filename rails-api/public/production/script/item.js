@@ -42,54 +42,36 @@ function getItem() {
     if (theRequest['id']!=null) {
     $.ajax({
         type: "GET",
-        url: domain + "/order/getOrdersAllInfo?order[id]="+theRequest['id'],
+        url: domain + "/orders/getOrdersAllInfo?order[id]="+theRequest['id'],
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
             if (data != null) {
-                for (var i = 0; i < data.length; i++) {
-                    var str="用户名: "+data[i].user_id +"<br/>";
+                    var str="用户名: "+data.user_id +"<br/>";
                     $('#user').html(str);
-                    var str="订单号： "+data[i].id+"<br/> 订单金额: "+data[i].totalprice+"<br/> 订单状态: "+data[i].status;
+                    var str="订单号： "+data.id+"<br/> 订单金额: "+data.totalprice+"<br/> 订单状态: "+data.status;
                     $('#bill').html(str);
-                    var str="物流单号： "+data[i]['waybills'][0].waybill_id+"<br/> 物流状态: "+data[i]['waybills'][0].status+"<br/> 配送员: "+data[i]['waybills'][0].sender_id;
+                    var str="物流单号： "+data['waybills'][0].waybill_id+"<br/> 物流状态: "+data['waybills'][0].status+"<br/> 配送员: "+data[i]['waybills'][0].sender_id;
                     $('#waybill').html(str);
-                    for(var j = 0; j < data[i]['item'].length; j++){}
+                    for(var j = 0; j < data['item'].length; j++){}
                     var sort=j+1;
-                    var item = data[i]['item'];
+                    var item = data['item'];
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + sort + "</td>" +
                         "<td >" + item[j].product_id + "</td>" +
                         "<td >" + item[j].product_number + "</td>" +
-                        "<td >" + data[i].total_price + "</td>" +
+                        "<td >" + item[j].total_price + "</td>" +
                        // "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
-            }
+
             $('#clothesTableBody').html(stringfortrlist);
         }
     });
 }
 }
 
-function showModel(id, name, region_id,factory_id) {
-    $('#changeStation').modal('show');
-    $('#idForStation').val(id);
-    $('#stationnamechange').val(name);
-    var obj = document.getElementById("regionchange");
-    for (var i = 0; i < obj.length; i++) {
-        if (obj.options[i].value == region_id) {
-            document.getElementById("regionchange")[i].selected = true;
-        }
-    }
-    var obj1 = document.getElementById("regionnamechange");
-    for (var i = 0; i < obj.length; i++) {
-        if (obj.options[i].id == factory_id) {
-            document.getElementById("regionnamechange")[i].selected = true;
-        }
-    }
-}
 
 
 
