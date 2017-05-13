@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504134536) do
+ActiveRecord::Schema.define(version: 20170513152712) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "comment"
@@ -42,17 +42,18 @@ ActiveRecord::Schema.define(version: 20170504134536) do
   end
 
   create_table "factories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
+    t.string   "factory_name"
     t.string   "mobile"
     t.integer  "status"
     t.string   "email"
     t.string   "password"
     t.integer  "station_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "region_id"
   end
 
-  create_table "factory_stations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "factories_stations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "factory_id"
     t.integer  "station_id"
     t.datetime "created_at", null: false
@@ -129,7 +130,6 @@ ActiveRecord::Schema.define(version: 20170504134536) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "level"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -165,8 +165,9 @@ ActiveRecord::Schema.define(version: 20170504134536) do
     t.datetime "actual_time"
     t.integer  "waybill_id"
     t.integer  "order_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "recieve_type"
   end
 
   create_table "worker_roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
