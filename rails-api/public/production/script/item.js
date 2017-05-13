@@ -3,8 +3,6 @@
  */
 var domain = "http://180.76.165.224:3000";
 $(document).ready(function () {
-    var str="用户名：hy <br/>手机号码：130XXXXXXXX<br/>邮箱：azxdhy@163.com";
-    $('#user').html(str);
     //$('#title').html(str);
     //$('#bill').html(str);
     //$('#waybill').html(str);
@@ -23,48 +21,55 @@ function getItem() {
             theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
         }
     }
-    var date = new Date();
-    var stringfortrlist = "";
-    for (var i = 0; i < 5; i++) {
-        var sort = i + 1;
-        var stringfortr = "<tr>" +
-            "<td >" + sort + "</td>" +
-            "<td >" + '羽绒服' + "</td>" +
-            "<td >" + '北京交通大学' + "</td>" +
-            "<td >" + '北京南站' + "</td>" +
-            "<td >" + '取件中' + "</td>" +
-            //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
-            "</tr>";
-        stringfortrlist = stringfortrlist + stringfortr;
-    }
-    $('#clothesTableBody').html(stringfortrlist);
-
+    // var date = new Date();
+    // var stringfortrlist = "";
+    // for (var i = 0; i < 5; i++) {
+    //     var sort = i + 1;
+    //     var stringfortr = "<tr>" +
+    //         "<td >" + sort + "</td>" +
+    //         "<td >" + '羽绒服' + "</td>" +
+    //         "<td >" + '北京交通大学' + "</td>" +
+    //         "<td >" + '北京南站' + "</td>" +
+    //         "<td >" + '取件中' + "</td>" +
+    //         //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+    //         "</tr>";
+    //     stringfortrlist = stringfortrlist + stringfortr;
+    // }
+    // $('#clothesTableBody').html(stringfortrlist);
+    //
 
 
     if (theRequest['id']!=null) {
-    // $.ajax({
-    //     type: "GET",
-    //     url: domain + "/order/getOrderById",
-    //     dataType: "json",
-    //     success: function (data) {
-    //         var stringfortrlist = "";
-    //         if (data != null) {
-    //             for (var i = 0; i < data.length; i++) {
-    //                 var sort=i+1;
-    //                 var stringfortr = "<tr class=\"gradeX\">" +
-    //                     "<td >" + sort + "</td>" +
-    //                     "<td >" + data[i].name + "</td>" +
-    //                     "<td >" + data[i].number + "</td>" +
-    //                     "<td >" + data[i].price + "</td>" +
-    //                     "<td >" + data[i].total_price + "</td>" +
-    //                    // "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
-    //                     "</tr>";
-    //                 stringfortrlist = stringfortrlist + stringfortr;
-    //             }
-    //         }
-    //         $('#clothesTableBody').html(stringfortrlist);
-    //     }
-    // });
+    $.ajax({
+        type: "GET",
+        url: domain + "/order/getOrdersAllInfo?order[id]="+theRequest['id'],
+        dataType: "json",
+        success: function (data) {
+            var stringfortrlist = "";
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    var str="用户名: "+data[i].user_id +"<br/>";
+                    $('#user').html(str);
+                    var str="订单号： "+data[i].id+"<br/> 订单金额: "+data[i].totalprice+"<br/> 订单状态: "+data[i].status;
+                    $('#bill').html(str);
+                    var str="物流单号： "+data[i]['waybills'][0].waybill_id+"<br/> 物流状态: "+data[i]['waybills'][0].status+"<br/> 配送员: "+data[i]['waybills'][0].sender_id;
+                    $('#waybill').html(str);
+                    for(var j = 0; j < data[i]['item'].length; j++){}
+                    var sort=j+1;
+                    var item = data[i]['item'];
+                    var stringfortr = "<tr class=\"gradeX\">" +
+                        "<td >" + sort + "</td>" +
+                        "<td >" + item[j].product_id + "</td>" +
+                        "<td >" + item[j].product_number + "</td>" +
+                        "<td >" + data[i].total_price + "</td>" +
+                       // "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+                        "</tr>";
+                    stringfortrlist = stringfortrlist + stringfortr;
+                }
+            }
+            $('#clothesTableBody').html(stringfortrlist);
+        }
+    });
 }
 }
 
