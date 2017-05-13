@@ -47,25 +47,25 @@ function getItem() {
         success: function (data) {
             var stringfortrlist = "";
             if (data != null) {
-                    var str="用户名: "+data.user_id +"<br/>";
-                    $('#user').html(str);
-                    var str="订单号： "+data.id+"<br/> 订单金额: "+data.totalprice+"<br/> 订单状态: "+data.status;
-                    $('#bill').html(str);
-                    var str="物流单号： "+data['waybills'][0].waybill_id+"<br/> 物流状态: "+data['waybills'][0].status+"<br/> 配送员: "+data[i]['waybills'][0].sender_id;
-                    $('#waybill').html(str);
-                    for(var j = 0; j < data['item'].length; j++){}
-                    var sort=j+1;
-                    var item = data['item'];
+                var str = "用户名: " + data.user_id + "<br/>";
+                $('#user').html(str);
+                var str = "订单号： " + data.id + "<br/> 订单金额: " + data.totalprice + "<br/> 订单状态: " + data.status;
+                $('#bill').html(str);
+          if(data.waybills.length>0){
+                var str = "物流单号： " + data.waybills[0].waybill_id + "<br/> 物流状态: " + data.waybills[0].status + "<br/> 配送员: " + data.waybills[0].sender_id;
+                $('#waybill').html(str);}
+                for (var j = 0; j < data.items.length; j++) {
+                    var sort = j + 1;
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + sort + "</td>" +
-                        "<td >" + item[j].product_id + "</td>" +
-                        "<td >" + item[j].product_number + "</td>" +
-                        "<td >" + item[j].total_price + "</td>" +
-                       // "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+                        "<td >" + data.items[j].product_id + "</td>" +
+                        "<td >" + data.items[j].product_number + "</td>" +
+                        "<td >" + data.items[j].total_price + "</td>" +
+                        // "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
-
+            }
             $('#clothesTableBody').html(stringfortrlist);
         }
     });
