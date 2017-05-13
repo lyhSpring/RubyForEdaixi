@@ -23,6 +23,12 @@ price = Price.create([{
 	product_id: 1
 	}])
 
+courier = Courier.create([{
+	name: 'lyh2我很聪明',
+	email: '123@qq.com',
+	mobile: '18811439847',
+	password: '123456'}])
+
 # price_rule = Price_rule.create([{
 # 	grade: 1,
 # 	region_id: 110108,
