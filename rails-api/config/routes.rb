@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
+  resources :regions do
+    collection do
+      get :getRegionId
+      post :getRegionId
+    end
+  end
   resources :roles
   resources :worker_roles
   resources :workers
-  resources :waybills
+  resources :waybills do
+    collection do
+      get :getWaybillsByCourierId
+      post :getWaybillsByCourierId
+    end
+  end
   resources :region_categories
   resources :price_rules do
     collection do
