@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     collection do
       get :addNewRule
       post :addNewRule
+      get :findPriceRule
+      post :findPriceRule
     end
   end
   resources :prices
