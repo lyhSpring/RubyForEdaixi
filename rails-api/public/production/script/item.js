@@ -83,13 +83,13 @@ function getItem() {
                             status="待取件";
                             break;
                     }
-
+                    var user_id=data[i].user_id;
                     var user_name="";
                     var user_mobile="";
                     var user_email="";
                     $.ajax({
                         type: "GET",
-                        url: domain + "/users/"+data[i].user_id,
+                        url: domain + "/users/"+user_id,
                         dataType: "json",
                         async: false,
                         success: function (data) {
@@ -111,9 +111,10 @@ function getItem() {
                     for (var j = 0; j < data.items.length; j++) {
                         var sort = j + 1;
                         var product="";
+                        var product_id=data.items[j].product_id
                         $.ajax({
                             type: "GET",
-                            url: domain + "/products/"+data.items[j].product_id,
+                            url: domain + "/products/"+product_id,
                             dataType: "json",
                             async: false,
                             success: function (data) {
