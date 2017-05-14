@@ -53,7 +53,7 @@ function getProduct(){
                 }
             }
 
-            $('#selectCategories').html(stringforselect);
+
             $('#productsTableBody').html(stringfortrlist);
         }
     });
@@ -122,8 +122,8 @@ function getCategories() {
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
-            for (var i = 0; i < data.data.length; i++) {
-               var strforname="<option id='"+data.data[i].id+"'>"+data.data[i].name+"</option>";
+            for (var i = 0; i < data.length; i++) {
+               var strforname="<option id='"+data[i].id+"'>"+data[i].name+"</option>";
                 stringfortrlist = stringfortrlist + strforname;
             }
             $('#selectCategories').html(stringfortrlist);
