@@ -83,7 +83,7 @@ function getItem() {
                             status="待取件";
                             break;
                     }
-                    var user_id=data[i].user_id;
+                    var user_id=data.user_id;
                     var user_name="";
                     var user_mobile="";
                     var user_email="";

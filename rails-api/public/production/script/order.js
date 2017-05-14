@@ -61,6 +61,7 @@ function getOrder() {
                             }
                         }
                     });
+                    if(data[i].courier_id!=null){
                     $.ajax({
                         type: "GET",
                         async: false,
@@ -71,7 +72,7 @@ function getOrder() {
                                 courier_name=data.name;
                             }
                         }
-                    });
+                    });}
                     $.ajax({
                         type: "GET",
                         async: false,
