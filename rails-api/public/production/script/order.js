@@ -85,6 +85,9 @@ function getOrder() {
                         }
                     });
                     var sort=i+1;
+                    if(data[i].courier_id==null){
+                        data[i].courier_id="";
+                    }
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + data[i].id + "</td>" +
                         "<td >" + status + "</td>" +
