@@ -31,11 +31,10 @@ function getCouriers() {
     console.log(station_name);
     $.ajax({
         type: "GET",
-        url: domain + "/users/getUsersByRole?user[role]=qs",
+        url: domain + "/couriers?page=1",
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
-            var stringforselect = "";
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
                     console.log(data[i].station_id);
@@ -46,8 +45,6 @@ function getCouriers() {
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td class=\"center\">" + data[i].id + "</td>" +
                         "<td >" + data[i].name + "</td>" +
-                        // "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
-                        //  "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
                         "<td >" + data[i].mobile + "</td>" +
                         "<td >" + data[i].email + "</td>" +
                         "<td >" + station_names + "</td>" +
