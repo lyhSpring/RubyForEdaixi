@@ -23,7 +23,7 @@ function getOrder() {
                     var courier_name="";
                     var address="";
                     var status="";
-                    switch (status){
+                    switch (data[i].status){
                         case 0:
                             status="待支付";
                             break;

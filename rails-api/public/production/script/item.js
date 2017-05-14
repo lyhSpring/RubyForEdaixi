@@ -51,7 +51,7 @@ function getItem() {
                 if (data != null) {
                     switch (data.status) {
                         case 0:
-                            $('#title').html("待付款");
+                            $('#title').html("待支付");
                             status="待付款";
                             break;
                         case 1:
