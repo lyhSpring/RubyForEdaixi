@@ -37,8 +37,9 @@ function getWaybill() {
 
     if (theRequest['id']!=null) {
     $.ajax({
+
         type: "GET",
-        url: domain + "/waybills/getWaybillsByCourierId?waybill[recieve_id]"+theRequest['id'],
+        url: domain + "/waybills/getWaybillsByCourierId?waybill[recieve_id]="+theRequest['id'],
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
