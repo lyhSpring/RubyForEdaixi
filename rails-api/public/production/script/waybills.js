@@ -18,23 +18,6 @@ function getWaybill() {
             theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
         }
     }
-    // var date = new Date();
-    // var stringfortrlist = "";
-    // for (var i = 0; i < 5; i++) {
-    //     var sort = i + 1;
-    //     var stringfortr = "<tr class=\"gradeX\">" +
-    //         "<td >" + sort + "</td>" +
-    //         "<td >" + sort + "</td>" +
-    //         "<td >" + date.toLocaleDateString() + "</td>" +
-    //         "<td >" + '北京交通大学' + "</td>" +
-    //         "<td >" + '北京南站' + "</td>" +
-    //         "<td >" + '取件中' + "</td>" +
-    //         //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
-    //         "</tr>";
-    //     stringfortrlist = stringfortrlist + stringfortr;
-    // }
-    // $('#waybillsTableBody').html(stringfortrlist);
-
     if (theRequest['id']!=null) {
     $.ajax({
 
@@ -76,7 +59,7 @@ function getWaybill() {
                         "<td >" + data[i].waybill_id + "</td>" +
                         "<td >" + data[i].order_id + "</td>" +
                         "<td >" + data[i].sender_type + "</td>" +
-                        "<td >" + data[i].recieve_type + "</td>" +
+                        "<td >" + data[i].recieve_id + "</td>" +
                         "<td >" + status + "</td>" +
                         //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
