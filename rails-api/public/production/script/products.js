@@ -4,23 +4,6 @@
 var domain='http://180.76.165.224:3000';
 $(document).ready(function() {
 getProduct();
-   
-    // var stringfortrlist ="<tr class=\"gradeX\">"+
-    //     "<td>"+"wew"+"</td>"+
-    //     "<td class=\"hidden-xs\">"+"ddd"+"</td>"+
-    //     "<td class=\"hidden-xs\">"+"ddd"+"</td>"+
-    //     "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel()\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
-    //     "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
-
-    //     "+</tr>"+"<tr class=\"gradeX\">"+
-    //     "<td>"+"wew"+"</td>"+
-    //     "<td class=\"hidden-xs\">"+"ddd"+"</td>"+
-    //     "<td class=\"hidden-xs\">"+"ddd"+"</td>"+
-    //     "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel()\"style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
-    //     "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" onclick=\"deleteCategories()\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
-
-    //     "+</tr>";
-    // $('#productsTableBody').html(stringfortrlist);
 });
 
 function showModel(id){
@@ -70,11 +53,12 @@ function addProduct() {
        dataType: "json",
        data:{},
        success: function (data) {
-                if(data.data){
+                if(data){
                     alert("add success！");
-                }else{
-                    alert("add fail");
                 }
+       },
+       error:function (data) {
+           alert("add fail！");
        }
    });
     $('#addProducts').modal('toggle');
@@ -127,6 +111,7 @@ function getCategories() {
                 stringfortrlist = stringfortrlist + strforname;
             }
             $('#selectCategories').html(stringfortrlist);
+            $('#updateselectCategories').html(stringfortrlist);
         }
     });
 }
