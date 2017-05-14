@@ -117,8 +117,8 @@ function upadteProduct() {
 
 function getCategories() {
     $.ajax({
-        type: "POST",
-        url: "http://localhost:3000/",//
+        type: "GET",
+        url: domain+"/categories",//
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
