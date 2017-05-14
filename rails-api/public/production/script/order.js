@@ -9,51 +9,84 @@ $(document).ready(function () {
 
 
 function getOrder() {
-    // var url = location.search; //获取url中"?"符后的字串
-    // var theRequest = new Object();
-    // if (url.indexOf("?") != -1) {
-    //     var str = url.substr(1);
-    //     strs = str.split("&");
-    //     for (var i = 0; i < strs.length; i++) {
-    //         theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-    //     }
-    // }
-    // var date = new Date();
-    // var stringfortrlist = "";
-    // for (var i = 0; i < 5; i++) {
-    //     var sort = i + 1;
-    //     var stringfortr = "<tr class=\"gradeX\">" +
-    //         "<td >" + sort + "</td>" +
-    //         "<td >" + sort + "</td>" +
-    //         "<td >" + date.toLocaleDateString() + "</td>" +
-    //         "<td >" + '22' + "</td>" +
-    //         "<td >" + 'wyl' + "</td>" +
-    //         "<td >" + '北京交通大学' + "</td>" +
-    //         "<td >" + 'lalal' + "</td>" +
-    //         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"toPage(" +sort+ ")\" style=\"font-size:4px;padding:0px 8px;\">" + "查看" + "</a></td>" +
-    //         "</tr>";
-    //     stringfortrlist = stringfortrlist + stringfortr;
-    // }
-    // $('#ordersTableBody').html(stringfortrlist);
-
     //if (theRequest['id']!=null) {
     $.ajax({
         type: "GET",
         url: domain + "/orders",
         dataType: "json",
+        async: false,
         success: function (data) {
             var stringfortrlist = "";
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
+                    var user_name="";
+                    var courier_name="";
+                    var address="";
+                    var status="";
+                    switch (status){
+                        case 0:
+                            status="待支付";
+                            break;
+                        case 1:
+                            status="待抢单";
+                            break;
+                        case 2:
+                            status="待取件";
+                            break;
+                        case 3:
+                            status="配送中";
+                            break;
+                        case 4:
+                            status="清洗中";
+                            break;
+                        case 5:
+                            status="送回中";
+                            break;
+                        case 6:
+                            status="已完成";
+                            break;
+                        default:
+                            status="取件中";
+                            break;
+                    }
+
+                    $.ajax({
+                        type: "GET",
+                        url: domain + "/users/"+data[i].user_id,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data != null) {
+                               user_name=data.name;
+                            }
+                        }
+                    });
+                    $.ajax({
+                        type: "GET",
+                        url: domain + "/couriers/"+data[i].courier_id,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data != null) {
+                                courier_name=data.name;
+                            }
+                        }
+                    });
+                    $.ajax({
+                        type: "GET",
+                        url: domain + "/addresses/"+data[i].address_id,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data != null) {
+                                address=data.comment.split("#")[0];
+                            }
+                        }
+                    });
                     var sort=i+1;
                     var stringfortr = "<tr class=\"gradeX\">" +
-                        "<td >" + sort + "</td>" +
                         "<td >" + data[i].id + "</td>" +
-                        "<td >" + data[i].status + "</td>" +
-                        "<td >" + data[i].washing_status + "</td>" +
+                        "<td >" + status + "</td>" +
                         "<td >" + data[i].totalprice + "</td>" +
-                        "<td >" + data[i].user_id + "</td>" +
-                        "<td >" + data[i].address_id + "</td>" +
+                        "<td >" + user_name + "</td>" +
+                        "<td >" + address + "</td>" +
                         "<td >" + data[i].courier_id + "</td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"toPage(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
@@ -67,7 +100,6 @@ function getOrder() {
 }
 
 function toPage(id) {
-    alert(id);
     url="item.html?id="+id;
     window.location.href=url;
 }

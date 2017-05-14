@@ -39,37 +39,101 @@ function getItem() {
     //
 
 
-    if (theRequest['id']!=null) {
-    $.ajax({
-        type: "GET",
-        url: domain + "/orders/getOrdersAllInfo?order[id]="+theRequest['id'],
-        dataType: "json",
-        success: function (data) {
-            var stringfortrlist = "";
-            if (data != null) {
-                var str = "用户名: " + data.user_id + "<br/>";
-                $('#user').html(str);
-                var str = "订单号： " + data.id + "<br/> 订单金额: " + data.totalprice + "<br/> 订单状态: " + data.status;
-                $('#bill').html(str);
-          if(data.waybills.length>0){
-                var str = "物流单号： " + data.waybills[0].waybill_id + "<br/> 物流状态: " + data.waybills[0].status + "<br/> 配送员: " + data.waybills[0].sender_id;
-                $('#waybill').html(str);}
-                for (var j = 0; j < data.items.length; j++) {
-                    var sort = j + 1;
-                    var stringfortr = "<tr class=\"gradeX\">" +
-                        "<td >" + sort + "</td>" +
-                        "<td >" + data.items[j].product_id + "</td>" +
-                        "<td >" + data.items[j].product_number + "</td>" +
-                        "<td >" + data.items[j].total_price + "</td>" +
-                        // "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
-                        "</tr>";
-                    stringfortrlist = stringfortrlist + stringfortr;
+    if (theRequest['id'] != null) {
+        $.ajax({
+            type: "GET",
+            url: domain + "/orders/getOrdersAllInfo?order[id]=" + theRequest['id'],
+            dataType: "json",
+            async:"false",
+            success: function (data) {
+                var stringfortrlist = "";
+                var status="";
+                if (data != null) {
+                    switch (data.status) {
+                        case 0:
+                            $('#title').html("待付款");
+                            status="待付款";
+                            break;
+                        case 1:
+                            $('#title').html("待抢单");
+                            status="待抢单";
+                            break;
+                        case 2:
+                            $('#title').html("待取件");
+                            status="待取件";
+                            break;
+                        case 3:
+                            $('#title').html("配送中");
+                            status="配送中";
+                            break;
+                        case 4:
+                            $('#title').html("清洗中");
+                            status="清洗中";
+                            break;
+                        case 5:
+                            $('#title').html("送回中");
+                            status="送回中";
+                            break;
+                        case 6:
+                            $('#title').html("已完成");
+                            status="已完成";
+                            break;
+                        default:
+                            $('#title').html("待取件");
+                            status="待取件";
+                            break;
+                    }
+
+                    var user_name="";
+                    var user_mobile="";
+                    var user_email="";
+                    $.ajax({
+                        type: "GET",
+                        url: domain + "/users/"+data[i].user_id,
+                        dataType: "json",
+                        success: function (data) {
+                            if (data != null) {
+                                user_name=data.name;
+                                user_email=data.email;
+                                user_mobile=data.mobile;
+                            }
+                        }
+                    });
+                    var str = "用户名: " + user_name + "<br/>电话： "+user_mobile+"<br/> 邮箱: "+user_email ;
+                    $('#user').html(str);
+                    var str = "订单号： " + data.id + "<br/> 订单金额: " + data.totalprice + "<br/> 订单状态: " +status;
+                    $('#bill').html(str);
+                    if (data.waybills.length > 0) {
+                        var str = "物流单号： " + data.waybills[0].waybill_id + "<br/> 物流状态: " + data.waybills[0].status + "<br/> 配送员: " + data.waybills[0].sender_id;
+                        $('#waybill').html(str);
+                    }
+                    for (var j = 0; j < data.items.length; j++) {
+                        var sort = j + 1;
+                        var product="";
+                        $.ajax({
+                            type: "GET",
+                            url: domain + "/products/"+data.items[j].product_id,
+                            dataType: "json",
+                            success: function (data) {
+                                if (data != null) {
+                                    product=data.name;
+                                }
+                            }
+                        });
+                        var stringfortr = "<tr class=\"gradeX\">" +
+                            "<td >" + sort + "</td>" +
+                            "<td >" + product + "</td>" +
+                            "<td >" + data.items[j].product_number + "</td>" +
+                            "<td >" + data.items[j].total_price + "</td>" +
+                            // "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+                            "</tr>";
+                        stringfortrlist = stringfortrlist + stringfortr;
+                    }
                 }
+                $('#clothesTableBody').html(stringfortrlist);
             }
-            $('#clothesTableBody').html(stringfortrlist);
-        }
-    });
-}
+        });
+    }
 }
 
 

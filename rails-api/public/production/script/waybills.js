@@ -38,20 +38,45 @@ function getWaybill() {
     if (theRequest['id']!=null) {
     $.ajax({
         type: "GET",
-        url: domain + "/orders/getOrdersByUserId?order[user_id]="+theRequest['id'],
+        url: domain + "/waybills/getWaybillsByCourierId?waybill[recieve_id]"+theRequest['id'],
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
+                    var status="";
+                    switch (data[i].status){
+
+                        case 1:
+                            status="取件中";
+                            break;
+                        case 2:
+                            status="送往站点";
+                            break;
+                        case 3:
+                            status="送往工厂";
+                            break;
+                        case 4:
+                            status="送回站点";
+                            break;
+                        case 5:
+                            status="送回用户";
+                            break;
+                        case 6:
+                            status="用户确认";
+                            break;
+                        default:
+                            status="取件中";
+                            break;
+                    }
                     var sort=i+1;
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + sort + "</td>" +
-                        "<td >" + data[i].id + "</td>" +
-                        "<td >" + sort + "</td>" +
-                        "<td >" + data[i].address_id + "</td>" +
-                        "<td >" + data[i].address_id + "</td>" +
-                        "<td >" + data[i].status + "</td>" +
+                        "<td >" + data[i].waybill_id + "</td>" +
+                        "<td >" + data[i].order_id + "</td>" +
+                        "<td >" + data[i].sender_type + "</td>" +
+                        "<td >" + data[i].recieve_type + "</td>" +
+                        "<td >" + status + "</td>" +
                         //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
