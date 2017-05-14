@@ -52,6 +52,7 @@ function getOrder() {
 
                     $.ajax({
                         type: "GET",
+                        async: false,
                         url: domain + "/users/"+data[i].user_id,
                         dataType: "json",
                         success: function (data) {
@@ -62,6 +63,7 @@ function getOrder() {
                     });
                     $.ajax({
                         type: "GET",
+                        async: false,
                         url: domain + "/couriers/"+data[i].courier_id,
                         dataType: "json",
                         success: function (data) {
@@ -72,6 +74,7 @@ function getOrder() {
                     });
                     $.ajax({
                         type: "GET",
+                        async: false,
                         url: domain + "/addresses/"+data[i].address_id,
                         dataType: "json",
                         success: function (data) {

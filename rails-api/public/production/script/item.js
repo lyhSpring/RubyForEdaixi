@@ -91,6 +91,7 @@ function getItem() {
                         type: "GET",
                         url: domain + "/users/"+data[i].user_id,
                         dataType: "json",
+                        async: false,
                         success: function (data) {
                             if (data != null) {
                                 user_name=data.name;
@@ -114,6 +115,7 @@ function getItem() {
                             type: "GET",
                             url: domain + "/products/"+data.items[j].product_id,
                             dataType: "json",
+                            async: false,
                             success: function (data) {
                                 if (data != null) {
                                     product=data.name;
