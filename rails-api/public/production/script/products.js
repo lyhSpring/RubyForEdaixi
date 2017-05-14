@@ -61,33 +61,32 @@ function getProduct(){
     
 }
 function addProduct() {
-    var ProductName=$("#nameinput").val();
+    var ProductName=$("#name").val();
      var selectIndex=document.getElementById("selectCategories").selectedIndex;
-    var ProductCategories=document.getElementById("selectCategories").options[selectIndex].text;
-    alert(ProductCategories);
-//    $.ajax({
-//        type: "POST",
-//        url: "http://localhost:3000/",//
-//        dataType: "json",
-//        data:{categoriesName:categoriesName,ProductName:ProductName},
-//        success: function (data) {
-//                 if(data.data){
-//                     alert("add success！");
-//                 }else{
-//                     alert("add fail");
-//                 }
-//        }
-//    });
+    var ProductCategories=document.getElementById("selectCategories").options[selectIndex].id;
+   $.ajax({
+       type: "POST",
+       url: domain+"products?product[name]="+ProductName+"&product[categories_id]="+ProductCategories,
+       dataType: "json",
+       data:{},
+       success: function (data) {
+                if(data.data){
+                    alert("add success！");
+                }else{
+                    alert("add fail");
+                }
+       }
+   });
     $('#addProducts').modal('toggle');
-    $("#nameinput").val("");
+    $("#name").val("");
 }
 
 function upadteProduct() {
     var productsId=$("#forProductId").val();
     var ProductName=$("#nameinput").val();
    
-    //var selectIndex=document.getElementById("selectCategories").selectedIndex;
-   // var ProductCategories=document.getElementById("selectCategories").options[selectIndex].text;
+    var selectIndex=document.getElementById("selectCategories").selectedIndex;
+    var ProductCategories=document.getElementById("selectCategories").options[selectIndex].id;
    if(ProductName==null){
     alert("请输入商品名称");
     return;
@@ -124,7 +123,7 @@ function getCategories() {
         success: function (data) {
             var stringfortrlist = "";
             for (var i = 0; i < data.data.length; i++) {
-               var strforname="<option>"+data.data[i].name+"</option>";
+               var strforname="<option id='"+data.data[i].id+"'>"+data.data[i].name+"</option>";
                 stringfortrlist = stringfortrlist + strforname;
             }
             $('#selectCategories').html(stringfortrlist);
