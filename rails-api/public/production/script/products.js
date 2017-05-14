@@ -66,7 +66,7 @@ function addProduct() {
     var ProductCategories=document.getElementById("selectCategories").options[selectIndex].id;
    $.ajax({
        type: "POST",
-       url: domain+"products?product[name]="+ProductName+"&product[categories_id]="+ProductCategories,
+       url: domain+"/products?product[name]="+ProductName+"&product[categories_id]="+ProductCategories,
        dataType: "json",
        data:{},
        success: function (data) {
