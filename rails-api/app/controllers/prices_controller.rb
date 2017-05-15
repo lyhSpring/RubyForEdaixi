@@ -38,6 +38,11 @@ class PricesController < ApplicationController
     @price.destroy
   end
 
+  def findByProductId
+    @price = Price.find_by_product_id(params[:price][:product_id])
+    render json: @price
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_price

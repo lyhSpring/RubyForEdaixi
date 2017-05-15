@@ -56,6 +56,11 @@ class PriceRulesController < ApplicationController
     @price_rule.destroy
   end
 
+  def findPriceRule
+    @price_rule = PriceRule.order('from_date desc').where('region_id=? and category_id=? and from_date<?',params[:price_rule][:region_id].to_i,params[:price_rule][:category_id].to_i,params[:price_rule][:from_date]).first
+    render json: @price_rule
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_price_rule

@@ -23,7 +23,12 @@ Rails.application.routes.draw do
       post :findPriceRule
     end
   end
-  resources :prices
+  resources :prices do
+    collection do
+      get :findByProductId
+      post :findByProductId
+    end
+  end
   resources :items
   resources :factory_stations
   resources :factories do
