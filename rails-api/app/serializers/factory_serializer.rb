@@ -1,3 +1,3 @@
  class FactorySerializer < ActiveModel::Serializer
-  attributes :id, :name, :mobile, :status, :email, :password, :station_id, :comment
+  attributes :id, :factory_name, :mobile, :status, :email, :password, :station_id, :comment, :region_id
 end

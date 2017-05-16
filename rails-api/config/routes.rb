@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     collection do
       get :getAllFactories
       post :getAllFactories
+      get :login
+      post :login
     end
   end
   resources :couriers

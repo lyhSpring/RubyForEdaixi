@@ -34,13 +34,23 @@ class FactoriesController < ApplicationController
   end
 
   def getAllFactories
-    @factory = Factory.find_by_sql ["select * from factories,addresses where addresses.addressable_id=factories.id and addresses.addressable_type=3"]    
+    @factory = Factory.find_by_sql ["select * from factories,addresses where addresses.addressable_id=factories.id and addresses.addressable_type=3"]
     render json: @factory
   end
 
   # DELETE /factories/1
   def destroy
     @factory.destroy
+  end
+
+  #加工商登录
+  def login
+    @factory = Factory.find_by_sql ["select * from factories,addresses where factories.mobile=? and factories.password=? and addresses.addressable_id=factories.id and addresses.addressable_type=3", "#{params[:factory][:mobile]}","#{params[:factory][:password]}"]
+    if @factory
+      render json: @factory
+    else
+      render json: @factory.errors, status: :unprocessable_entity
+    end
   end
 
   private
