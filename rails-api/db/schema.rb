@@ -10,16 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513152712) do
+ActiveRecord::Schema.define(version: 20170517083143) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "comment"
+    t.string   "comment",                       comment: "详细地址#联系人#电话"
     t.integer  "addressable_id"
     t.string   "addressable_type"
     t.integer  "user_id"
     t.integer  "order_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "true_money"
+    t.integer  "fake_money"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -39,6 +47,16 @@ ActiveRecord::Schema.define(version: 20170513152712) do
     t.integer  "station_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "discount_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "type"
+    t.integer  "base_money"
+    t.integer  "added_money"
+    t.date     "from_date"
+    t.date     "end_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "factories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -89,6 +107,7 @@ ActiveRecord::Schema.define(version: 20170513152712) do
     t.integer  "user_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "act_pay"
   end
 
   create_table "price_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -145,6 +164,15 @@ ActiveRecord::Schema.define(version: 20170513152712) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "turnovers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "type"
+    t.integer  "true_money"
+    t.integer  "fake_money"
+    t.integer  "card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "password"
@@ -154,6 +182,7 @@ ActiveRecord::Schema.define(version: 20170513152712) do
     t.datetime "updated_at", null: false
     t.string   "role"
     t.integer  "station_id"
+    t.integer  "card_id"
   end
 
   create_table "waybills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

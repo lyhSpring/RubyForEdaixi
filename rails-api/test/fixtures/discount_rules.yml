@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 1
+  base_money: 1
+  added_money: 1
+  from_date: 2017-05-17
+  end_date: 2017-05-17
+
+two:
+  type: 1
+  base_money: 1
+  added_money: 1
+  from_date: 2017-05-17
+  end_date: 2017-05-17

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :turnovers
+  resources :discount_rules
+  resources :cards
   resources :regions do
     collection do
       get :getRegionId
@@ -39,7 +42,12 @@ Rails.application.routes.draw do
       post :login
     end
   end
-  resources :couriers
+  resources :couriers do
+    collection do
+      get :login
+      post :login
+    end
+  end
   resources :addresses
   resources :stations do
     collection do

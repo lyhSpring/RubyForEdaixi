@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 1
+  true_money: 1
+  fake_money: 1
+  card_id: 1
+
+two:
+  type: 1
+  true_money: 1
+  fake_money: 1
+  card_id: 1

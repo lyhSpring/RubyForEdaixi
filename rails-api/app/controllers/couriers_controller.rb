@@ -38,6 +38,16 @@ class CouriersController < ApplicationController
     @courier.destroy
   end
 
+  #快递员登录
+  def login
+    @courier = Courier.find_by_mobile_and_password(params[:courier][:mobile],params[:courier][:password])
+    if @courier
+      render json: @courier
+    else
+      render json: @courier.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_courier

@@ -1,0 +1,2 @@
+class DiscountRule < ApplicationRecord
+end
