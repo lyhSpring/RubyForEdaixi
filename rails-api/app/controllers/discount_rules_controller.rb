@@ -3,7 +3,7 @@ class DiscountRulesController < ApplicationController
 
   # GET /discount_rules
   def index
-    @discount_rules = DiscountRule.all
+    @discount_rules = DiscountRule.paginate(page: params[:page],per_page:10).order(created_at: :desc)
 
     render json: @discount_rules
   end
@@ -46,6 +46,6 @@ class DiscountRulesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def discount_rule_params
-      params.require(:discount_rule).permit(:type, :base_money, :added_money, :from_date, :end_date)
+      params.require(:discount_rule).permit(:rule_type, :base_money, :added_money, :from_date, :end_date)
     end
 end

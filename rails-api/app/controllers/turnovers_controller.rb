@@ -3,7 +3,7 @@ class TurnoversController < ApplicationController
 
   # GET /turnovers
   def index
-    @turnovers = Turnover.all
+    @turnovers = Turnover.paginate(page: params[:page],per_page:10).order(created_at: :desc)
 
     render json: @turnovers
   end
@@ -46,6 +46,6 @@ class TurnoversController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def turnover_params
-      params.require(:turnover).permit(:type, :true_money, :fake_money, :card_id)
+      params.require(:turnover).permit(:turnover_type, :true_money, :fake_money, :card_id)
     end
 end

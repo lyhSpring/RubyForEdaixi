@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517083143) do
+ActiveRecord::Schema.define(version: 20170517180212) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "comment",                       comment: "详细地址#联系人#电话"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20170517083143) do
   end
 
   create_table "discount_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "type"
+    t.string   "rule_type"
     t.integer  "base_money"
     t.integer  "added_money"
     t.date     "from_date"
@@ -165,12 +165,12 @@ ActiveRecord::Schema.define(version: 20170517083143) do
   end
 
   create_table "turnovers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "type"
+    t.integer  "turnover_type"
     t.integer  "true_money"
     t.integer  "fake_money"
     t.integer  "card_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

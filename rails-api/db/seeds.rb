@@ -16,18 +16,40 @@
 # 	}
 # 	])
 
-price = Price.create([{
-	price1: 5,
-	price2: 4,
-	price3: 3,
-	product_id: 1
-	}])
+# price = Price.create([{
+# 	price1: 5,
+# 	price2: 4,
+# 	price3: 3,
+# 	product_id: 1
+# 	}])
 
 courier = Courier.create([{
 	name: 'lyh2我很聪明',
 	email: '123@qq.com',
-	mobile: '18811439847',
+	mobile: '123456',
 	password: '123456'}])
+
+# card = Card.create([{
+# 	user_id: 1,
+# 	true_money: 100,
+# 	fake_money: 20,
+# },{
+# 	user_id: 2,
+# 	true_money: 100,
+# 	fake_money: 20,
+# },{
+# 	user_id: 3,
+# 	true_money: 100,
+# 	fake_money: 20,
+# },{
+# 	user_id: 4,
+# 	true_money: 100,
+# 	fake_money: 20,
+# },{
+# 	user_id: 5,
+# 	true_money: 100,
+# 	fake_money: 20,
+# 	}])
 
 # price_rule = Price_rule.create([{
 # 	grade: 1,

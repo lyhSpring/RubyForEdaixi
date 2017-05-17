@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
   resources :turnovers
   resources :discount_rules
-  resources :cards
+  resources :cards do
+    collection do
+      get :systemRecharge
+      post :systemRecharge
+      get :userRecharge
+      post :userRecharge
+      get :spend
+      post :spend
+    end
+  end
   resources :regions do
     collection do
       get :getRegionId

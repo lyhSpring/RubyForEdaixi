@@ -38,6 +38,59 @@ class CardsController < ApplicationController
     @card.destroy
   end
 
+  #系统充值
+  def systemRecharge
+    @card = Card.find(params[:card][:id])
+    @card.fake_money = @card.fake_money + params[:card][:fake_money].to_i
+    if @card.save
+      @turnover = Turnover.new
+      @turnover.card_id = params[:card][:id].to_i
+      @turnover.turnover_type = 1      
+      @turnover.fake_money = params[:card][:fake_money].to_i
+      @turnover.save
+      render json: {status: "success"}.to_json
+    else
+      render json: @card.errors, status: :unprocessable_entity
+    end
+  end
+
+  #用户充值
+  def userRecharge
+    @card = Card.find(params[:card][:id])
+    @card.true_money = @card.true_money + params[:card][:true_money].to_i
+    @card.fake_money = @card.fake_money + params[:card][:fake_money].to_i
+    if @card.save
+      @turnover = Turnover.new
+      @turnover.card_id = params[:card][:id].to_i
+      @turnover.turnover_type = 2
+      @turnover.true_money = params[:card][:true_money].to_i
+      @turnover.fake_money = params[:card][:fake_money].to_i
+      @turnover.save
+      render json: {status: "success"}.to_json
+    else
+      render json: @card.errors, status: :unprocessable_entity
+    end
+  end
+
+  #用户消费
+  def spend
+    @card = Card.find(params[:card][:id])
+    @card.true_money = @card.true_money - params[:card][:true_money].to_i
+    @card.fake_money = @card.fake_money - params[:card][:fake_money].to_i
+    if @card.true_money < 0 || @card.fake_money < 0
+      render json: {status: "refused"}.to_json
+    else
+      @card.save
+      @turnover = Turnover.new
+      @turnover.card_id = params[:card][:id].to_i
+      @turnover.turnover_type = 0
+      @turnover.true_money = params[:card][:true_money].to_i
+      @turnover.fake_money = params[:card][:fake_money].to_i
+      @turnover.save
+      render json: {status: "success"}.to_json
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_card
