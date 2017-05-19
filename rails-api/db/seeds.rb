@@ -23,11 +23,17 @@
 # 	product_id: 1
 # 	}])
 
-courier = Courier.create([{
-	name: 'lyh2我很聪明',
-	email: '123@qq.com',
-	mobile: '123456',
-	password: '123456'}])
+# courier = Courier.create([{
+# 	name: 'lyh2我很聪明',
+# 	email: '123@qq.com',
+# 	mobile: '123456',
+# 	password: '123456'}])
+
+# settlement = Settlement.create([{
+# 	courier_id: 1
+# },{
+# 	courier_id: 2
+# }])
 
 # card = Card.create([{
 # 	user_id: 1,

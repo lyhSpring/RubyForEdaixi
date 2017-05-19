@@ -18,6 +18,9 @@ class CouriersController < ApplicationController
     @courier = Courier.new(courier_params)
 
     if @courier.save
+      @settlement = Settlement.new
+      @settlement.courier_id = @courier.id
+      @settlement.save
       render json: @courier, status: :created, location: @courier
     else
       render json: @courier.errors, status: :unprocessable_entity

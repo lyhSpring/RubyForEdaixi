@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :settlements do
+    collection do
+      get :meter
+      post :meter
+      get :valuate
+      post :valuate
+    end
+  end
   resources :turnovers
   resources :discount_rules
   resources :cards do

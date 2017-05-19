@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  settled: 1
+  unsettled: 1
+  money_settled: 1
+  money_unsettled: 1
+  courier_id: 1
+
+two:
+  settled: 1
+  unsettled: 1
+  money_settled: 1
+  money_unsettled: 1
+  courier_id: 1
