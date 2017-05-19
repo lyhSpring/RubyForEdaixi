@@ -52,6 +52,16 @@ class OrdersController < ApplicationController
     render json: @order
   end
 
+  #快递员获取可抢订单
+  def getOrdersByStatus
+    @orders = Order.where('status=1 or status=6')
+    if @orders
+      render json: @orders
+    else
+      render json: @orders.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
@@ -60,6 +70,6 @@ class OrdersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:courier_id, :washing_status, :factory_id, :waybill_id, :voucher_status, :categories_id, :status, :address_id, :totalprice, :user_id)
+      params.require(:order).permit(:courier_id, :washing_status, :factory_id, :waybill_id, :voucher_status, :categories_id, :status, :address_id, :totalprice, :user_id, :act_pay)
     end
 end

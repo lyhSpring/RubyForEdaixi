@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     collection do
       get :getWaybillsByCourierId
       post :getWaybillsByCourierId
+      get :getWaybillByStatus
+      post :getWaybillByStatus
     end
   end
   resources :region_categories
@@ -83,6 +85,8 @@ Rails.application.routes.draw do
       post :getOrdersAllInfo
       get :getOrdersByUserId
       post :getOrdersByUserId
+      get :getOrdersByStatus
+      post :getOrdersByStatus
     end
   end
   resources :categories

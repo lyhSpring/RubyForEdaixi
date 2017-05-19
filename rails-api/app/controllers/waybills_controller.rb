@@ -44,6 +44,16 @@ class WaybillsController < ApplicationController
     render json: @waybills
   end
 
+  #根据运单的状态和order_id查找
+  def getWaybillByStatus
+    @waybill = Waybill.find_by_status_and_order_id(0,params[:waybill][:order_id])
+    if @waybill
+      render json: @waybill
+    else
+      render json: @waybill.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_waybill
