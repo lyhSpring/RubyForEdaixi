@@ -38,6 +38,16 @@ class DiscountRulesController < ApplicationController
     @discount_rule.destroy
   end
 
+  #根据类型获取优惠规则  0-消费优惠，1-充值优惠
+  def getRulesByType
+    @discount_rules = DiscountRule.order("from_date desc").where("rule_type=?","#{params[:discount_rule][:rule_type]}")
+    if @discount_rules
+      render json: @discount_rules
+    else
+      render json: @discount_rules.errors, status: :unprocessable_entity
+    end    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_discount_rule

@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     end
   end
   resources :turnovers
-  resources :discount_rules
+  resources :discount_rules do
+    collection do
+      get :getRulesByType
+      post :getRulesByType
+    end
+  end
   resources :cards do
     collection do
       get :systemRecharge
