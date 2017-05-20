@@ -28,9 +28,11 @@ function getCard() {
                     // }
                     var true_money="";
                     var fake_money="";
+                    var card_id=""
                     if(data[i].card!=null){
                         true_money=data[i].card.true_money;
                         fake_money=data[i].card.fake_money;
+                        card_id=data[i].card.card_id;
 
                     }
                     var sort = i + 1;
@@ -41,7 +43,7 @@ function getCard() {
                         "<td >" + fake_money + "</td>" +
                       //  "<td >" + created_at + "</td>" +
                       //   "<td >" + updated_at + "</td>" +
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" +data[i].id+ ","+data[i].card.id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "充值" + "</a></td>" +
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" +data[i].id+ ","+card_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "充值" + "</a></td>" +
                         "</tr>";
 
                     stringfortrlist = stringfortrlist + stringfortr;
