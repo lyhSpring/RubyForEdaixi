@@ -197,17 +197,18 @@
                 <form>
                   <div class="form-group">
                     <label for="userid">用户id</label>
-                    <input type="text" id="userid" class="form-control" value="这里获取用户id让管理员确认" disabled>
+                    <input type="text"  id="userid" class="form-control" value="" disabled>
                   </div>
+                  <label id="forCardId" value="" style="display: none"></label>
                   <div class="form-group">
                     <label for="falsemoney">充值假钱（元）：</label>
-                    <input type="number" id="falsemoney" class="form-control">
+                    <input type="number" value="" id="falsemoney" class="form-control">
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消充值</button>
-                <button type="button" class="btn btn-primary">确认充值</button>
+                <button type="button" class="btn btn-primary" onclick="save()">确认充值</button>
               </div>
             </div>
           </div>
@@ -281,5 +282,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+  <script src="script/card.js"></script>
   </body>
 </html>

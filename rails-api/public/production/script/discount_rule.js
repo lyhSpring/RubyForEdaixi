@@ -47,13 +47,13 @@ function getDiscountRule() {
                     var type="";
                     switch (data[i].rule_type){
                         case 0:
-                            type="充值优惠";
+                            type="消费优惠";
                             break;
                         case 1:
-                            type="满减优惠";
+                            type="充值优惠";
                             break;
                         default:
-                            type="充值优惠";
+                            type="消费优惠";
 
                     }
                     var stringfortr = "<tr class=\"gradeX\">" +

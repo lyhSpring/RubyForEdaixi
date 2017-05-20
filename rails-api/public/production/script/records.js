@@ -20,18 +20,18 @@ function getRecord() {
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
 
-                    var type="用户充值";
+                    var type="消费流水";
                     switch (data[i].turnover_type){
                         case 0:
-                            type="用户充值";
+                            type="消费流水";
                             break;
                         case 1:
                             type="系统充值";
                             break;
                         case 2:
-                            type="用户消费";
+                            type="用户充值";
                         default:
-                            type="充值优惠";
+                            type="消费流水";
 
                     }
                     var sort=i+1;
