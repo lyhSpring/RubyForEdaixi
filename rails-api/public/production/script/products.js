@@ -55,6 +55,7 @@ function addProduct() {
        success: function (data) {
                 if(data){
                     alert("add success！");
+                    getProduct();
                 }
        },
        error:function (data) {
