@@ -46,10 +46,10 @@ function getCouriers() {
                     var money_settled=0;
                     var money_unsettled=0;
                     if (data[i].settlement!=null){
-                        settled=settlement[0].settled;
-                        unsettled=settlement[0].unsettled;
-                        money_settled=settlement[0].money_settled;
-                        money_unsettled=settlement[0].money_unsettled;
+                        settled=settlement.settled;
+                        unsettled=settlement.unsettled;
+                        money_settled=settlement.money_settled;
+                        money_unsettled=settlement.money_unsettled;
                     }
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td class=\"center\">" + data[i].id + "</td>" +
