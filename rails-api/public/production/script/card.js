@@ -36,6 +36,7 @@ function getCard() {
                       //   "<td >" + updated_at + "</td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" +data[i].id+ ","+data[i].card.id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "充值" + "</a></td>" +
                         "</tr>";
+
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
             }
