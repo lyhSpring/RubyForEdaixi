@@ -63,7 +63,6 @@ function getCouriers() {
                         "<td >" + settled + "</td>" +
                         "<td >" + unsettled + "</td>" +
                         "<td >" + money_settled + "</td>" +
-                        "<td >" + money_unsettled + "</td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel1(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "结算" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;

@@ -18,8 +18,6 @@ function getUser() {
             var stringfortrlist = "";
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
-                    var created_at=data[i].card.created_at.split("T")[0];
-                    var updated_at=data[i].card.updated_at.split("T")[0];
                     var sort=i+1;
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + data[i].name + "</td>" +
