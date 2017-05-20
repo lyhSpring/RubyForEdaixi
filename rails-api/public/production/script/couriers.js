@@ -61,8 +61,8 @@ function getCouriers() {
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"toPage(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "查看" + "</a></td>" +
                         "<td >" + settled + "</td>" +
-                        "<td >" + unsettled + "</td>" +
                         "<td >" + money_settled + "</td>" +
+                        "<td >" + unsettled + "</td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel1(" + data[i].id +","+money_unsettled+ ")\" style=\"font-size:4px;padding:0px 8px;\">" + "结算" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
@@ -100,6 +100,8 @@ function save() {
         success: function (data) {
             if (data != null) {
                 alert("success");
+                $('#charge').modal('toggle');
+                getCouriers();
             }
         },
         error:function (data) {

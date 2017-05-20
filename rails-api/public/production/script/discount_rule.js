@@ -80,7 +80,7 @@ function getDiscountRule() {
 }
 
 function addDiscountRule() {
-    var fromDate = $("#single_cal").val();
+    var fromDate = $("#single_cal1").val();
     var endDate = $("#single_cal2").val();
     console.log("date" + fromDate + "date");
     var form_date = fromDate.split("/");
@@ -94,7 +94,6 @@ function addDiscountRule() {
     }
     var base_money= $("#base").val();
     var added_money= $("#cut").val();
-    console.log(urlFormDate);
     var selectIndex = document.getElementById("ruletype").selectedIndex;
     var ruletype = document.getElementById("ruletype").options[selectIndex].value;
    //var selectIndexForGrade = document.getElementById("gradeselect").selectedIndex;
@@ -108,15 +107,18 @@ function addDiscountRule() {
         data: {},
         success: function (data) {
                 alert("add success！");
+
                 getDiscountRule();
         },
         error: function () {
             alert("add fail！");
         }
     });
-    $('#addPriceRule').modal('toggle');
-    document.getElementById("regioninput").selectedIndex = 0;
-    document.getElementById("gradeselect").selectedIndex = 0;
+
+    $('#addRule').modal('toggle');
+    document.getElementById("ruletype").selectedIndex = 0;
+ $("#base").val("");
+ $("#cut").val("");
 }
 
 function updatePriceRule() {
