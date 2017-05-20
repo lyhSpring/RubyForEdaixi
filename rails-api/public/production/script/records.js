@@ -30,6 +30,8 @@ function getRecord() {
                             break;
                         case 2:
                             type="用户消费";
+                        default:
+                            type="充值优惠";
 
                     }
                     var sort=i+1;

@@ -4,7 +4,7 @@
 var domain = 'http://180.76.165.224:3000';
 $(document).ready(function () {
 
-    getPriceRule();
+    getDiscountRule();
 
 });
 
@@ -25,33 +25,53 @@ function showModel(id, grade, region_id, from_date) {
     console.log($('#single_cal2').val());
 
 }
-function getPriceRule() {
-    var priceRulesTable = $('#priceRulesTable').dataTable();
+function getDiscountRule() {
+    var rulesTable = $('#rulesTable').dataTable();
     $.ajax({
         type: "GET",
-        url: domain + "/price_rules",
+        url: domain + "//discount_rules?page=1",
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
                     var date;
+                    var end_date;
                     if (data[i].from_date != null) {
                         date = data[i].from_date.split("T")[0];
+
+                    }  if (data[i].end_date != null) {
+                        end_date = data[i].end_date.split("T")[0];
+
+                    }
+                    var type="";
+                    switch (data[i].rule_type){
+                        case 0:
+                            type="充值优惠";
+                            break;
+                        case 1:
+                            type="满减优惠";
+                            break;
+                        default:
+                            type="充值优惠";
+
                     }
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td class=\"center\">" + i + "</td>" +
-                        "<td > price" + data[i].grade + "</td>" +
-                        "<td >" + date + "</td>" +
+                        "<td > " + type + "</td>" +
+                        "<td >" + data[i].base_money + "</td>" +
+                        "<td >" + data[i].added_money + "</td>" +
+                        "<td > " + date + "</td>" +
+                        "<td > " + end_date + "</td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + "," + data[i].grade + "," + data[i].region_id + ", '" + date + "')\" style=\"font-size:6px;padding:0px 8px;\">" + "编辑" + "</a></td>" +
-                        "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:5px;padding:0px 8px;\">删除</a></td>" +
-                        "<td class=\"center\" style=\"display:none\">" + data[i].id + "</td>" +
+                       // "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:5px;padding:0px 8px;\">删除</a></td>" +
+                        //"<td class=\"center\" style=\"display:none\">" + data[i].id + "</td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
             }
 
-            $('#priceRulesTableBody').html(stringfortrlist);
+            $('#rulesTableBody').html(stringfortrlist);
         },
         error: function () {
             alert("服务器错误!");
