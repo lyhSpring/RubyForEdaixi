@@ -79,20 +79,27 @@ function getDiscountRule() {
     });
 }
 
-function addPriceRule() {
-    var fromDate = $("#single_cal4").val();
+function addDiscountRule() {
+    var fromDate = $("#single_cal").val();
+    var endDate = $("#single_cal2").val();
     console.log("date" + fromDate + "date");
-    var date = fromDate.split("/");
-    var urlFormDate = date[0];
-    if (date.length != 1) {
-        urlFormDate = date[2] + "-" + date[0] + "-" + date[1];
+    var form_date = fromDate.split("/");
+    var end_date = endDate.split("/");
+    var urlFormDate1 = form_date[0];
+    var urlFormDate2 = end_date[0];
+    if (form_date.length != 1) {
+        urlFormDate1 = form_date[2] + "-" + form_date[0] + "-" + form_date[1];
+    } if (end_date.length != 1) {
+        urlFormDate2 = end_date[2] + "-" + end_date[0] + "-" + end_date[1];
     }
+    var base_money= $("#base").val();
+    var added_money= $("#cut").val();
     console.log(urlFormDate);
-    var selectIndex = document.getElementById("regioninput").selectedIndex;
-    var regioninput = document.getElementById("regioninput").options[selectIndex].value;
-    var selectIndexForGrade = document.getElementById("gradeselect").selectedIndex;
-    var Grade = document.getElementById("gradeselect").options[selectIndexForGrade].value;
-    var url = domain + "/price_rules/addNewRule?price_rule[grade]=" + Grade + "&price_rule[region_id]=" + regioninput + "&price_rule[category_id]=1&price_rule[from_date]=" + urlFormDate;
+    var selectIndex = document.getElementById("ruletype").selectedIndex;
+    var ruletype = document.getElementById("ruletype").options[selectIndex].value;
+   //var selectIndexForGrade = document.getElementById("gradeselect").selectedIndex;
+   // var Grade = document.getElementById("gradeselect").options[selectIndexForGrade].value;
+    var url = domain + "/discount_rules?discount_rule[rule_type]=" + ruletype + "&discount_rule[base_money]=" + base_money + "&discount_rule[added_money]="+added_money+"&discount_rule[from_date]=" + urlFormDate1+"&discount_rule[end_date]=" + urlFormDate2;
     console.log(url);
     $.ajax({
         type: "POST",
@@ -100,12 +107,8 @@ function addPriceRule() {
         dataType: "json",
         data: {},
         success: function (data) {
-            if (data.id != null) {
                 alert("add success！");
-                getPriceRule();
-            }
-            else
-                alert("时间重复!");
+                getDiscountRule();
         },
         error: function () {
             alert("add fail！");
