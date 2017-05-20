@@ -4,7 +4,6 @@
 var domain = "http://180.76.165.224:3000";
 $(document).ready(function () {
     var couriersTable = $('#couriersTable').dataTable();
-
     getCouriers();
 });
 
@@ -42,6 +41,16 @@ function getCouriers() {
                     if (data[i].station_id != null) {
                         station_names = station_name[data[i].station_id];
                     }
+                    var settled=0;
+                    var unsettled=0;
+                    var money_settled=0;
+                    var money_unsettled=0;
+                    if (data[i].settlement!=null){
+                        settled=settlement[0].settled;
+                        unsettled=settlement[0].unsettled;
+                        money_settled=settlement[0].money_settled;
+                        money_unsettled=settlement[0].money_unsettled;
+                    }
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td class=\"center\">" + data[i].id + "</td>" +
                         "<td >" + data[i].name + "</td>" +
@@ -51,6 +60,11 @@ function getCouriers() {
                         // "<td >"+data.stops+"</td>"+
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"toPage(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "查看" + "</a></td>" +
+                        "<td >" + settled + "</td>" +
+                        "<td >" + unsettled + "</td>" +
+                        "<td >" + money_settled + "</td>" +
+                        "<td >" + money_unsettled + "</td>" +
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel1(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "结算" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
@@ -69,6 +83,28 @@ function showModel(id) {
     $('#forCouriersId').val(id);
 
     getStops();
+}
+function showModel1(id) {
+    $('#charge').modal('show');
+    $('#forCountId').val(id);
+}
+
+function save() {
+    var id=$('#forCountId').val();
+    url="/settlements/valuate?settlement[courier_id]="+id;
+    $.ajax({
+        type: "POST",
+        url: domain + url,
+        dataType: "json",
+        success: function (data) {
+            if (data != null) {
+                alert("success");
+            }
+        },
+        error:function (data) {
+            alert("fail");
+        }
+    });
 }
 
 function getStops() {
