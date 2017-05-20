@@ -32,7 +32,7 @@ function getCard() {
                     if(data[i].card!=null){
                         true_money=data[i].card.true_money;
                         fake_money=data[i].card.fake_money;
-                        card_id=data[i].card.card_id;
+                        card_id=data[i].card.id;
 
                     }
                     var sort = i + 1;
@@ -55,6 +55,7 @@ function getCard() {
 }
 
 function showModel(id,card_id) {
+    $('#charge').modal('show');
     $('#userid').val(id);
 $('#forCardId').val(card_id);
 }
@@ -76,6 +77,7 @@ function save() {
            alert("fail");
        }
    });
+    $('#charge').modal('toggle');
     $('#userid').val("");
     $('#forCardId').val("");
     $('#falsemoney').val("");
