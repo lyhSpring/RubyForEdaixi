@@ -65,10 +65,7 @@ function getCouriers() {
                         "<td >" + unsettled + "</td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" id="+data[i].id+" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel1(" + data[i].id +","+money_unsettled+ ")\" style=\"font-size:4px;padding:0px 8px;\">" + "结算" + "</a></td>" +
                         "</tr>";
-                    if(money_unsettled==0){
-                        document.getElementById(data[i].id).setAttribute("disabled",true);
-                        //$("#data[i].id").attr("disabled",true);
-                    }
+
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
             }

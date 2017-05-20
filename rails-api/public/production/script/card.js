@@ -26,12 +26,19 @@ function getCard() {
                     //     var updated_at = data[i].card.updated_at.split("T")[0];
                     //
                     // }
+                    var true_money="";
+                    var fake_money="";
+                    if(data[i].card!=null){
+                        true_money=data[i].card.true_money;
+                        fake_money=data[i].card.fake_money;
+
+                    }
                     var sort = i + 1;
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + sort + "</td>" +
                         "<td >" + data[i].id + "</td>" +
-                        "<td >" + data[i].card.true_money + "</td>" +
-                        "<td >" + data[i].card.fake_money + "</td>" +
+                        "<td >" + true_money + "</td>" +
+                        "<td >" + fake_money + "</td>" +
                       //  "<td >" + created_at + "</td>" +
                       //   "<td >" + updated_at + "</td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" +data[i].id+ ","+data[i].card.id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "充值" + "</a></td>" +
