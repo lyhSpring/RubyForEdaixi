@@ -16,17 +16,24 @@ function getCard() {
         success: function (data) {
             var stringfortrlist = "";
             if (data != null) {
+
                 for (var i = 0; i < data.length; i++) {
-                    var created_at = data[i].card.created_at.split("T")[0];
-                    var updated_at = data[i].card.updated_at.split("T")[0];
+                    if (data[i].card.created_at!=null) {
+                        var created_at = data[i].card.created_at.split("T")[0];
+
+                    }
+                    if (data[i].card.updated_at!=null) {
+                        var updated_at = data[i].card.updated_at.split("T")[0];
+
+                    }
                     var sort = i + 1;
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + sort + "</td>" +
                         "<td >" + data[i].id + "</td>" +
                         "<td >" + data[i].card.true_money + "</td>" +
                         "<td >" + data[i].card.fake_money + "</td>" +
-                        //"<td >" + created_at + "</td>" +
-                        // "<td >" + updated_at + "</td>" +
+                      //  "<td >" + created_at + "</td>" +
+                      //   "<td >" + updated_at + "</td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" +data[i].id+ ","+data[i].card.id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "充值" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
