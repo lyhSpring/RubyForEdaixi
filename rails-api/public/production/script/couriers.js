@@ -46,10 +46,10 @@ function getCouriers() {
                     var money_settled=0;
                     var money_unsettled=0;
                     if (data[i].settlement!=null){
-                        settled=settlement.settled;
-                        unsettled=settlement.unsettled;
-                        money_settled=settlement.money_settled;
-                        money_unsettled=settlement.money_unsettled;
+                        settled=data[i].settlement.settled;
+                        unsettled=data[i].settlement.unsettled;
+                        money_settled=data[i].settlement.money_settled;
+                        money_unsettled=data[i].settlement.money_unsettled;
                     }
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td class=\"center\">" + data[i].id + "</td>" +
@@ -63,7 +63,7 @@ function getCouriers() {
                         "<td >" + settled + "</td>" +
                         "<td >" + unsettled + "</td>" +
                         "<td >" + money_settled + "</td>" +
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel1(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "结算" + "</a></td>" +
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel1(" + data[i].id +","+money_unsettled+ ")\" style=\"font-size:4px;padding:0px 8px;\">" + "结算" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
@@ -83,9 +83,11 @@ function showModel(id) {
 
     getStops();
 }
-function showModel1(id) {
+function showModel1(id,count) {
     $('#charge').modal('show');
     $('#forCountId').val(id);
+    $('#count').val(count);
+
 }
 
 function save() {
