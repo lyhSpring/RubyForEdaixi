@@ -35,8 +35,8 @@ function getRecord() {
 
                     }
                     var sort=i+1;
-                    var true_money="";
-                    var fake_money="";
+                    var true_money=0;
+                    var fake_money=0;
                     if(data[i].true_money!=null){
                         true_money=data[i].true_money;
                     }
