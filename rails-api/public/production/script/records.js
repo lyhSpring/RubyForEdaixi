@@ -35,11 +35,19 @@ function getRecord() {
 
                     }
                     var sort=i+1;
+                    var true_money="";
+                    var fake_money="";
+                    if(data[i].true_money!=null){
+                        true_money=data[i].true_money;
+                    }
+                    if(data[i].fake_money!=null){
+                        fake_money=data[i].fake_money;
+                    }
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + sort + "</td>" +
                         "<td >" + type + "</td>" +
-                        "<td >" + data[i].true_money + "</td>" +
-                        "<td >" + data[i].fake_money + "</td>" +
+                        "<td >" + true_money + "</td>" +
+                        "<td >" + fake_money + "</td>" +
                         "<td >" + data[i].card_id + "</td>" +
                         //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"toPage(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
