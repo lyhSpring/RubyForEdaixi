@@ -90,7 +90,7 @@ function addPrice() {
 }
 
 function updatePrice() {
-    var priceC=$("#changePriceA").val();
+    var priceA=$("#changePriceA").val();
     var priceB=$("#changePriceB").val();
     var priceC=$("#changePriceC").val();
     var priceId=$('#idForPrice').val();
