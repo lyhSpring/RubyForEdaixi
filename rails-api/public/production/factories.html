@@ -186,13 +186,14 @@
         </div>
         <!-- /page content-->
 
+
         <!-- Modal -->
-       <div class="modal fade" id="addFactory" tabindex="-1" role="dialog" aria-labelledby="addFactoryLabel">
+        <div class="modal fade" id="changeFactory" tabindex="-1" role="dialog" aria-labelledby="addFactoryLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="addFactoryLabel">新增加工厂</h4>
+                <h4 class="modal-title" id="changeFactoryLabel">修改加工厂</h4>
               </div>
               <div class="modal-body">
                 <form>
@@ -211,6 +212,44 @@
                   <div class="form-group">
                     <label for="addressinput">address</label>
                     <input type="text" id="addressinput" class="form-control" placeholder="请输入地址">
+                  </div>
+                  <label id="idForChangeFactory" style="display: none" value=""></label>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updateFactory()">保存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+
+        <!-- Modal -->
+       <div class="modal fade" id="addFactory" tabindex="-1" role="dialog" aria-labelledby="addFactoryLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addFactoryLabel">新增加工厂</h4>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="factorynameinput">加工厂名称</label>
+                    <input type="text" id="factorynameinputadd" class="form-control" placeholder="请输入加工厂名称">
+                  </div>
+                  <div class="form-group">
+                    <label for="mobileinput">联系电话</label>
+                    <input type="text" id="mobileinputadd" class="form-control" placeholder="请输入联系电话">
+                  </div>
+                  <div class="form-group">
+                    <label for="emailinput">email</label>
+                    <input type="text" id="emailinputadd" class="form-control" placeholder="请输入email">
+                  </div>
+                  <div class="form-group">
+                    <label for="addressinput">address</label>
+                    <input type="text" id="addressinputadd" class="form-control" placeholder="请输入地址">
                   </div>
                 </form>
               </div>

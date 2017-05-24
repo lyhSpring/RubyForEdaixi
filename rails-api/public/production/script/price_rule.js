@@ -18,7 +18,8 @@ function showModel(id, grade, region_id, from_date) {
             document.getElementById("regionChangeInput")[i].selected = true;
         }
     }
-    obj1[grade].selected = true;
+    var index=grade-1;
+    obj1[index].selected = true;
     $('#idForPriceRule').val(id);
     $('#single_cal2').val(from_date);
     console.log(from_date);
@@ -121,7 +122,7 @@ function updatePriceRule() {
                 alert("update success！");
                 getPriceRule();
             } else {
-                alert(data);
+                alert("时间重复");
             }
         },
         error: function () {

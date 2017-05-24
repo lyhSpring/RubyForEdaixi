@@ -93,7 +93,7 @@ function updateStation() {
                 alert("update success！");
                 getStations();
             } else {
-                alert(data);
+              //  alert(data);
             }
         },
         error: function () {
@@ -131,13 +131,13 @@ function addStations() {
     var regioninput = document.getElementById("regioninput").options[selectIndex].value;
     var selectIndex1 = document.getElementById("regionnameselect").selectedIndex;
     var regionnameselect = document.getElementById("regionnameselect").options[selectIndex1].id;
-    var station_id;
+    var station_id="";
     console.log(regioninput);
     var url = domain + "/stations?station[name]=" + stationnameinput + "&station[region_id]=" + regioninput;
     $.ajax({
         type: "POST",
         url: url,
-        ayas: false,
+        async: false,
         dataType: "json",
         success: function (data) {
             station_id = data.id
@@ -148,12 +148,13 @@ function addStations() {
     });
 
     //localhost:3000/factory_stations?factory_station[factory_id]=1&factory_station[station_id]=2
+    if (station_id!="") {
 
     var url2 = domain + "/factory_stations?factory_station[factory_id]=" + regionnameselect + "&factory_station[station_id]=" + station_id;
     $.ajax({
         type: "POST",
         url: url2,
-        ayas: false,
+        async: false,
         dataType: "json",
         success: function (data) {
             alert("add success");
@@ -162,7 +163,7 @@ function addStations() {
             alert("add fail");
         }
     });
-
+}
     $('#addStation').modal('toggle');
     getStations();
 }

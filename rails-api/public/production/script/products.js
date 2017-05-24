@@ -30,8 +30,8 @@ function getProduct(){
                     "<td class=\"center\">"+data[i].categories_id+"</td>"+
                     "<td >"+data[i].name+"</td>"+
                     "<td class=\"center\"><img src=\""+data[i].logo+"\"></td>"+
-                    "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+修改+"</a></td>"+
-                    "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" onclick='change("+data[i].id+")' style=\"font-size:4px;padding:0px 8px;\">name</a></td>"+
+                    "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
+                    "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" onclick='change("+data[i].id+")' style=\"font-size:4px;padding:0px 8px;\">"+name+"</a></td>"+
                     "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
                     "</tr>";
                     var strforname="<option>"+data[i].name+"</option>";
