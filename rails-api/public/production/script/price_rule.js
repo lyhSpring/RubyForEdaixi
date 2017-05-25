@@ -3,7 +3,7 @@
  */
 var domain = 'http://180.76.165.224:3000';
 $(document).ready(function () {
-
+    getRegions();
     getPriceRule();
 
 });
@@ -18,12 +18,44 @@ function showModel(id, grade, region_id, from_date) {
             document.getElementById("regionChangeInput")[i].selected = true;
         }
     }
-    var index=grade-1;
+    var index = grade - 1;
     obj1[index].selected = true;
     $('#idForPriceRule').val(id);
     $('#single_cal2').val(from_date);
     console.log(from_date);
     console.log($('#single_cal2').val());
+
+}
+
+function getRegions() {
+    $.ajax({
+        type: "GET",
+        url: domain + "/regions/getRegionsStatus1",
+        dataType: "json",
+        success: function (data) {
+            var stringfortrlist = "<option value='1'>" + "全部区域" + "</option>";
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    var string = "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
+                    // var stringfortr = "<tr class=\"gradeX\">" +
+                    //     "<td class=\"center\">" + i + "</td>" +
+                    //     "<td > price" + data[i].grade + "</td>" +
+                    //     "<td >" + date + "</td>" +
+                    //     "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + "," + data[i].grade + "," + data[i].region_id + ", '" + date + "')\" style=\"font-size:6px;padding:0px 8px;\">" + "编辑" + "</a></td>" +
+                    //     "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:5px;padding:0px 8px;\">删除</a></td>" +
+                    //     "<td class=\"center\" style=\"display:none\">" + data[i].id + "</td>" +
+                    //     "</tr>";
+                    stringfortrlist = stringfortrlist + string;
+                }
+            }
+
+            $('#select_regions').html(stringfortrlist);
+            $('#regioninput').html(stringfortrlist);
+        },
+        error: function () {
+            alert("服务器错误!");
+        }
+    });
 
 }
 function getPriceRule() {
@@ -60,6 +92,47 @@ function getPriceRule() {
     });
 }
 
+function getPriceRuleByRegion() {
+    var priceRulesTable = $('#priceRulesTable').dataTable();
+    var selectIndex = document.getElementById("select_regions").selectedIndex;
+    var select_regions = document.getElementById("select_regions").options[selectIndex].value;
+    if (select_regions == 1) {
+        getPriceRule();
+        getRegions();
+    } else {
+        $.ajax({
+            type: "GET",
+            url: domain + "/price_rules/price_rules[region]=" + region,
+            dataType: "json",
+            success: function (data) {
+                var stringfortrlist = "";
+                if (data != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        var date;
+                        if (data[i].from_date != null) {
+                            date = data[i].from_date.split("T")[0];
+                        }
+                        var stringfortr = "<tr class=\"gradeX\">" +
+                            "<td class=\"center\">" + i + "</td>" +
+                            "<td > price" + data[i].grade + "</td>" +
+                            "<td >" + date + "</td>" +
+                            "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + "," + data[i].grade + "," + data[i].region_id + ", '" + date + "')\" style=\"font-size:6px;padding:0px 8px;\">" + "编辑" + "</a></td>" +
+                            "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:5px;padding:0px 8px;\">删除</a></td>" +
+                            "<td class=\"center\" style=\"display:none\">" + data[i].id + "</td>" +
+                            "</tr>";
+                        stringfortrlist = stringfortrlist + stringfortr;
+                    }
+                }
+
+                $('#priceRulesTableBody').html(stringfortrlist);
+            },
+            error: function () {
+                alert("服务器错误!");
+            }
+        });
+    }
+}
+
 function addPriceRule() {
     var fromDate = $("#single_cal4").val();
     console.log("date" + fromDate + "date");
@@ -83,6 +156,7 @@ function addPriceRule() {
         success: function (data) {
             if (data.id != null) {
                 alert("add success！");
+                getRegions();
                 getPriceRule();
             }
             else
@@ -120,6 +194,7 @@ function updatePriceRule() {
         success: function (data) {
             if (data.id != null) {
                 alert("update success！");
+                getRegions();
                 getPriceRule();
             } else {
                 alert("时间重复");

@@ -3,7 +3,7 @@
  */
 var domain='http://180.76.165.224:3000';
 $(document).ready(function() {
-    getCities();
+    getRegions();
 
 });
 
@@ -13,10 +13,12 @@ function showModel(id){
 
 }
 
-function getCities() {
+function getRegions1() {
     var citiesTable = $('#regionsTable').dataTable();
+
+
     var stringfortrlist ="<tr class=\"gradeX\">"+
-        "<td class=\"hidden-xs\">"+"海淀"+"</td>"+
+        "<td class=\"hidden-xs\">"+""+"</td>"+
         "<td class=\"hidden-xs\">"+"北京交通大学"+"</td>"+
         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel()\" style=\"font-size:4px;padding:0px 8px;\">"+"编辑"+"</a></td>"+
         "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
@@ -24,23 +26,31 @@ function getCities() {
     $('#regionsTableBody').html(stringfortrlist);
 
 }
-function getProduct(){
-     var productsTable = $('#productsTable').dataTable();
+function getRegions(){
+     var citiesTable = $('#citiesTable').dataTable();
         $.ajax({
         type: "GET",
-        url: domain+"/products",
+        url: domain+"/regions",
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
             var stringforselect = "";
             if(data!=null){
                 for(var i = 0; i < data.length; i++){
+                    var sort=i+1;
+                    var name="删除";
+                    if(data.status==1){
+                        name="删除";
+                    }
+                    else{
+                        name="开通";
+                    }
                     var stringfortr ="<tr class=\"gradeX\">"+
-                    "<td class=\"center\">"+data[i].categories_id+"</td>"+
+                    "<td class=\"center\">"+sort+"</td>"+
+                    "<td >"+data[i].id+"</td>"+
                     "<td >"+data[i].name+"</td>"+
-                    "<td class=\"center\"><img src=\""+data[i].logo+"\"></td>"+
-                    "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
-                    "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
+                    //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+name+"</a></td>"+
+                    "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\" onclick='changeStatus("+data[i].id+","+data[i].status+")'>name</a></td>"+
                     "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
                     "</tr>";
                     var strforname="<option>"+data[i].name+"</option>";
@@ -56,28 +66,27 @@ function getProduct(){
     
     
 }
-function addProduct() {
-    var ProductName=$("#nameinput").val();
-     var selectIndex=document.getElementById("selectCategories").selectedIndex;
-    var ProductCategories=document.getElementById("selectCategories").options[selectIndex].text;
-    alert(ProductCategories);
-//    $.ajax({
-//        type: "POST",
-//        url: "http://localhost:3000/",//
-//        dataType: "json",
-//        data:{categoriesName:categoriesName,ProductName:ProductName},
-//        success: function (data) {
-//                 if(data.data){
-//                     alert("add success！");
-//                 }else{
-//                     alert("add fail");
-//                 }
-//        }
-//    });
-    $('#addProducts').modal('toggle');
-    $("#nameinput").val("");
-}
 
+function changeStatus(id,status) {
+    $.ajax({
+        type: "PUT",
+        url: domain+"/regions/"+id+"?regions[status]="+status,//
+        dataType: "json",
+        data:{},
+        success: function (data) {
+            if(data){
+                alert("update success！");
+                getProduct();
+            }else{
+                alert("update fail");
+            }
+        },
+        error: function(){
+            alert("update fail");
+        }
+    });
+
+}
 function upadteProduct() {
     var productsId=$("#forProductId").val();
     var ProductName=$("#nameinput").val();

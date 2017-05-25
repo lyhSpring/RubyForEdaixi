@@ -31,7 +31,7 @@ function getProduct(){
                     "<td >"+data[i].name+"</td>"+
                     "<td class=\"center\"><img src=\""+data[i].logo+"\"></td>"+
                     "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
-                    "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" onclick='change("+data[i].id+")' style=\"font-size:4px;padding:0px 8px;\">"+name+"</a></td>"+
+                    "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" onclick='change("+data[i].id+","+data[i].is_del+")' style=\"font-size:4px;padding:0px 8px;\">"+name+"</a></td>"+
                     "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
                     "</tr>";
                     var strforname="<option>"+data[i].name+"</option>";
@@ -47,6 +47,28 @@ function getProduct(){
     
     
 }
+
+function change(id,is_del) {
+    $.ajax({
+        type: "PUT",
+        url: domain+"/products/"+id+"?product[is_del]="+is_del,//
+        dataType: "json",
+        data:{},
+        success: function (data) {
+            if(data){
+                alert("update success！");
+                getProduct();
+            }else{
+                alert("update fail");
+            }
+        },
+        error: function(){
+            alert("update fail");
+        }
+    });
+
+}
+
 function addProduct() {
     var ProductName=$("#name").val();
      var selectIndex=document.getElementById("selectCategories").selectedIndex;
@@ -90,7 +112,7 @@ function upadteProduct() {
                     alert("update success！");
                     getProduct();
                 }else{
-                    alert("add fail");
+                    alert("update fail");
                 }
        },
        error: function(){

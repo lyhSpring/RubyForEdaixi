@@ -29,7 +29,7 @@ function getPrice(){
      var productPriceTable = $('#productPriceTable').dataTable();
         $.ajax({
         type: "GET",
-        url: domain+"/prices/?page=1",
+        url: domain+"/prices?page=1",
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
