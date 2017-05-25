@@ -5,7 +5,6 @@ var domain = 'http://180.76.165.224:3000';
 $(document).ready(function () {
     getRegions();
     getPriceRule();
-
 });
 
 function showModel(id, grade, region_id, from_date) {
@@ -33,7 +32,8 @@ function getRegions() {
         url: domain + "/regions/getRegionsStatus1",
         dataType: "json",
         success: function (data) {
-            var stringfortrlist = "<option value='1'>" + "全部区域" + "</option>";
+            var stringfortrselect = "<option value='1'>" + "全部区域" + "</option>";
+            var stringfortrlist="";
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
                     var string = "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
@@ -45,12 +45,14 @@ function getRegions() {
                     //     "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:5px;padding:0px 8px;\">删除</a></td>" +
                     //     "<td class=\"center\" style=\"display:none\">" + data[i].id + "</td>" +
                     //     "</tr>";
+                    stringfortrselect = stringfortrselect + string;
                     stringfortrlist = stringfortrlist + string;
                 }
             }
 
-            $('#select_regions').html(stringfortrlist);
+            $('#select_regions').html(stringfortrselect);
             $('#regioninput').html(stringfortrlist);
+            $('#regionChangeInput').html(stringfortrlist);
         },
         error: function () {
             alert("服务器错误!");
@@ -100,6 +102,7 @@ function getPriceRuleByRegion() {
         getPriceRule();
         getRegions();
     } else {
+        //todo change the interface name
         $.ajax({
             type: "GET",
             url: domain + "/price_rules/price_rules[region]=" + region,

@@ -39,7 +39,7 @@ function getRegions(){
                 for(var i = 0; i < data.length; i++){
                     var sort=i+1;
                     var name="删除";
-                    if(data.status==1){
+                    if(data[i].status==1){
                         name="删除";
                     }
                     else{
@@ -50,7 +50,7 @@ function getRegions(){
                     "<td >"+data[i].id+"</td>"+
                     "<td >"+data[i].name+"</td>"+
                     //"<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+name+"</a></td>"+
-                    "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\" onclick='changeStatus("+data[i].id+","+data[i].status+")'>name</a></td>"+
+                    "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\" onclick='changeStatus("+data[i].id+","+data[i].status+")'>"+name+"</a></td>"+
                     "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
                     "</tr>";
                     var strforname="<option>"+data[i].name+"</option>";
@@ -59,8 +59,7 @@ function getRegions(){
                 }
             }
 
-            $('#selectCategories').html(stringforselect);
-            $('#productsTableBody').html(stringfortrlist);
+            $('#regionsTableBody').html(stringfortrlist);
         }
     });
     
