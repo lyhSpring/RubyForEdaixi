@@ -34,8 +34,8 @@ class StationsController < ApplicationController
   end
 
   def getStationByRegion
-    @station = Station.find_by_sql ["select stations.id,stations.region_id,stations.name,factories.factory_name from stations,factories,factory_stations where stations.id=factory_stations.station_id and factory_stations.factory_id=factories.id and stations.region_id=?","#{params[:station][:region_id]}"]
-    render json: @station
+    @stations = Station.find_by_sql ["select stations.id,stations.region_id,stations.name,factories.factory_name from stations,factories,factory_stations where stations.id=factory_stations.station_id and factory_stations.factory_id=factories.id and stations.region_id=?","#{params[:station][:region_id]}"]
+    render json: @stations
   end
 
   # DELETE /stations/1

@@ -28,6 +28,12 @@ Rails.application.routes.draw do
     collection do
       get :getRegionId
       post :getRegionId
+      get :openRegion
+      post :openRegion
+      get :closeRegion
+      post :closeRegion
+      get :getRegionsStatus1
+      post :getRegionsStatus1
     end
   end
   resources :roles
@@ -102,6 +108,8 @@ Rails.application.routes.draw do
   	collection do
   		get :getProductByCategory
   		post :getProductByCategory
+      get :getProductNotDel
+      post :getProductNotDel
   	end
   end
   resources :users do

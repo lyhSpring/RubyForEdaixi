@@ -46,8 +46,13 @@ class ProductsController < ApplicationController
     end    
   end
 
-  #用户端按类别获取产品列表，is_del=0
-
+  #用户端按类别获取产品列表，
+  #is_del=0：未删除
+  #is_del=1：已删除
+  def getProductNotDel
+    @products = Product.searchNotDel(params[:product][:categories_id],params[:page])
+    render json: @products
+  end
 
   #企业端按类别获取产品
   def getProductByCategory

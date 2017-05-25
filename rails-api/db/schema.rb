@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519073747) do
+ActiveRecord::Schema.define(version: 20170525115507) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "comment",                       comment: "详细地址#联系人#电话"
@@ -63,13 +63,13 @@ ActiveRecord::Schema.define(version: 20170519073747) do
   create_table "factories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "factory_name"
     t.string   "mobile"
-    t.integer  "status"
+    t.integer  "status",       default: 0
     t.string   "email"
     t.string   "password"
-    t.integer  "station_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "region_id"
+    t.integer  "station_id",   default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "region_id",    default: 0
   end
 
   create_table "factories_stations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -96,19 +96,19 @@ ActiveRecord::Schema.define(version: 20170519073747) do
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "courier_id"
-    t.integer  "washing_status"
-    t.integer  "factory_id"
-    t.integer  "waybill_id"
+    t.integer  "courier_id",                    default: 0
+    t.integer  "washing_status",                default: 0
+    t.integer  "factory_id",                    default: 0
+    t.integer  "waybill_id",                    default: 0
     t.integer  "voucher_status"
     t.integer  "categories_id"
-    t.integer  "status"
-    t.integer  "address_id"
+    t.integer  "status",                        default: 0
+    t.integer  "address_id",                    default: 1
     t.decimal  "totalprice",     precision: 10
-    t.integer  "user_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "act_pay"
+    t.integer  "user_id",                       default: 0
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "act_pay",                       default: 0
   end
 
   create_table "price_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -132,10 +132,10 @@ ActiveRecord::Schema.define(version: 20170519073747) do
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "logo"
-    t.string   "is_del"
+    t.string   "is_del",                       default: "0"
     t.integer  "categories_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.decimal  "price",         precision: 10
   end
 
@@ -148,8 +148,9 @@ ActiveRecord::Schema.define(version: 20170519073747) do
 
   create_table "regions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status",     default: 0
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -198,16 +199,16 @@ ActiveRecord::Schema.define(version: 20170519073747) do
 
   create_table "waybills", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "sender_type"
-    t.integer  "sender_id"
-    t.integer  "status"
-    t.integer  "recieve_id"
+    t.integer  "sender_id",    default: 0
+    t.integer  "status",       default: 0
+    t.integer  "recieve_id",   default: 0
     t.datetime "exp_time"
     t.datetime "actual_time"
-    t.integer  "waybill_id"
+    t.integer  "waybill_id",   default: 0
     t.integer  "order_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "recieve_type"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "recieve_type", default: 0
   end
 
   create_table "worker_roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
