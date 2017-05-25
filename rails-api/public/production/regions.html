@@ -160,7 +160,6 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>区域列表</h2>
-                    <button class="btn btn-primary btn-lg newbtn" data-toggle="modal" data-target="#addRegion"> <i class="fa fa-plus"></i> 新增 </button>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -171,7 +170,7 @@
                           <th>区域名称</th>
                           <th>地址</th>
                           <th>编辑品类</th>
-                          <th>删除区域</th>
+                          <th>开通与禁用</th>
                         </tr>
                       </thead>
                       <tbody id="regionsTableBody">
@@ -183,54 +182,6 @@
               </div>
         </div>
         <!-- /page content-->
-
-        <!-- Modal -->
-       <div class="modal fade" id="addRegion" tabindex="-1" role="dialog" aria-labelledby="addRegionLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="addRegionLabel">新增区域</h4>
-              </div>
-              <div class="modal-body">
-                <form>
-                  <div class="form-group">
-                    <label for="regionnameinput">区域名称</label>
-                    <input type="text" id="regionnameinput" class="form-control" placeholder="请输入区域名称">
-                  </div>
-                  <div class="form-group">
-                    <label for="addrinput">地址</label>
-                    <input type="text" id="addrinput" class="form-control" placeholder="请输入地址">
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" value="category1">
-                      Category1
-                    </label>
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" value="category2">
-                      Category2
-                    </label>
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" value="">
-                      加载所有品类
-                    </label>
-                  </div>
-
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">保存</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Modal -->
       </div>
     </div>
 
