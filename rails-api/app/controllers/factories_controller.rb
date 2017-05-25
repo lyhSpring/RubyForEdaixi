@@ -53,6 +53,12 @@ class FactoriesController < ApplicationController
     end
   end
 
+  #根据station_id查询station所属的工厂
+  def getFactoryByStation
+    @factories = Factory.find_by_sql ["select * from factories,factories_stations where factories.station_id = factories_stations.station_id and factories.id = factories_stations.factory_id and factories.station_id=?","#{params[:factory][:station_id].to_i}"]
+    render json: @factories
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_factory

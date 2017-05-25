@@ -46,6 +46,10 @@ class ProductsController < ApplicationController
     end    
   end
 
+  #用户端按类别获取产品列表，is_del=0
+
+
+  #企业端按类别获取产品
   def getProductByCategory
     @product = Product.search(params[:product][:categories_id],params[:page])
     if @product
@@ -55,8 +59,7 @@ class ProductsController < ApplicationController
     end 
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
+  private    # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
     end

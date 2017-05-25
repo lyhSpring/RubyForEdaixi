@@ -75,18 +75,31 @@ class CardsController < ApplicationController
   #用户消费
   def spend
     @card = Card.find(params[:card][:id])
-    @card.true_money = @card.true_money - params[:card][:true_money].to_i
-    @card.fake_money = @card.fake_money - params[:card][:fake_money].to_i
-    if @card.true_money < 0 || @card.fake_money < 0
+    @total = params[:card][:true_money].to_i+params[:card][:fake_money].to_i
+    # @card.true_money = @card.true_money - params[:card][:true_money].to_i
+    # @card.fake_money = @card.fake_money - params[:card][:fake_money].to_i
+    if (@card.true_money+@card.fake_money-params[:card][:true_money].to_i-params[:card][:fake_money].to_i)<0
       render json: {status: "refused"}.to_json
     else
+      if @card.true_money>=@total
+        @card.true_money = @card.true_money - @total
+        @turnover = Turnover.new
+        @turnover.card_id = params[:card][:id].to_i
+        @turnover.turnover_type = 0
+        @turnover.true_money = @total
+        @turnover.fake_money = 0
+        @turnover.save
+      else
+        @card.fake_money = @card.fake_money - @total + @card.true_money        
+        @turnover = Turnover.new
+        @turnover.card_id = params[:card][:id].to_i
+        @turnover.turnover_type = 0
+        @turnover.true_money = @card.true_money
+        @turnover.fake_money = @total - @card.true_money
+        @turnover.save
+        @card.true_money = 0
+      end
       @card.save
-      @turnover = Turnover.new
-      @turnover.card_id = params[:card][:id].to_i
-      @turnover.turnover_type = 0
-      @turnover.true_money = params[:card][:true_money].to_i
-      @turnover.fake_money = params[:card][:fake_money].to_i
-      @turnover.save
       render json: {status: "success"}.to_json
     end
   end
