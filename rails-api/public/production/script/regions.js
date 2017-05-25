@@ -13,19 +13,7 @@ function showModel(id){
 
 }
 
-function getRegions1() {
-    var citiesTable = $('#regionsTable').dataTable();
 
-
-    var stringfortrlist ="<tr class=\"gradeX\">"+
-        "<td class=\"hidden-xs\">"+""+"</td>"+
-        "<td class=\"hidden-xs\">"+"北京交通大学"+"</td>"+
-        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel()\" style=\"font-size:4px;padding:0px 8px;\">"+"编辑"+"</a></td>"+
-        "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:4px;padding:0px 8px;\">删除</a></td>"+
-        "+</tr>";
-    $('#regionsTableBody').html(stringfortrlist);
-
-}
 function getRegions(){
      var citiesTable = $('#citiesTable').dataTable();
         $.ajax({
@@ -38,9 +26,9 @@ function getRegions(){
             if(data!=null){
                 for(var i = 0; i < data.length; i++){
                     var sort=i+1;
-                    var name="删除";
+                    var name="禁用";
                     if(data[i].status==1){
-                        name="删除";
+                        name="禁用";
                     }
                     else{
                         name="开通";
@@ -67,6 +55,7 @@ function getRegions(){
 }
 
 function changeStatus(id,status) {
+   //todo
     $.ajax({
         type: "PUT",
         url: domain+"/regions/"+id+"?regions[status]="+status,//
