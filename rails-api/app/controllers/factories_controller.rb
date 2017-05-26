@@ -59,6 +59,16 @@ class FactoriesController < ApplicationController
     render json: @factories
   end
 
+  #根据region_id查询factory
+  def getFactoryByRegion
+    @factory = Factory.find_by_region_id(params[:factory][:region_id])
+    if @factory
+      render json: @factory
+    else
+      render json: {stauts: "errors"}.to_json
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_factory

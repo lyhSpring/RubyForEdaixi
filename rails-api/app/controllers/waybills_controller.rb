@@ -40,7 +40,7 @@ class WaybillsController < ApplicationController
 
 # 根据取送人员的id查看其全部物流单
   def getWaybillsByCourierId
-    @waybills = Waybill.order("updated_at desc").where('recieve_id=? and recieve_type=2',params[:waybill][:recieve_id])
+    @waybills = Waybill.order("updated_at desc").where("recieve_id=? and recieve_type=2",params[:waybill][:recieve_id])
     render json: @waybills
   end
 

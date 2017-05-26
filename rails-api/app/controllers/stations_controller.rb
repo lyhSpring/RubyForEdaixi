@@ -40,6 +40,19 @@ class StationsController < ApplicationController
     render json: @stations
   end
 
+  #修改站点的所属区域
+  def editRegion
+    @station = Station.find(params[:station][:id])
+    @station.region_id = params[:station][:region_id]
+    @factory = Factory.find_by_region_id(params[:station][:region_id])
+    @station.factory_id = @factory.id
+    if @station.save
+      render json: @station
+    else
+      render json: @station.errors, status: :unprocessable_entity
+    end
+  end
+
   #创建站点
   def createStation
     @station = @factory.stations.create(station_params)

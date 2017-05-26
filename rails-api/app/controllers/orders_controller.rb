@@ -48,14 +48,19 @@ class OrdersController < ApplicationController
 
   #根据用户id获取订单简略信息
   def getOrdersByUserId
-    @order = Order.where('user_id = ?',"#{params[:order][:user_id]}")
-    render json: @order
+    @orders = Order.where('user_id = ?',"#{params[:order][:user_id]}")
+    @orders.each do |order|
+      order.waybills = Waybill.where('order_id=?',order.id)
+      order.items = Item.where('order_id=?',order.id)
+    end
+    render json: @orders
   end
 
   #根据快递员id获取订单简略信息
   def getOrdersByCourierId
-    @order = Order.order("updated_at desc").where('courier_id = ? and (status=2 or status=6)',"#{params[:order][:courier_id]}")
-    render json: @order
+    @orders = Order.order("updated_at desc").where('courier_id = ? and (status=2 or status=6)',"#{params[:order][:courier_id]}")
+    
+    render json: @orders
   end
 
   #根据工厂id获取订单简略信息

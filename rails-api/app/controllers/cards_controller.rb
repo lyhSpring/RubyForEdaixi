@@ -50,7 +50,7 @@ class CardsController < ApplicationController
       @turnover.save
       render json: {status: "success"}.to_json
     else
-      render json: @card.errors, status: :unprocessable_entity
+      render json: {status: "refused"}.to_json
     end
   end
 
@@ -68,7 +68,7 @@ class CardsController < ApplicationController
       @turnover.save
       render json: {status: "success"}.to_json
     else
-      render json: @card.errors, status: :unprocessable_entity
+      render json: {status: "refused"}.to_json
     end
   end
 

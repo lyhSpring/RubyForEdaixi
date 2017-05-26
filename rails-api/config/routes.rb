@@ -76,6 +76,8 @@ Rails.application.routes.draw do
       post :login
       get :getFactoryByStation
       post :getFactoryByStation
+      get :getFactoryByRegion
+      post :getFactoryByRegion
     end
   end
   resources :couriers do
@@ -91,6 +93,8 @@ Rails.application.routes.draw do
       post :getStationByRegion
       get :createStation
       post :createStation
+      get :editRegion
+      post :editRegion
     end
   end
   resources :orders do
