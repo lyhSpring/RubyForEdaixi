@@ -84,7 +84,7 @@ function showModel(id,station_id) {
     $('#forCouriersId').val(id);
     var obj = document.getElementById("selectStops");
     for (var i = 0; i < obj.length; i++) {
-        if (obj.options[i].value == station_id) {
+        if (obj.options[i].id == station_id) {
             document.getElementById("selectStops")[i].selected = true;
         }
     }
@@ -140,10 +140,10 @@ function saveStops() {
     var stop = document.getElementById("selectStops").options[selectIndex].id;
     console.log(stop);
     console.log(userId);
-    var url=domain+"couriers/"+userId+"?courier[station_id]="+stop;
+    var url=domain+"/couriers/"+userId+"?courier[station_id]="+stop;
     $.ajax({
         type: "PUT",
-        url: domain + "/users/" + userId + ".json?user[station_id]=" + stop,
+        url: url,
 
         dataType: "json",
         success: function (data) {
