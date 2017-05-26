@@ -13,7 +13,7 @@ function getStations() {
     $.ajax({
         type: "GET",
         async: false,
-        url: domain + "/factories/getAllFactories",
+        url: domain + "/factories",
         dataType: "json",
         success: function (data) {
             var stringforselect = "";
@@ -29,7 +29,7 @@ function getStations() {
     console.log(factoriy_name);
     $.ajax({
         type: "GET",
-        url: domain + "/stations/getStationByRegion?station[region_id]=110108",
+        url: domain + "/stations",
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
@@ -43,7 +43,7 @@ function getStations() {
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + sort + "</td>" +
                         "<td >" + data[i].name + "</td>" +
-                        "<td >" + factoriy_name + "</td>" +
+                        "<td >" + data[i].factory.factory_name + "</td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
@@ -81,7 +81,7 @@ function updateStation() {
     var regionchange = document.getElementById("regionchange").options[selectIndex].value;
     var selectIndex1 = document.getElementById("regionnamechange").selectedIndex;
     var regionnamechange = document.getElementById("regionnamechange").options[selectIndex1].id;
-    var url = domain + "/stations/" + idForStation + "?station[name]=" + stationnamechange + "&station[region_id]=" + regionchange;
+    var url = domain + "/stations/" + idForStation + "?station[name]=" + stationnamechange + "&station[region_id]=" + regionchange+"&station[factory_id]="+regionnamechange;
     console.log(url);
     $.ajax({
         type: "PUT",
@@ -108,7 +108,7 @@ function updateStation() {
 function getFactories() {
     $.ajax({
         type: "GET",
-        url: domain + "/factories/getAllFactories",
+        url: domain + "/factories",
         dataType: "json",
         success: function (data) {
             var stringforselect = "";
@@ -133,7 +133,8 @@ function addStations() {
     var regionnameselect = document.getElementById("regionnameselect").options[selectIndex1].id;
     var station_id="";
     console.log(regioninput);
-    var url = domain + "/stations?station[name]=" + stationnameinput + "&station[region_id]=" + regioninput;
+    var url=domain+"/stations/createStation?station[region_id]="+regioninput+"&station[name]="+stationnameinput+"&station[factory_id]="+regionnameselect;
+    //var url = domain + "/stations?station[name]=" + stationnameinput + "&station[region_id]=" + regioninput;
     $.ajax({
         type: "POST",
         url: url,
@@ -141,6 +142,7 @@ function addStations() {
         dataType: "json",
         success: function (data) {
             station_id = data.id
+            getStations();
         },
         error: function (data) {
             alert("add fail");
@@ -148,25 +150,89 @@ function addStations() {
     });
 
     //localhost:3000/factory_stations?factory_station[factory_id]=1&factory_station[station_id]=2
-    if (station_id!="") {
-
-    var url2 = domain + "/factory_stations?factory_station[factory_id]=" + regionnameselect + "&factory_station[station_id]=" + station_id;
-    $.ajax({
-        type: "POST",
-        url: url2,
-        async: false,
-        dataType: "json",
-        success: function (data) {
-            alert("add success");
-        },
-        error: function (data) {
-            alert("add fail");
-        }
-    });
-}
+//     if (station_id!="") {
+//     var url2 = domain + "/factory_stations?factory_station[factory_id]=" + regionnameselect + "&factory_station[station_id]=" + station_id;
+//     $.ajax({
+//         type: "POST",
+//         url: url2,
+//         async: false,
+//         dataType: "json",
+//         success: function (data) {
+//             alert("add success");
+//         },
+//         error: function (data) {
+//             alert("add fail");
+//         }
+//     });
+// }
     $('#addStation').modal('toggle');
     getStations();
 }
+function getRegions() {
+    $.ajax({
+        type: "GET",
+        url: domain + "/regions/getRegionsStatus1",
+        dataType: "json",
+        success: function (data) {
+            var stringfortrselect = "<option value='1'>" + "全部区域" + "</option>";
+            var stringfortrlist="";
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    var string = "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
+                    stringfortrselect = stringfortrselect + string;
+                    stringfortrlist = stringfortrlist + string;
+                }
+            }
+
+            $('#select_regions').html(stringfortrselect);
+            $('#regioninput').html(stringfortrlist);
+            $('#regionchange').html(stringfortrlist);
+        },
+        error: function () {
+            alert("服务器错误!");
+        }
+    });
+
+}
 
 
+function getStaionByRegion() {
+    var selectIndex = document.getElementById("select_regions").selectedIndex;
+    var select_regions = document.getElementById("select_regions").options[selectIndex].value;
+    if (select_regions == 1) {
+        getStations();
+        getRegions();
+    } else {
+        $.ajax({
+            type: "GET",
+            url: domain + "/stations/getStationByRegion?station[region_id]=" + region,
+            dataType: "json",
+            success: function (data) {
+                var stringfortrlist = "";
+                if (data != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        var date;
+                        if (data[i].from_date != null) {
+                            date = data[i].from_date.split("T")[0];
+                        }
+                        var stringfortr = "<tr class=\"gradeX\">" +
+                            "<td class=\"center\">" + i + "</td>" +
+                            "<td > price" + data[i].grade + "</td>" +
+                            "<td >" + date + "</td>" +
+                            "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + "," + data[i].grade + "," + data[i].region_id + ", '" + date + "')\" style=\"font-size:6px;padding:0px 8px;\">" + "编辑" + "</a></td>" +
+                            "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:5px;padding:0px 8px;\">删除</a></td>" +
+                            "<td class=\"center\" style=\"display:none\">" + data[i].id + "</td>" +
+                            "</tr>";
+                        stringfortrlist = stringfortrlist + stringfortr;
+                    }
+                }
+
+                $('#stationsTableBody').html(stringfortrlist);
+            },
+            error: function () {
+                alert("服务器错误!");
+            }
+        });
+    }
+}
 

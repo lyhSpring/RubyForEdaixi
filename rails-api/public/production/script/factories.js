@@ -26,7 +26,7 @@ function getFactories() {
     var factoriesTable = $('#factoriesTable').dataTable();
     $.ajax({
         type: "GET",
-        url: domain + "/factories/getAllFactories",
+        url: domain + "/factories",
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
@@ -62,7 +62,6 @@ function addFactories() {
         alert("输入所有信息");
         return;
     }
-
     var url = domain + "/factories?factory[name]=" + factorynameinput + "&factory[mobile]=" + mobileinput + "&factory[email]=" + emailinput + "&factory[password]=456"
     console.log(url);
     $.ajax({
@@ -117,7 +116,8 @@ function updateFactory() {
     var emailinput = $("#emailinput").val();
     var commentinput = $("#addressinput").val();
 
-    var url = domain + "/prices/" + priceId + "?" + "price[price1]=" + priceA + "&price[price2]=" + priceB + "&price[price3]=" + priceC;
+    var url=domain+"/factories/2?factory[factory_name]="+factorynameinput+"&factory[mobile]="+mobileinput+"&factory[email]="+emailinput;
+   // var url = domain + "/prices/" + priceId + "?" + "price[price1]=" + priceA + "&price[price2]=" + priceB + "&price[price3]=" + priceC;
     console.log(url);
     $.ajax({
         type: "PUT",

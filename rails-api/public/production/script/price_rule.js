@@ -105,7 +105,7 @@ function getPriceRuleByRegion() {
         //todo change the interface name
         $.ajax({
             type: "GET",
-            url: domain + "/price_rules/price_rules[region]=" + region,
+            url: domain + "/price_rules/findByRegionId?price_rule[region_id]=" + region,
             dataType: "json",
             success: function (data) {
                 var stringfortrlist = "";

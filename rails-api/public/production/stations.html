@@ -158,19 +158,8 @@
         <div class="right_col" role="main">
           <div class="col-md-12 col-sm-12 col-xs-12">
               <!-- Split button -->
-              <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm">海淀区</button>
-                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="caret"></span>
-                  <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">朝阳区</a></li>
-                  <li><a href="#">东城区</a></li>
-                  <li><a href="#">大兴区</a></li>
-                  <li><a href="#">。。。</a></li>
-                </ul>
-              </div>
+            <select id="select_regions" onchange="getStaionByRegion()">
+            </select>
               <!-- /Split button -->
                 <div class="x_panel">
                   <div class="x_title">
@@ -212,22 +201,6 @@
                   <div class="form-group">
                     <label for="regioninput">区域</label>
                     <select id="regionchange" class="form-control">
-                      <option value="110101">东城区</option>
-                      <option value="110102">西城区</option>
-                      <option value="110105">朝阳区</option>
-                      <option value="110106">丰台区</option>
-                      <option value="110107">石景山区</option>
-                      <option value="110108">海淀区</option>
-                      <option value="110109">门头沟区</option>
-                      <option value="110111">房山区</option>
-                      <option value="110112">通州区</option>
-                      <option value="110113">顺义区</option>
-                      <option value="110114">昌平区</option>
-                      <option value="110115">大兴区</option>
-                      <option value="110116">怀柔区</option>
-                      <option value="110117">平谷区</option>
-                      <option value="110128">密云县</option>
-                      <option value="110129">延庆县</option>
                     </select>
                   </div>
                   <label style="display: none" id="idForStation"></label>
@@ -266,22 +239,6 @@
                   <div class="form-group" class="form-control">
                     <label for="regioninput">区域</label>
                     <select id="regioninput">
-                      <option value="110101">东城区</option>
-                      <option value="110102">西城区</option>
-                      <option value="110105">朝阳区</option>
-                      <option value="110106">丰台区</option>
-                      <option value="110107">石景山区</option>
-                      <option value="110108">海淀区</option>
-                      <option value="110109">门头沟区</option>
-                      <option value="110111">房山区</option>
-                      <option value="110112">通州区</option>
-                      <option value="110113">顺义区</option>
-                      <option value="110114">昌平区</option>
-                      <option value="110115">大兴区</option>
-                      <option value="110116">怀柔区</option>
-                      <option value="110117">平谷区</option>
-                      <option value="110128">密云县</option>
-                      <option value="110129">延庆县</option>
                     </select>
                   </div>
                   <div class="form-group">

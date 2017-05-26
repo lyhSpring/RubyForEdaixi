@@ -55,25 +55,46 @@ function getRegions(){
 }
 
 function changeStatus(id,status) {
-   //todo
-    $.ajax({
-        type: "PUT",
-        url: domain+"/regions/"+id+"?regions[status]="+status,//
-        dataType: "json",
-        data:{},
-        success: function (data) {
-            if(data){
-                alert("update success！");
-                getProduct();
-            }else{
+    if(status==0) {
+
+
+        $.ajax({
+            type: "PUT",
+            url: domain + "/regions/openRegion?region[id]=" + id,//
+            dataType: "json",
+            data: {},
+            success: function (data) {
+                if (data) {
+                    alert("update success！");
+                    getProduct();
+                } else {
+                    alert("update fail");
+                }
+            },
+            error: function () {
                 alert("update fail");
             }
-        },
-        error: function(){
-            alert("update fail");
-        }
-    });
-
+        });
+    }
+    else if(status==1) {
+        $.ajax({
+            type: "PUT",
+            url: domain + "/regions/closeRegion?region[id]=" + id,//
+            dataType: "json",
+            data: {},
+            success: function (data) {
+                if (data) {
+                    alert("update success！");
+                    getProduct();
+                } else {
+                    alert("update fail");
+                }
+            },
+            error: function () {
+                alert("update fail");
+            }
+        });
+    }
 }
 function upadteProduct() {
     var productsId=$("#forProductId").val();
