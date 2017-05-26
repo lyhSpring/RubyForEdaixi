@@ -59,7 +59,7 @@ function changeStatus(id,status) {
 
 
         $.ajax({
-            type: "PUT",
+            type: "GET",
             url: domain + "/regions/openRegion?region[id]=" + id,//
             dataType: "json",
             data: {},
@@ -78,7 +78,7 @@ function changeStatus(id,status) {
     }
     else if(status==1) {
         $.ajax({
-            type: "PUT",
+            type: "GET",
             url: domain + "/regions/closeRegion?region[id]=" + id,//
             dataType: "json",
             data: {},

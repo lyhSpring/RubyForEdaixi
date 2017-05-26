@@ -105,7 +105,7 @@ function getPriceRuleByRegion() {
         //todo change the interface name
         $.ajax({
             type: "GET",
-            url: domain + "/price_rules/findByRegionId?price_rule[region_id]=" + region,
+            url: domain + "/price_rules/findByRegionId?price_rule[region_id]=" + select_regions,
             dataType: "json",
             success: function (data) {
                 var stringfortrlist = "";
@@ -187,7 +187,7 @@ function updatePriceRule() {
     var selectIndex1 = document.getElementById("changeGradeselect").selectedIndex;
     var changeGradeselect = document.getElementById("changeGradeselect").options[selectIndex1].value;
     console.log($('#single_cal2').val());
-    var url = domain + "/price_rules/" + idPriceRule + "?price_rule[from_date]=" + urlFormDate + "&price_rule[grade]=" + changeGradeselect + "&price_rule[category_id]" + regionChangeInput;
+    var url = domain + "/price_rules/" + idPriceRule + "?price_rule[from_date]=" + urlFormDate + "&price_rule[grade]=" + changeGradeselect + "&price_rule[category_id]=" + regionChangeInput;
     console.log(url);
     $.ajax({
         type: "PUT",

@@ -5,6 +5,7 @@ var domain = "http://180.76.165.224:3000";
 $(document).ready(function () {
     var stationsTable = $('#stationsTable').dataTable();
     getStations();
+    getRegions();
 });
 
 
@@ -44,7 +45,7 @@ function getStations() {
                         "<td >" + sort + "</td>" +
                         "<td >" + data[i].name + "</td>" +
                         "<td >" + data[i].factory.factory_name + "</td>" +
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory.id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "</tr>";
                     stringfortrlist = stringfortrlist + stringfortr;
                 }
@@ -66,8 +67,8 @@ function showModel(id, name, region_id,factory_id) {
         }
     }
     var obj1 = document.getElementById("regionnamechange");
-    for (var i = 0; i < obj.length; i++) {
-        if (obj.options[i].id == factory_id) {
+    for (var i = 0; i < obj1.length; i++) {
+        if (obj1.options[i].id == factory_id) {
             document.getElementById("regionnamechange")[i].selected = true;
         }
     }
@@ -205,23 +206,22 @@ function getStaionByRegion() {
     } else {
         $.ajax({
             type: "GET",
-            url: domain + "/stations/getStationByRegion?station[region_id]=" + region,
+            url: domain + "/stations/getStationByRegion?station[region_id]=" + select_regions,
             dataType: "json",
             success: function (data) {
                 var stringfortrlist = "";
                 if (data != null) {
                     for (var i = 0; i < data.length; i++) {
-                        var date;
-                        if (data[i].from_date != null) {
-                            date = data[i].from_date.split("T")[0];
+                        var factoriy_name = "";
+                        if (data[i].factory_id != null) {
+                            factoriy_name = factoriy_name[data[i].factory_id];
                         }
+                        var sort=i+1;
                         var stringfortr = "<tr class=\"gradeX\">" +
-                            "<td class=\"center\">" + i + "</td>" +
-                            "<td > price" + data[i].grade + "</td>" +
-                            "<td >" + date + "</td>" +
-                            "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + "," + data[i].grade + "," + data[i].region_id + ", '" + date + "')\" style=\"font-size:6px;padding:0px 8px;\">" + "编辑" + "</a></td>" +
-                            "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:5px;padding:0px 8px;\">删除</a></td>" +
-                            "<td class=\"center\" style=\"display:none\">" + data[i].id + "</td>" +
+                            "<td >" + sort + "</td>" +
+                            "<td >" + data[i].name + "</td>" +
+                            "<td >" + data[i].factory.factory_name + "</td>" +
+                            "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ",'" + data[i].name + "',"  + data[i].region_id +","+  data[i].factory_id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                             "</tr>";
                         stringfortrlist = stringfortrlist + stringfortr;
                     }

@@ -4,6 +4,7 @@
 var domain = "http://180.76.165.224:3000";
 $(document).ready(function () {
     var couriersTable = $('#couriersTable').dataTable();
+    getStops();
     getCouriers();
 });
 
@@ -58,7 +59,7 @@ function getCouriers() {
                         "<td >" + data[i].email + "</td>" +
                         "<td >" + station_names + "</td>" +
                         // "<td >"+data.stops+"</td>"+
-                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
+                        "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id +","+data[i].station_id+ ")\" style=\"font-size:4px;padding:0px 8px;\">" + "修改" + "</a></td>" +
                         "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"toPage(" + data[i].id + ")\" style=\"font-size:4px;padding:0px 8px;\">" + "查看" + "</a></td>" +
                         "<td >" + settled + "</td>" +
                         "<td >" + money_settled + "</td>" +
@@ -78,11 +79,15 @@ function toPage(id) {
     window.location.href=url;
 }
 
-function showModel(id) {
+function showModel(id,station_id) {
     $('#selectStopsModel').modal('show');
     $('#forCouriersId').val(id);
-
-    getStops();
+    var obj = document.getElementById("selectStops");
+    for (var i = 0; i < obj.length; i++) {
+        if (obj.options[i].value == station_id) {
+            document.getElementById("selectStops")[i].selected = true;
+        }
+    }
 }
 function showModel1(id,count) {
     $('#charge').modal('show');
@@ -135,16 +140,17 @@ function saveStops() {
     var stop = document.getElementById("selectStops").options[selectIndex].id;
     console.log(stop);
     console.log(userId);
+    var url=domain+"couriers/"+userId+"?courier[station_id]="+stop;
     $.ajax({
         type: "PUT",
         url: domain + "/users/" + userId + ".json?user[station_id]=" + stop,
 
         dataType: "json",
         success: function (data) {
-            alert("添加成功");
+            alert("修改成功");
         },
         error: function (data) {
-            alert("添加失败");
+            alert("修改失败");
         }
     });
     $('#selectStopsModel').modal('toggle');

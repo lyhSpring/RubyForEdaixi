@@ -32,8 +32,11 @@ function getFactories() {
             var stringfortrlist = "";
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
-                    var address=data[i].comment.split("#")[0];
+                    var address="";
+                    if(data[i].address!=null){
+                        address=data[i].address.comment.split("#")[0];
 
+                    }
                     var stringfortr = "<tr class=\"gradeX\">" +
                         "<td >" + i + "</td>" +
                         "<td >" + data[i].name + "</td>" +
@@ -62,7 +65,7 @@ function addFactories() {
         alert("输入所有信息");
         return;
     }
-    var url = domain + "/factories?factory[name]=" + factorynameinput + "&factory[mobile]=" + mobileinput + "&factory[email]=" + emailinput + "&factory[password]=456"
+    var url = domain + "/factories?factory[factory_name]=" + factorynameinput + "&factory[mobile]=" + mobileinput + "&factory[email]=" + emailinput + "&factory[password]=456"
     console.log(url);
     $.ajax({
         type: "POST",
