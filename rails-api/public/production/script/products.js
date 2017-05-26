@@ -3,11 +3,19 @@
  */
 var domain='http://180.76.165.224:3000';
 $(document).ready(function() {
-getProduct();
+    getCategories();
+    getProduct();
 });
-
-function showModel(id){
+var category_name="";
+function showModel(id,category_id,name){
      $('#updateProducts').modal('show');
+     $('#nameinput').val(name);
+    var obj = document.getElementById("updateselectCategories");
+    for (var i = 0; i < obj.length; i++) {
+        if (obj.options[i].id == category_id) {
+            document.getElementById("regionchange")[i].selected = true;
+        }
+    }
      $('#forProductId').val(id);
 
 }
@@ -26,11 +34,15 @@ function getProduct(){
                     if (data[i].is_del==1){
                         name="恢复";
                     }
+                    var factoriy_name="";
+                    if (data[i].categories_id != null) {
+                        factoriy_name = category_name[data[i].categories_id];
+                    }
                     var stringfortr ="<tr class=\"gradeX\">"+
-                    "<td class=\"center\">"+data[i].categories_id+"</td>"+
+                    "<td class=\"center\">"+category_name+"</td>"+
                     "<td >"+data[i].name+"</td>"+
                     "<td class=\"center\"><img src=\""+data[i].logo+"\"></td>"+
-                    "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+")\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
+                    "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+","+data[i].categories_id+",'"+data[i].name+"')\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
                     "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" onclick='change("+data[i].id+","+data[i].is_del+")' style=\"font-size:4px;padding:0px 8px;\">"+name+"</a></td>"+
                     "<td class=\"center\" style=\"display:none\">"+data[i].id+"</td>"+
                     "</tr>";
@@ -104,7 +116,7 @@ function upadteProduct() {
    }
    $.ajax({
        type: "PUT",
-       url: domain+"/products/"+productsId+".update?product[name]="+ProductName,//
+       url: domain+"/products/"+productsId+".update?product[name]="+ProductName+"product[categories_id]="+ProductCategories,//
        dataType: "json",
        data:{},
        success: function (data) {
@@ -127,6 +139,7 @@ function upadteProduct() {
 
 
 function getCategories() {
+
     $.ajax({
         type: "GET",
         url: domain+"/categories",//
@@ -134,6 +147,11 @@ function getCategories() {
         success: function (data) {
             var stringfortrlist = "";
             for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.length; i++) {
+                    var j = data[i].id;
+                    parseInt(j);
+                    category_name[j] = data[i].name;
+                }
                var strforname="<option id='"+data[i].id+"'>"+data[i].name+"</option>";
                 stringfortrlist = stringfortrlist + strforname;
             }

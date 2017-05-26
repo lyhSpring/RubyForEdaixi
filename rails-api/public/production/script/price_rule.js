@@ -37,14 +37,6 @@ function getRegions() {
             if (data != null) {
                 for (var i = 0; i < data.length; i++) {
                     var string = "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
-                    // var stringfortr = "<tr class=\"gradeX\">" +
-                    //     "<td class=\"center\">" + i + "</td>" +
-                    //     "<td > price" + data[i].grade + "</td>" +
-                    //     "<td >" + date + "</td>" +
-                    //     "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel(" + data[i].id + "," + data[i].grade + "," + data[i].region_id + ", '" + date + "')\" style=\"font-size:6px;padding:0px 8px;\">" + "编辑" + "</a></td>" +
-                    //     "<td class=\"center hidden-xs\"><a class=\"btn btn-info\" style=\"font-size:5px;padding:0px 8px;\">删除</a></td>" +
-                    //     "<td class=\"center\" style=\"display:none\">" + data[i].id + "</td>" +
-                    //     "</tr>";
                     stringfortrselect = stringfortrselect + string;
                     stringfortrlist = stringfortrlist + string;
                 }
