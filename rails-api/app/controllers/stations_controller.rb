@@ -1,5 +1,6 @@
 class StationsController < ApplicationController
   before_action :set_station, only: [:show, :update, :destroy]
+  before_action :set_factory, only: [:createStation]
 
   # GET /stations
   def index
@@ -34,8 +35,15 @@ class StationsController < ApplicationController
   end
 
   def getStationByRegion
-    @stations = Station.find_by_sql ["select stations.id,stations.region_id,stations.name,factories.factory_name from stations,factories,factory_stations where stations.id=factory_stations.station_id and factory_stations.factory_id=factories.id and stations.region_id=?","#{params[:station][:region_id]}"]
+   # @stations = Station.find_by_sql ["select stations.id,stations.region_id,stations.name,factories.factory_name from stations,factories,factories_stations where stations.id=factories_stations.station_id and factories_stations.factory_id=factories.id and stations.region_id=?","#{params[:station][:region_id]}"]
+    @stations = Station.order("updated_at desc").where("region_id=?","#{params[:station][:region_id]}")
     render json: @stations
+  end
+
+  #创建站点
+  def createStation
+    @station = @factory.stations.create(station_params)
+    render json: @station
   end
 
   # DELETE /stations/1
@@ -44,6 +52,9 @@ class StationsController < ApplicationController
   end
 
   private
+    def set_factory
+      @factory = Factory.find(params[:station][:factory_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_station
       @station = Station.find(params[:id])

@@ -61,6 +61,12 @@ class PriceRulesController < ApplicationController
     render json: @price_rule
   end
 
+  #根据region_id查找已开通区域的价格规则
+  def findByRegionId
+    @price_rules = PriceRule.order("updated_at").where('region_id=?',params[:price_rule][:region_id])
+    render json: @price_rules
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_price_rule

@@ -67,6 +67,6 @@ class FactoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def factory_params
-      params.require(:factory).permit(:name, :mobile, :status, :email, :password, :station_id)
+      params.require(:factory).permit(:name, :mobile, :status, :email, :password, :station_id, :factory_name)
     end
 end

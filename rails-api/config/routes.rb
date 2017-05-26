@@ -56,6 +56,8 @@ Rails.application.routes.draw do
       post :addNewRule
       get :findPriceRule
       post :findPriceRule
+      get :findByRegionId
+      post :findByRegionId
     end
   end
   resources :prices do
@@ -87,6 +89,8 @@ Rails.application.routes.draw do
     collection do
       get :getStationByRegion
       post :getStationByRegion
+      get :createStation
+      post :createStation
     end
   end
   resources :orders do

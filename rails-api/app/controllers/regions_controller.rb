@@ -50,12 +50,24 @@ class RegionsController < ApplicationController
     @region = Region.find(params[:region][:id])
     @region.status = 1
     @region.save
-    
+    Category.find_each do |category|
+      @price_rule = PriceRule.new
+      @price_rule.grade = 1
+      @price_rule.region_id = params[:region][:id]
+      @price_rule.category_id = category.id
+      @price_rule.from_date = Time.now.strftime('%Y-%m-%d %H:%M:%S')
+      @price_rule.save
+    end
+    render json: @region
   end
   
   #关闭一个区域
   def closeRegion
-    
+    @region = Region.find(params[:region][:id])
+    @region.status = 0
+    @region.save    
+    PriceRule.delete_all(["region_id=?",@region.id])
+    render json: @region
   end
 
   #用户端获取所有已经开通的区域
