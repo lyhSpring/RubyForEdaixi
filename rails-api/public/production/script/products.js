@@ -34,12 +34,12 @@ function getProduct(){
                     if (data[i].is_del==1){
                         name="恢复";
                     }
-                    var factoriy_name="";
+                    var categorys_name="";
                     if (data[i].categories_id != null) {
-                        factoriy_name = category_name[data[i].categories_id];
+                        categorys_name = category_name[data[i].categories_id];
                     }
                     var stringfortr ="<tr class=\"gradeX\">"+
-                    "<td class=\"center\">"+category_name+"</td>"+
+                    "<td class=\"center\">"+categorys_name+"</td>"+
                     "<td >"+data[i].name+"</td>"+
                     "<td class=\"center\"><img src=\""+data[i].logo+"\"></td>"+
                     "<td class=\"center hidden-xs\"><a href=\"#table-modal-showTaskSchedual\" data-toggle=\"modal\" class=\"btn btn-info\" onclick=\"showModel("+data[i].id+","+data[i].categories_id+",'"+data[i].name+"')\" style=\"font-size:4px;padding:0px 8px;\">"+"修改"+"</a></td>"+
@@ -146,13 +146,12 @@ function getCategories() {
         dataType: "json",
         success: function (data) {
             var stringfortrlist = "";
-            for (var i = 0; i < data.length; i++) {
-                for (var i = 0; i < data.length; i++) {
-                    var j = data[i].id;
+            for (var k = 0; k < data.length; k++) {
+                    var j = data[k].id;
                     parseInt(j);
-                    category_name[j] = data[i].name;
-                }
-               var strforname="<option id='"+data[i].id+"'>"+data[i].name+"</option>";
+                    category_name[j] = data[k].name;
+
+               var strforname="<option id='"+data[k].id+"'>"+data[k].name+"</option>";
                 stringfortrlist = stringfortrlist + strforname;
             }
             $('#selectCategories').html(stringfortrlist);
