@@ -6,14 +6,14 @@ $(document).ready(function() {
     getCategories();
     getProduct();
 });
-var category_name="";
+var category_name=new Array();
 function showModel(id,category_id,name){
      $('#updateProducts').modal('show');
      $('#nameinput').val(name);
     var obj = document.getElementById("updateselectCategories");
     for (var i = 0; i < obj.length; i++) {
         if (obj.options[i].id == category_id) {
-            document.getElementById("regionchange")[i].selected = true;
+            document.getElementById("updateselectCategories")[i].selected = true;
         }
     }
      $('#forProductId').val(id);
@@ -108,15 +108,15 @@ function upadteProduct() {
     var productsId=$("#forProductId").val();
     var ProductName=$("#nameinput").val();
    
-    var selectIndex=document.getElementById("selectCategories").selectedIndex;
-    var ProductCategories=document.getElementById("selectCategories").options[selectIndex].id;
+    var selectIndex=document.getElementById("updateselectCategories").selectedIndex;
+    var ProductCategories=document.getElementById("updateselectCategories").options[selectIndex].id;
    if(ProductName==null){
     alert("请输入商品名称");
     return;
    }
    $.ajax({
        type: "PUT",
-       url: domain+"/products/"+productsId+".update?product[name]="+ProductName+"product[categories_id]="+ProductCategories,//
+       url: domain+"/products/"+productsId+".update?product[name]="+ProductName+"&product[categories_id]="+ProductCategories,//
        dataType: "json",
        data:{},
        success: function (data) {
