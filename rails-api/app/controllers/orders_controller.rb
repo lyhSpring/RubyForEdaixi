@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
 
   #根据快递员id获取订单简略信息
   def getOrdersByCourierId
-    @orders = Order.order("updated_at desc").where('courier_id = ? and (status=2 or status=6)',"#{params[:order][:courier_id]}")
+    @orders = Order.order("updated_at desc").where('courier_id = ? and (status=2 or status=3 or status=6)',"#{params[:order][:courier_id]}")
     
     render json: @orders
   end
@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
   #即将进入工厂的order Status=4
   #已经清洗完成的order Status=5
   def getOrdersByFactoryId
-    @orders = Order.where('factory_id=? and status=?',"#{params[:order][:factory_id]}","#{params[:order][:status]}")
+    @orders = Order.where("factory_id=? and status=?",params[:order][:factory_id],params[:order][:status])
     render json: @orders
   end
 

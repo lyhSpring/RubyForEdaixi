@@ -3,7 +3,7 @@ class PriceRulesController < ApplicationController
 
   # GET /price_rules
   def index
-    @price_rules = PriceRule.paginate(page: params[:page],per_page:10).order(updated_at: :desc)
+    @price_rules = PriceRule.all
 
     render json: @price_rules
   end
